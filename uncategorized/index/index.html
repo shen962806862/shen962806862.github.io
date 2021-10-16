@@ -101,10 +101,10 @@
     </ul>
 </nav>
     <header class="cube-header" id="cube-header">
-    <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
+    <img src=" source/images/background.jpg " alt="头部背景图片">
     
     <div class="cube-type">
-        <span class="cube-typed-title">senrenbankaの部落格</span>
+        <span class="cube-typed-title">hanhanのmagic world</span>
         <span class="cube-typed-cursor">|</span>
     </div>
     
@@ -124,7 +124,7 @@
             -webkit-filter: blur(5px);
         
             z-index: -1;
-            background-image: url('http://cube-1252774894.cosgz.myqcloud.com/background.png');
+            background-image: url('/images/source/images/background.jpg');
             background-repeat: no-repeat;
             background-position: center -356px;
             background-size: cover;
@@ -133,14 +133,14 @@
 
         header.cube-background.cube-header-background {
             visibility: hidden;
-            background-image: url('http://cube-1252774894.cosgz.myqcloud.com/background.png');
+            background-image: url('/images/source/images/background.jpg');
             background-position: center -400px;
         }
     </style>
     <header class="cube-background cube-header-background">
         
         <div class="cube-type">
-            <span class="cube-typed-title">senrenbankaの部落格</span>
+            <span class="cube-typed-title">hanhanのmagic world</span>
             <span class="cube-typed-cursor">|</span>
         </div>
         
@@ -164,11 +164,15 @@
     <h1 class="title">first</h1>
     
     <div class="cube-article-header">
-        <div class="cube-article-date page">
+        <div class="cube-article-date">
             <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
             <!-- moment.js对象 -->
             2021-10-15
         </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+</div>
     </div>
     
     <div class="cube-article-content cube-markdown">
@@ -177,6 +181,23 @@
 
     </div>
 </div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        
+        <li class="next">
+            <a href="/uncategorized/hello-world/">
+                Hello World
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
 
 
 
@@ -217,7 +238,7 @@
     
     
     <div class="count">
-        <a class="count articles"><span>1</span>Article</a>
+        <a class="count articles"><span>2</span>Article</a>
         <a class="count tags"><span>0</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
@@ -256,10 +277,23 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/uncategorized/hello-world/" title="Hello World">Hello World</a>
+                    <a href="/uncategorized/index/" title="first">first</a>
                 </p>
             </div>
             
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/uncategorized/hello-world/" title="Hello World">Hello World</a>
+                </p>
+            </div>
         </li>
         
         
