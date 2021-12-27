@@ -170,5 +170,11 @@ comment_setting:
     hide_notice: true
 
 analytics:
-  baidu:
+  baidu: a8ed5b37dd0aaae924c52eb382109c5d
   google:
+
+# some setting about reading quantity
+leancloud_visitors:
+  enable: true
+  app_id: PHJss55iUwp0ckP8cbxCsB7w-gzGzoHsz
+  app_key: dOk4B1uMMfBRocXTVhhxKRRD
