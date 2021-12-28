@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Szh">
+    
+    
+    
+    
+    
+    
+    <title>opencv移库笔记 | hanhan</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
+
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: block;
+            content: 'Loading';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
+        }
+    </style>
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
+        
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="/">首页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-tags" aria-hidden="true"></i>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
+            <a href="/about-me">关于我</a>
+        </li>
+        
+    </ul>
+</nav>
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
+        
+        <li>
+            <a class="lrc-control">Open Lyrics</a>
+        </li>
+        
+        <li>
+            <a class="scroll-to-top">Top</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg " alt="头部背景图片">
+    
+    <div class="cube-type">
+        <span class="cube-typed-title">hanhanのMagicWorld</span>
+        <span class="cube-typed-cursor">|</span>
+    </div>
+    
+</header>
+
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+        
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        
+            z-index: -1;
+            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
+            background-repeat: no-repeat;
+            background-position: center 44px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
+            background-position: center 0;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
+        
+        <div class="cube-type">
+            <span class="cube-typed-title">hanhanのMagicWorld</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
+        
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '1297',
+                height: '629'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            <div class="cube-article">
+<h1 class="title">opencv移库笔记</h1>
+
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2021-12-23
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/opencv/">#opencv</a>
+    
+</div>
+    </div>
+
+    <div class="cube-article-content cube-markdown">
+        
+        <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><h2 id="VMware-Workstation"><a href="#VMware-Workstation" class="headerlink" title="VMware Workstation"></a>VMware Workstation</h2><h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p><font color="red"> 16.0版本！ 16.0版本！ 16.0版本！</font>15版本的有bug，会闪退。</p>
+<h3 id="VMware-Tools"><a href="#VMware-Tools" class="headerlink" title="VMware Tools"></a>VMware Tools</h3><p><strong>实现物理机和虚拟机之间的文件和文本的直接复制粘贴</strong></p>
+<p>1.点击虚拟机选项中的安装，安装的是个tar.gz的压缩包</p>
+<p>2.将虚拟机解压至任意路径下，并在该路径下进入命令行</p>
+<p>3.<code>./vmware-install.pl</code>即可完成安装</p>
+<h2 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h2><p>16.0版本，用户名和密码设简单点！建议英文！</p>
+<p>切换中文输入法用Ctrl+空格。</p>
+<p>解压：<code>tar -zxvf xxx.tar.gz</code></p>
+<h3 id="分辨率"><a href="#分辨率" class="headerlink" title="分辨率"></a>分辨率</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cvt 1920 1080</span><br><span class="line">// 返回</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1920x1080 59.96 Hz (CVT 2.07M9) hsync: 67.16 kHz; pclk: 173.00 MHz</span></span><br><span class="line">Modeline &quot;1920x1080_60.00&quot;  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync</span><br><span class="line"></span><br><span class="line">// 增加显示模块，并设置为开机启动，编辑”/etc/profile”，在末尾增加：</span><br><span class="line">xrandr --newmode &quot;1920x1080_60.00&quot; 173.00 1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync</span><br><span class="line">xrandr --addmode VGA1 &quot;1920x1080_60.00&quot;</span><br><span class="line"></span><br><span class="line">// 立即启用</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>之后就可以在设置中的Display里修改啦。</p>
+<h1 id="opencv库"><a href="#opencv库" class="headerlink" title="opencv库"></a>opencv库</h1><h2 id="安装与编译"><a href="#安装与编译" class="headerlink" title="安装与编译"></a>安装与编译</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>1.在GitHub上下载了opencv4.1.1的库，并在Ubuntu中解压</p>
+<p>2.下载 <strong>ippicv_2019_lnx_intel64_general_20180723</strong>，这个压缩包无需解压</p>
+<p>3.将<strong>opencv-4.1.1/3rdparty/ippicv/ippicv.cmake</strong>文件中倒数第十行(以http开头的)修改成”<strong>file://path</strong>“,  <strong>path</strong>为下载的ippicv_2019_lnx_intel64_general_20180723在你的电脑中存放的位置（绝对路径）</p>
+<h3 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential</span><br><span class="line"></span><br><span class="line">sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev</span><br></pre></td></tr></table></figure>
+
+<h3 id="编译opencv"><a href="#编译opencv" class="headerlink" title="编译opencv"></a>编译opencv</h3><p>在opencv-4.1.1路径下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_GENERATE_PKGCONFIG=ON ..</span><br><span class="line">// 这里选择安装路径为/usr/local下，并开启了pkg-config</span><br><span class="line">// 因为opencv4开始就不会主动支持pkg-config了，但是编译还是需要这个。</span><br><span class="line">// 一定注意这两个点“..”，这是选择编译的内容为整个opencv文件夹</span><br><span class="line">// 编译结束后进入下一步：</span><br><span class="line">make -j8</span><br><span class="line">// 这一步比较久一点，8为选择编译时使用的内核数</span><br><span class="line">sudo make install</span><br><span class="line">opencv_version</span><br><span class="line">//编译结束后运行，若能查看到版本号就ok了</span><br><span class="line">sudo gedit /etc/ld.so.conf.d/opencv.conf</span><br><span class="line">//设置opencv的环境变量。(文件可能为空，即原来不存在，新建立的)</span><br><span class="line">//将如下内容添加到最后：</span><br><span class="line">/usr/local/lib  (依然要对应成你本身的路径，这个看看安装好之后，你的安装路径下的lib文件夹位置)</span><br><span class="line"></span><br><span class="line">//配置库</span><br><span class="line">sudo ldconfig</span><br><span class="line">//更改环境变量：</span><br><span class="line">sudo gedit /etc/bash.bashrc</span><br><span class="line">//在文件后添加</span><br><span class="line">PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/ubun/myinstall/lib/pkgconfig  </span><br><span class="line">export PKG_CONFIG_PATH</span><br></pre></td></tr></table></figure>
+
+<p>opencv 编译后主要文件位于 <strong>/usr/local/bin</strong>    <strong>/usr/local/include/opencv4</strong>     <strong>/usr/local/lib</strong></p>
+<h3 id="导入opencv扩展包"><a href="#导入opencv扩展包" class="headerlink" title="导入opencv扩展包"></a>导入opencv扩展包</h3><p>1.下载opencv_contrib-4.1.1扩展包</p>
+<p>2.将文件夹解压至opencv-4.1.1文件夹下，同时删除其下的build文件夹（之前的编译文件）</p>
+<p>3.下载可能缺少的.i文件（会导致编译失败）</p>
+<p>将下载的.i文件放至**/opencv_4.1.1/opencv_contrib-4.1.1/modules/xfeatures2d/src/**目录下</p>
+<p>4.按照上一节的步骤重新编译，其中编译命令做一点改动（增加一句）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=/home/shenzihan/opencv-4.1.1/opencv_contrib-4.1.1/modules/ -D OPENCV_GENERATE_PKGCONFIG=ON ..</span><br></pre></td></tr></table></figure>
+
+<p>5.在执行<strong>make -j4</strong>时可能会报错：<strong>fatal error: features2d/test/test_detectors_regression.impl.hpp: No such file or directory</strong></p>
+<p>按照内容，将opencv-4.1.1/modules/下的<strong>features2d</strong>文件夹复制到<strong>build</strong>文件夹下即可。</p>
+<h2 id="移植opencv"><a href="#移植opencv" class="headerlink" title="移植opencv"></a>移植opencv</h2><h3 id="总体流程"><a href="#总体流程" class="headerlink" title="总体流程"></a>总体流程</h3><p><strong>1.封装函数</strong></p>
+<p>需求的操作系统环境下，只允许int char等基本类型的数据类型，因此需要将opencv库中定义的类型（如Mat）做一个转换。函数的输入不再是Mat而是转化成unsigned char和int。</p>
+<p>也就是需要在每个opencv函数外面套一层壳，先将unsigned char和int 转为Mat CPoint等输入opencv函数，返回值再转回unsigned char和int作为移植函数的返回值，即可。</p>
+<p><strong>2.生成.so动态链接库</strong></p>
+<p>编译写好的移植函数生成.so文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -fpic -shared -o target.so source.cpp `pkg-config --cflags --libs opencv4` -std=c++11</span><br></pre></td></tr></table></figure>
+
+<p>一步到位，直接生成.so文件</p>
+<p><strong>3.在测试文件中调用so文件测试功能</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> * LdSoHandle=<span class="built_in">dlopen</span>(<span class="string">&quot;./target.so&quot;</span>, RTLD_NOW|RTLD_GLOBAL);</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.编译测试文件生成可执行文件</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -std=c++11 main.cpp -o mai `pkg-config --cflags --libs opencv4` -ldl</span><br><span class="line">// -ldl一定要加上</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="opencv图像类型参数的值"><a href="#opencv图像类型参数的值" class="headerlink" title="opencv图像类型参数的值"></a>opencv图像类型参数的值</h3><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">int值</th>
+<th align="center">elemSize()</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">CV_8UC1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">CV_8UC2</td>
+<td align="center">8</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">CV_8UC3</td>
+<td align="center">16</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">CV_32FC1</td>
+<td align="center">5</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">CV_32FC2</td>
+<td align="center">13</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">CV_32FC3</td>
+<td align="center">21</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td align="center">CV_16FC1</td>
+<td align="center">7</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">CV_16FC2</td>
+<td align="center">15</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">CV_16FC3</td>
+<td align="center">23</td>
+<td align="center">6</td>
+</tr>
+</tbody></table>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        <li class="prev">
+        <a href="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/">
+            <i class="cube-icon cube-prev" aria-hidden="true"></i>
+            opencv图像算法
+        </a>
+        </li>
+        
+            
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+        </div>
+        <div class="cube-right">
+            
+
+<div class="cube-search cube-sidebar" id="cube-search">
+    <div class="search-container">
+        <input type="text" placeholder="Search" class="cube-search-input" id="cube-search-input">
+        <i class="cube-icon cube-icon-search cube-search-submit" aria-hidden="true"></i>
+    </div>
+    <!-- TODO 通过给window赋一个全局变量，通过脚本赋值 -->
+</div>
+<script>
+    (function (window) {
+        'use strict';
+        window.searchModule = {}
+        window.searchModule.JSONUrl = '/content.json'
+        window.searchModule.rootUrl = '/'
+    })(window)
+</script>
+<div class="cube-search-form">
+    <div class="cube-search-control">
+        <input type="text" placeholder="Search" class="search-input">
+        <a class="close-button">
+            <i class="cube-icon cube-close" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="cube-search-result"></div>
+</div>
+
+
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>Szh</span>
+    
+    
+    <div class="count">
+        <a class="count articles"><span>2</span>Article</a>
+        <a class="count tags"><span>1</span>Tags</a>
+        <a class="count categories"><span>1</span>Categories</a>
+    </div>
+</div>
+
+
+
+<div class="cube-music cube-sidebar" id="cube-music">
+    <div class="cube-player aplayer" id="cube-player"></div>
+</div>
+<script>
+    (function (window) {
+        window.musicModule = {}
+        window.musicModule.musicConfig = '{"narrow":false,"autoplay":false,"showlrc":3,"theme":"#b7daff","mutex":true,"mode":"circulation","preload":"auto","listmaxheight":"513px","music":[{"title":"石头歌 (先行曲)","author":"三无Marblue","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/三无Marblue - 石头歌 (先行曲).mp3","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/三无Marblue - 石头歌 (先行曲).jpg"},{"title":"有没有那么一首歌","author":"张茜","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/张茜 - 有没有那么一首歌.mp3","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/张茜 - 有没有那么一首歌.jpg"},{"title":"NEW BOY","author":"朴树","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/朴树 - NEW BOY.mp3","lrc":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/lrc/朴树 - NEW BOY.lrc","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/朴树 - NEW BOY.jpg"}]}'
+        window.musicModule.lrcConfig = {
+            open: 'Open Lyrics',
+            close: 'Close Lyrics'
+        }
+    })(window)
+</script>
+
+
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>Recent Posts</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/Graphics-and-Image/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/" title="opencv移库笔记">opencv移库笔记</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-categories cube-sidebar" id="cube-categories">
+    <div class="title">
+        <a href="/categories">Categories</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/Graphics-and-Image/">#Graphics and Image</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
+    <div class="title">
+        <a href="/tags">Tagcloud</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/opencv/">#opencv</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/github.png">
+            
+            <a href="https://github.com/shen962806862" target="_blank">GitHub</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/csdn.jpg">
+            
+            <a href="https://blog.csdn.net/shen962806862" target="_blank">CSDN</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/weibo.jpg">
+            
+            <a href="https://weibo.com/u/6056563979" target="_blank">新浪微博</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-friend-links cube-sidebar" id="cube-friend-links">
+    <div class="title">
+        <a>Friend Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/links.jpg">
+            <a href="http://www.maxwellzhu.pub/" target="_blank">祝大师</a>
+        </li>
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/links2.jpg">
+            <a href="http://www.hanhan0223.cn/" target="_blank">我的大号</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+    © 2017 Szh
+
+    <br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    <br>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp; </span>
+<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
+</body>
+</html>
