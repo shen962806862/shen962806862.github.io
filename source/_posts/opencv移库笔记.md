@@ -11,7 +11,7 @@ tags: opencv
 
 ### 版本
 
-<font color="red"> 16.0版本！ 16.0版本！ 16.0版本！</font>15版本有bug，会闪退。
+<font color="red"> 16.0版本！ 16.0版本！ 16.0版本！</font>15版本的有bug，会闪退。
 
 ### VMware Tools
 
