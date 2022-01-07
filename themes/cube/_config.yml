@@ -16,8 +16,8 @@ background: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/backgro
 
 
 # the background image width and height (you can see your image file to get them)
-width: 1297
-height: 629
+width: 800
+height: 504
 
 
 # this variable is used to locate your background
@@ -54,7 +54,7 @@ menu:
   # about-me
   - title: 关于我
     icon: about
-    url: about-me
+    url: about
 
 sidebar:
   links:
