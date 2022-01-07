@@ -162,8 +162,8 @@
 
             window.headerModule = {}
             window.headerModule.image = {
-                width: '1297',
-                height: '629'
+                width: '800',
+                height: '800'
             }
 
         })(window)
@@ -399,7 +399,7 @@
 <p>优点：<strong>方法简单，泛化能力更强（带有随机性）</strong></p>
 <h2 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h2><h3 id="gamma变换（校正）"><a href="#gamma变换（校正）" class="headerlink" title="gamma变换（校正）"></a>gamma变换（校正）</h3><p>Gamma校正是一种非常重要的线性变换。对输入图像的灰度值进行指数变换，进而校正亮度偏差，通常应用于<strong>扩展暗调的细节</strong>。gamma校正可使得图像看起来更符合人眼的特性。</p>
 <p>当Gamma校正的值大于1时，图像的高光部分被压缩而暗调部分被扩展；</p>
-<p>当Gamma校正的值小于1时，图像的高光部分被压缩而暗调部分被压缩。</p>
+<p>当Gamma校正的值小于1时，图像的高光部分被扩展而暗调部分被压缩。</p>
 <p>gamma校正的作用：</p>
 <p><strong>1.为方便人眼辨识图像，须要将摄像机采集的图像进行gamma校正。</strong></p>
 <p><strong>2.为能更有效的保存图像亮度信息，需进行Gamma校正。</strong></p>
