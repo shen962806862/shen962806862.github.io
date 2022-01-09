@@ -1,8 +1,10 @@
 ---
 title: opencv图像算法
 date: 2021-12-23 19:36:24
-categories: Graphics and Image
-tags: opencv
+categories: 原理
+tags: 
+- opencv
+- 图像
 ---
 
 # 图像

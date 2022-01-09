@@ -1,8 +1,10 @@
 ---
 title: opencv移库笔记
 date: 2021-12-23 19:28:33
-categories: Graphics and Image
-tags: opencv
+categories: 杂记
+tags:
+- opencv
+- 环境
 ---
 
 # 环境配置
