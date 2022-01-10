@@ -16,8 +16,8 @@ background: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/backgro
 
 
 # the background image width and height (you can see your image file to get them)
-width: 773
-height: 387
+width: 800
+height: 280
 
 
 # this variable is used to locate your background
