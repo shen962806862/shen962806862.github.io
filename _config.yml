@@ -29,6 +29,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - "webProject/**"
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -49,7 +50,7 @@ highlight:
   auto_detect: false
   tab_replace: ''
   wrap: true
-  hljs: false
+  hljs: true
 prismjs:
   enable: false
   preprocess: true
@@ -113,3 +114,9 @@ deploy:
   type: git
   repo: git@github.com:shen962806862/shen962806862.github.io.git
   branch: hexo
+
+excerpt:
+  depth: 8  
+  excerpt_excludes: []
+  more_excludes: []
+  hideWholePostExcerpts: true
