@@ -216,7 +216,7 @@ d取其他值时，该滤波器适用于包括多种噪声的情况，如高斯�
 
 转化为代码：
 
-```c++
+```cpp
 for(int i = 0; i < m; ++i)
     for(int j = 0; j < n; ++j)
         double g = exp(((i - m/2)*(i - m/2) + (j - n/2)*(j - n/2)) * -1.0 / (2 * sigma * sigma));
@@ -224,7 +224,7 @@ for(int i = 0; i < m; ++i)
 
 再对求出来的每个g进行归一化（因为求的是加权平均，要保证窗口模板各元素和为1）
 
-```c++
+```cpp
 kernel = g / sum;
 ```
 
@@ -312,7 +312,7 @@ Sobel相较于Prewitt，**在中心权值上使用2来代替1，这样可以较�
 
 ![img](opencv图像算法/583030-20190930104504107-1830102038-164025956439326.png)
 
-二阶差分公式：![CodeCogsEqn(../../../../../Notes/img/810956-20150926131132084-1009704410.gif)](.\img\810956-20150926131132084-1009704410.gif)
+二阶差分公式：![azzz](opencv图像算法/810956-20150926131132084-1009704410.gif)
 
 Laplace算子的差分形式：
 
@@ -322,7 +322,7 @@ Laplace算子的差分形式：
 
 于是可得Laplace算子的差分形式为：
 
-![CodeCogsEqn(../../../../../Notes/img/810956-20150926131132865-1836740999.gif)](.\img\810956-20150926131132865-1836740999.gif)
+![azzzzz](opencv图像算法/810956-20150926131132084-1009704410-16418119874511.gif)
 
 写作滤波模板的形式如下：
 
@@ -474,7 +474,7 @@ Gamma校正主要应用在**图像增强、目标检测以及图像分析**等�
 
 **代码实现**
 
-```C++
+```cpp
 unsigned char newPixel = static_cast<unsigned char>(pow(pixel / 255.0, gamma) * 255);
 ```
 
@@ -656,7 +656,7 @@ Gray = (R * 313524 + G * 615514 + B * 119538) >> 20
 
 因此代码实现为：
 
-```C++
+```cpp
 for (k1 = 1; k1 < 256; k1++){
     for (k2 = 1; k2 < 256; k2++){
         for (int i = 0; i < k1; i++){
@@ -698,7 +698,7 @@ for (k1 = 1; k1 < 256; k1++){
 
 由于**缩放比例**（即srcWidth / dstWidth）基本上是浮点数值，而最后得到的**图像坐标**（srcX）是整数。因此需要对等式右边的值进行四舍五入的操作：
 
-```C++
+```cpp
 int srcX = static_cast<int>(dstX * (srcWidth / dstWidth) + 0.5f);
 // 其中static_cast用于强制转换为int类型
 // +0.5f是为了实现四舍五入而不是舍去小数点后的值
@@ -740,7 +740,7 @@ int srcX = static_cast<int>(dstX * (srcWidth / dstWidth) + 0.5f);
 
 **源图像和目标图像几何中心的对齐**
 
-```C++
+```cpp
 SrcX=(dstX + 0.5) * (srcWidth/dstWidth) -0.5
 SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
 ```
