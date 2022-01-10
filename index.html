@@ -198,78 +198,6 @@
 <p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211209161017369-16402595643922.png" alt="邻域计算公式"></p>
 <h3 id="中值滤波"><a href="#中值滤波" class="headerlink" title="中值滤波"></a>中值滤波</h3><p>图像的中值滤波是一种非线性图像处理方法,是统计排序滤波器的一种典型应用。中值滤波是通过<strong>对邻域内像素按灰度排序的结果</strong>决定<strong>中心像素</strong>的灰度。具体的操作过程如下：<font color="red">用一个奇数点的移动窗口，将窗口中心点的值用窗口内各点的中值代替。</font>假设窗口内有5个点，其值为1,2,3,4和5，那么此窗口内各点的中值即为3，也就是用3来代替中心点的像素值。</p>
 <p>中值滤波对于滤除<strong>脉冲干扰及图像扫描噪声</strong>最为有效，还可以克服线性滤波器（如领域简单平滑滤波）带来的图像细节模糊。</p>
-<p>数字图像存在冗余信息，具体分为六大冗余：空间冗余、时间冗余、视觉冗余、信息熵冗余、结构冗余、知识冗余。其中第一个空间冗余就可以很好的解释中值滤波的作用。空间冗余指的是：图像内部<strong>相邻像素之间存在较强的相关性而造成的冗余</strong>。简单来说就是，同一景物表面上采样点的颜色之间通常存在着空间相关性，相邻各点的取值往往相近或者相同，这就是空间冗余。而脉冲噪声通常是在一个邻域内有一个点或多个点的灰度值很高或很低，这就与周围像素存在较大差异，因此中值滤波能很好的去除这种噪声。</p>
-<p>需要注意的是，中值滤波的<strong>窗口形状和尺寸</strong>对滤波效果影响很大，不同的图像内容和不同的应用要求，往往采用不同的窗口形状和尺寸。常用的中值滤波窗口有线状、方形、圆形、十字形以及圆环形等等。窗口尺寸一般先用3x3,再取5x5逐渐增大，直到滤波效果满意为止。就一般经验来讲，对于有缓变的较长轮廓线物体的图像，采用方形或圆形窗口为宜。对于包含有尖顶物体的图像，用十字形窗口，而窗口大小则以不超过图像中最小有效物体的尺寸为宜。如果图像中点、线、尖角细节较多（感觉就是邻域灰度值变化较大），则不宜采用中值滤波。</p>
-<h3 id="自适应中值滤波"><a href="#自适应中值滤波" class="headerlink" title="自适应中值滤波"></a>自适应中值滤波</h3><p>上面提到常规的中值滤波器，在噪声的<strong>密度不是很大</strong>的情况下，效果不错。但是密度较高时，常规的中值滤波的效果就不是很好了。有一个选择就是增大滤波器的窗口大小，这虽然在一定程度上能解决上述的问题，但是会给图像造成较大的模糊。</p>
-<p>常规的中值滤波器的窗口尺寸是固定大小不变的，就<strong>不能同时兼顾去噪和保护图像的细节</strong>。这时就要寻求一种改变，根据预先设定好的条件，在滤波的过程中，<strong>动态的改变滤波器的窗口尺寸大小</strong>，这就是自适应中值滤波器 。在滤波的过程中，自适应中值滤波器会根据预先设定好的条件，改变滤波窗口的尺寸大小，同时还会根据一定的条件判断当前像素是不是噪声，如果是则用<strong>邻域中值</strong>替换掉当前像素；不是，则不作改变。</p>
-<p>自适应中值滤波器有三个<strong>目的</strong>：</p>
-<ul>
-<li>滤除椒盐噪声</li>
-<li>平滑其他非脉冲噪声</li>
-<li>尽可能的保护图像中细节信息，避免图像边缘的细化或者粗化。</li>
-</ul>
-<p><strong>实现过程：</strong></p>
-<p>对于每一个像素点的处理，使用一个while循环。在while循环中：</p>
-<p>首先，在当前像素点下根据当前尺寸窗口的大小获取数据存入数组；</p>
-<p>其次，获取窗口内像素的最大最小值和中值；</p>
-<p>再，得到A1（中值 - 最小值），A2（中值 - 最大值）。</p>
-<p>预先定义好以下符号：</p>
-<p>Sxy：        滤波器的作用区域，滤波器窗口所覆盖的区域；<br>Zmin：    Sxy中最小的灰度值；<br>Zmax：    Sxy中最大的灰度值；<br>Zmed：    Sxy中所有灰度值的中值；<br>Zxy：        表示图像中对应像素点的灰度值；<br>Smax：    Sxy所允许的最大窗口尺寸；</p>
-<p>自适应中值滤波器分为以下两个过程，A和B：</p>
-<p>A:</p>
-<ol>
-<li>A1 = Zmed - Zmin</li>
-<li>A2 = Zmed - Zmax</li>
-<li>如果A1&gt;0 且 A2&lt;0，则跳转到B</li>
-<li>否则，增大窗口的尺寸</li>
-<li>如果增大后的尺寸 ≤ Smax，则重复A</li>
-<li>否则，直接输出Zmed</li>
-</ol>
-<p>B：</p>
-<ol>
-<li>B1 = Zxy - Zmin</li>
-<li>B2 = Zxy - Zmax</li>
-<li>如果B1&gt;0 且 B2&lt;0，则输出Zxy</li>
-<li>否则输出Zmed</li>
-</ol>
-<p><strong>实现原理：</strong></p>
-<p><strong>A</strong>步骤实质是判断当前区域的中值点是否是噪声点，通常来说是满足条件的，此时中值点不是噪声点，跳转到<strong>B</strong>；考虑一些特殊情况，如果Zmed=Zmin或者Zmed=Zmax，则认为是噪声点，应该扩大窗口尺寸，在一个更大的范围内寻找一个合适的非噪声点，随后再跳转到<strong>B</strong>，否则输出的中值点是噪声点；</p>
-<p>接下来考虑跳转到<strong>B</strong>之后的情况：判断中心点的像素值是否是噪声点，原理同上，因为如果Zxy=Zmin或者Zxy=Zmax，则认为是噪声点。如果不是噪声点，我们可以保留当前像素点的灰度值；如果是噪声点，则使用中值替代原始灰度值，滤去噪声。</p>
-<h3 id="均值滤波"><a href="#均值滤波" class="headerlink" title="均值滤波"></a>均值滤波</h3><p>一种特殊形式的邻域滤波（邻域算子都是1/M*N）。</p>
-<p>图片中一个方块区域（一般为3*3）内，中心点的像素为全部点像素值的平均值。均值滤波就是对于整张图片进行以上操作。</p>
-<p><strong>缺陷</strong>：均值滤波本身存在着固有的缺陷，即它不能很好地保护图像细节，在图像去噪的同时也破坏了图像的细节部分，从而使<strong>图像变得模糊，不能很好地去除噪声点</strong>。特别是椒盐噪声</p>
-<h4 id="算术均值滤波"><a href="#算术均值滤波" class="headerlink" title="算术均值滤波"></a>算术均值滤波</h4><p>这是<strong>最简单的均值滤波器，可以去除均匀噪声和高斯噪声，但会对图像造成一定程度的模糊</strong>。</p>
-<p>算术均值滤波器就是简单的计算窗口区域的像素均值，然后将均值赋值给窗口中心点处的像素：</p>
-<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210160750996-16402595643923.png" alt="image-20211210160750996" style="zoom:50%;">
-
-<p>其中，g(s,t)表示原始图像，f(x,y)表示均值滤波后得到的图像，Sxy表示滤波器窗口。</p>
-<p>基于上述公式，可以很容易的得到的算术均值滤波器的窗口模板，下面以3×3为例：</p>
-<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210160926601-16402595643924.png" alt="image-20211210160926601" style="zoom:67%;">
-
-
-
-<h4 id="几何均值滤波"><a href="#几何均值滤波" class="headerlink" title="几何均值滤波"></a>几何均值滤波</h4><p>滤波后图像的像素由模板窗口内像素的乘积的1/mn幂给出。 和算术均值滤波器相比，几何均值滤波器能够<strong>更好的取出高斯噪声，并且能够更多的保留图像的边缘信息</strong>。但其<strong>对0值是非常敏感</strong>的，在滤波器的窗口内只要有一个像素的灰度值为0，就会造成滤波器的输出结果为0。</p>
-<p>公式如下：</p>
-<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214172053056-16402595643925.png" alt="image-20211214172053056" style="zoom:50%;">
-
-
-
-<h4 id="谐波均值滤波"><a href="#谐波均值滤波" class="headerlink" title="谐波均值滤波"></a>谐波均值滤波</h4><p><strong>对盐粒噪声（白噪声）效果较好，不适用于胡椒噪声；比较适合处理高斯噪声。</strong></p>
-<p>公式如下：</p>
-<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210161208708-16402595643926.png" alt="image-20211210161208708" style="zoom:50%;">
-
-
-
-<h4 id="逆谐波均值滤波"><a href="#逆谐波均值滤波" class="headerlink" title="逆谐波均值滤波"></a>逆谐波均值滤波</h4><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210163038627-16402595643927.png" alt="image-20211210163038627" style="zoom:67%;">
-
-<p>其中Q称为滤波器的阶数，该滤波器可以用来<strong>消除椒盐噪声</strong>。但是不能同时处理盐粒噪声和胡椒噪声，当Q为正时，可以消除<strong>胡椒噪声</strong>；当Q为负时，消除<strong>盐粒噪声</strong>。当Q=0时，该滤波器退化为算术均值滤波器；Q=-1时，退化为谐波均值滤波器。</p>
-<h4 id="修正后的alpha均值滤波"><a href="#修正后的alpha均值滤波" class="headerlink" title="修正后的alpha均值滤波"></a>修正后的alpha均值滤波</h4><p>假设在Sxy模板领域内，去掉g(s,t)中最高灰度值的d/2和最低灰度值的d/2个像素。用gr(s,t)来代替剩余的mn-d个像素。由剩余像素点的平均值形成的滤波器称为修正后的alpha均值滤波器：</p>
-<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210173009541-16402595643938.png" alt="image-20211210173009541" style="zoom:67%;">
-
-<p>其中d取0~m*n-1之间的任意数。</p>
-<p>当d=0时，退变为算术均值滤波；</p>
-<p>当d=(m*n-1)，退变为中值滤波器；</p>
-<p>d取其他值时，该滤波器适用于包括多种噪声的情况，如高斯噪声和椒盐噪声混合的情况。</p>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -299,7 +227,9 @@
         
         
            <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><h2 id="VMware-Workstation"><a href="#VMware-Workstation" class="headerlink" title="VMware Workstation"></a>VMware Workstation</h2><h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p><font color="red"> 16.0版本！ 16.0版本！ 16.0版本！</font>15版本的有bug，会闪退。</p>
-<h3 id="VMware-Tools"><a href="#VMware-Tools" class="headerlink" title="VMware Tools"></a>VMware Tools</h3>
+<h3 id="VMware-Tools"><a href="#VMware-Tools" class="headerlink" title="VMware Tools"></a>VMware Tools</h3><p><strong>实现物理机和虚拟机之间的文件和文本的直接复制粘贴</strong></p>
+<p>1.点击虚拟机选项中的安装，安装的是个tar.gz的压缩包</p>
+<p>2.将虚拟机解压至任意路径下，并在该路径下进入命令行</p>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -334,6 +264,9 @@
 <p>源码（包含2.0的GUI程序和单独的挂机python脚本）：<a target="_blank" rel="noopener" href="https://github.com/shen962806862/on-hook">Github</a></p>
 <p>百度云：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1cdx-o7NJC2iCyk6jyX2aCA">OnHook</a> 提取码：mc13</p>
 <h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>很简单的思路——每一轮只需要两次移动和点击事件，识别到开始界面第一次移动并点击开始按钮，识别到结束界面第二次移动点击奖励界面退出去，然后循环。</p>
+<p>为了怕被检测封号，需要对这样机械的行为进行一定<strong>伪装</strong>：比如一次点击事件的点击次数随机1-3次；每次点击的间隔在0.15-0.3s之间随机；每次移动的时间在0.05-0.25s随机；每次点击的像素点坐标在识别到的点击区域中随机等等。不知道有多大用，感觉是跟我个人手动挂的习惯比较相符的==</p>
+<p>python现成的<strong>pyautogui</strong>库：</p>
+<p><strong>click(x, y)</strong> 函数模拟点击</p>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -363,6 +296,8 @@
            <p>一些<strong>H5</strong>的小玩意儿，自己写的或是网上漂的。</p>
 <h2 id="金翰林6栋洗衣机使用情况"><a href="#金翰林6栋洗衣机使用情况" class="headerlink" title="金翰林6栋洗衣机使用情况"></a>金翰林6栋洗衣机使用情况</h2><p><a href="https://shen962806862.github.io/webProject/LaundryStatus.html">LaundryStatus</a></p>
 <h2 id="聚光灯特效"><a href="#聚光灯特效" class="headerlink" title="聚光灯特效"></a>聚光灯特效</h2><p><a href="https://shen962806862.github.io/webProject/SpotLight.html">SpotLight</a></p>
+<h2 id="合成大西瓜魔改"><a href="#合成大西瓜魔改" class="headerlink" title="合成大西瓜魔改"></a>合成大西瓜魔改</h2><p><a href="https://shen962806862.github.io/">Daxigua</a></p>
+
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -392,6 +327,8 @@
            <h1 id="ID卡（非接触卡）的读卡原理"><a href="#ID卡（非接触卡）的读卡原理" class="headerlink" title="ID卡（非接触卡）的读卡原理"></a>ID卡（非接触卡）的读卡原理</h1><h2 id="1-简单描述"><a href="#1-简单描述" class="headerlink" title="1.简单描述"></a>1.简单描述</h2><p>ID卡全称为身份识别卡（<strong>Identification Card</strong>）,是一种<strong>不可写入</strong>的感应卡,含<strong>固定的编号</strong>,主要类型有台湾SYRIS的<strong>EM格式，</strong>美国HID,TI,MOTOROLA等。</p>
 <p>在出厂时，厂家会将ID号写死在芯片的内部，是不允许进行二次修改的。国内常见的型号有EM4100和EM4102。</p>
 <p>有别于IC卡这种高频（13.56MHz）、可加密的存储卡，ID卡属于低频（<strong>125KHz</strong>）的只读卡。</p>
+<h2 id="2-读卡流程"><a href="#2-读卡流程" class="headerlink" title="2.读卡流程"></a>2.读卡流程</h2><p>1.读卡器采用射频识别技术（RFID），持续发射特定频率的射频信号</p>
+<p>2.当ID卡进入读卡器工作范围时，将产生感应电流，将自身芯片内的编码信息通过线圈发送出去</p>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -422,6 +359,11 @@
 <p>2.对于get传参的网页来说，采取的是如下方式 ( <strong>? key = value</strong> )</p>
 <p>问题在于，若是传的参数中包含？和=怎么办，就冲突了，所以需要编码以区分</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.biquge.tv/modules/article/search.php?searchkey=xxx</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="如何进行URL编码"><a href="#如何进行URL编码" class="headerlink" title="如何进行URL编码"></a>如何进行URL编码</h3><p>Url编码通常也被称为百分号编码（percent-encoding），编码方式非常简单。</p>
+<p>使用%百分号加上两位的字符——0123456789ABCDEF——代表一个字节的十六进制形式。</p>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -452,6 +394,9 @@
 <h3 id="RSA产生公私钥对"><a href="#RSA产生公私钥对" class="headerlink" title="RSA产生公私钥对"></a>RSA产生公私钥对</h3><p><strong>1.随机选取两个相近但不相等的质数p和q（越大越难破解）</strong></p>
 <p>取p=11，q=13，n = p * q = 143，n即为密钥长度，143二进制为10001111，密钥为8位。实际应用中，一般为1024位。</p>
 <p><strong>2.计算n的欧拉函数z</strong></p>
+<p>z = (p-1)(q-1) = 120</p>
+<p><strong>3.随机选择一个整数e，作为公钥中用来加密的数字</strong></p>
+<p>条件1 &lt; e &lt; z，且e与z互质。假设随机选择e = 7（实际中常选择为65537）</p>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -487,6 +432,15 @@
 <p><a target="_blank" rel="noopener" href="http://www.hanhan0223.cn/TextProject/BilibiliGetting/bilibili.php">获取b站视频封面</a></p>
 <p>（现在挂在我的云服务器上，但等到过期了就寄了，GitHub Page并不支持php。话说当初学php就是因为在云服务器上建站用的WordPress，想改别人的主题但是看不懂代码才去学的）</p>
 <p>三项功能：</p>
+<ol>
+<li><p>输入视频的网址、BV号获取AV号（AV号明面上已经被b站禁了，但后台实际还在）；</p>
+</li>
+<li><p>输入视频的网址、BV号、AV号获取视频封面；</p>
+</li>
+<li><p>输入up主的UID获取该up主所有视频的封面，并打包成zip文件下载。</p>
+</li>
+</ol>
+<h1 id="获取封面"><a href="#获取封面" class="headerlink" title="获取封面"></a>获取封面</h1><h2 id="1-爬取图片的脚本"><a href="#1-爬取图片的脚本" class="headerlink" title="1.爬取图片的脚本"></a>1.爬取图片的脚本</h2>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -519,6 +473,9 @@
 <p>恰巧我的笔记本最近也毛病重重（贼卡），于是在我的一位同学祝大师（sdl，wsl）的帮助下，对电脑运行的CPU占用率、硬盘测速、甜甜圈视频输出、内存延时、模具散热、坏道检测等多项数据进行了测试。发现了唯一的问题在于机械盘坏道有点多（跑了1%就有几十柱坏道，神奇，讲道理坏成这样应该经常会卡死，而我只是运行慢一些。。）</p>
 <p>然后开始拆机~清灰，然后取出机械硬盘在台式机进行一些测试。</p>
 <h3 id="拆机简录"><a href="#拆机简录" class="headerlink" title="拆机简录"></a>拆机简录</h3><p><img src="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200412210853-1024x576.jpg" alt="img"></p>
+<p>首先把四周的螺丝拧开~然后掰开后盖。因为后盖四周带有卡扣固定，所以在掀开的过程中需要拿螺丝刀一点一点的撬开。注意到上图中左右两个网格状的梯形，里面有两坨圆形的灰色，这都是灰，因为这两个网格正对电脑的散热风扇，久而久之在散热过程中就积灰了。</p>
+<p>最后掀开，如下：</p>
+<p><img src="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200412210925-1024x769.jpg" alt="img"></p>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -551,7 +508,14 @@
 <p>国际惯例贴上源代码、以及软件下载链接~</p>
 <p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/shen962806862/memo/">memo-master</a></p>
 <p>百度网盘：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1wImGLcBkOV0c29CRr4rj5w">memo</a> 提取码：61uy</p>
-<h3 id="Version：1-0-【2020-4-8】"><a href="#Version：1-0-【2020-4-8】" class="headerlink" title="Version：1.0 【2020.4.8】"></a>Version：1.0 【2020.4.8】</h3>
+<h3 id="Version：1-0-【2020-4-8】"><a href="#Version：1-0-【2020-4-8】" class="headerlink" title="Version：1.0 【2020.4.8】"></a>Version：1.0 【2020.4.8】</h3><p>先上图~</p>
+<p><img src="/%E5%BA%94%E7%94%A8/PyQt5%E5%86%8D%E5%B0%9D%E8%AF%95-Windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AC%BA/%E4%B8%BB%E7%95%8C%E9%9D%A2.png" alt="img"></p>
+<ul>
+<li>主图标选择了我非常喜欢的滑稽表情~</li>
+<li>灯泡是用来展开、隐藏下边菜单栏的开关~</li>
+<li>菜单栏分别是新建一个便笺、设置（字体样式，便笺样式等）以及关于（软件的简单使用tips）</li>
+<li>右边就是建的一个个便笺了~</li>
+</ul>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -738,7 +702,7 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
         </div>
         
@@ -764,12 +728,12 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/PyQt5/">#PyQt5</a>
         </div>
         
@@ -784,12 +748,12 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/opencv/">#opencv</a>
         </div>
         
@@ -819,7 +783,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
         </div>
         
