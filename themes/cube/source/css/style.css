@@ -1099,8 +1099,8 @@
 }
 
 .cube-markdown figure.highlight {
-    color: #ddd;
-    background: #272822;
+    /* color: #ddd; */
+    /* background: #272822; */
     margin: 1.6em 0;
     padding: 1em 20px;
     display: block;
