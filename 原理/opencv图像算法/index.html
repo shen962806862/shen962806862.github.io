@@ -299,12 +299,12 @@
 <p>对于窗口模板的大小为 (2k+1)×(2k+1)，模板中各个元素值的计算公式如下：</p>
 <p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/20190502112714183-164025956439315.png" alt="img"></p>
 <p>转化为代码：</p>
-<pre><code class="line-numbers language-c++">for(int i = 0; i &lt; m; ++i)
+<pre><code class="line-numbers language-cpp">for(int i = 0; i &lt; m; ++i)
     for(int j = 0; j &lt; n; ++j)
         double g = exp(((i - m/2)*(i - m/2) + (j - n/2)*(j - n/2)) * -1.0 / (2 * sigma * sigma));
 </code></pre>
 <p>再对求出来的每个g进行归一化（因为求的是加权平均，要保证窗口模板各元素和为1）</p>
-<pre><code class="line-numbers language-c++">kernel = g / sum;
+<pre><code class="line-numbers language-cpp">kernel = g / sum;
 </code></pre>
 <p>关于高斯分布的<strong>标准差σ的选值</strong>，代表着数据的离散程度。如果σ较小，那么生成的模板的中心系数较大，而周围的系数较小，这样对图像的平滑效果就不是很明显；反之，σ较大，则生成的模板的各个系数相差就不是很大，比较类似均值模板，对图像的平滑效果比较明显。</p>
 <p>高斯分布的概率分布密度图如下：</p>
@@ -339,13 +339,13 @@
 <h3 id="Laplacian算子（二阶微分法）"><a href="#Laplacian算子（二阶微分法）" class="headerlink" title="Laplacian算子（二阶微分法）"></a>Laplacian算子（二阶微分法）</h3><p><strong>基于过零点检测</strong></p>
 <p>对Sobel算子中的一阶导数函数再次求导可得：</p>
 <p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190930104504107-1830102038-164025956439326.png" alt="img"></p>
-<p>二阶差分公式：<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/.%5Cimg%5C810956-20150926131132084-1009704410.gif" alt="CodeCogsEqn(../../../../../Notes/img/810956-20150926131132084-1009704410.gif)"></p>
+<p>二阶差分公式：<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/810956-20150926131132084-1009704410.gif" alt="azzz"></p>
 <p>Laplace算子的差分形式：</p>
 <p>分别对Laplace算子x,y两个方向的二阶导数进行差分就得到了离散函数的Laplace算子。在一个二维函数f(x,y)中，x,y两个方向的二阶差分分别为：</p>
 <img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210153218813-164025956439327.png" alt="image-20211210153218813" style="zoom: 67%;">
 
 <p>于是可得Laplace算子的差分形式为：</p>
-<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/.%5Cimg%5C810956-20150926131132865-1836740999.gif" alt="CodeCogsEqn(../../../../../Notes/img/810956-20150926131132865-1836740999.gif)"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/810956-20150926131132084-1009704410-16418119874511.gif" alt="azzzzz"></p>
 <p>写作滤波模板的形式如下：</p>
 <img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210153440871-164025956439329.png" alt="image-20211210153440871" style="zoom: 50%;">
 
@@ -409,7 +409,7 @@
 <img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-58d0f7160ef3cc1db393f612bf56c56c_1440w-164025956439335.jpg" alt="img" style="zoom:67%;">
 
 <p><strong>代码实现</strong></p>
-<pre><code class="line-numbers language-C++">unsigned char newPixel = static_cast&lt;unsigned char&gt;(pow(pixel / 255.0, gamma) * 255);
+<pre><code class="line-numbers language-cpp">unsigned char newPixel = static_cast&lt;unsigned char&gt;(pow(pixel / 255.0, gamma) * 255);
 </code></pre>
 <h3 id="图像的归一化"><a href="#图像的归一化" class="headerlink" title="图像的归一化"></a>图像的归一化</h3><p>所谓归一化，就是把需要处理的数据限制在你需要的一定范围内。</p>
 <p>首先归一化是为了后面<strong>数据处理的方便</strong>，其次是保证<strong>程序运行时收敛加快</strong>。归一化的具体作用是<strong>归纳统一样本的统计分布性</strong>。归一化在0-1之间是统计的概率分布，归一化在某个区间上是统计的坐标分布。</p>
@@ -483,7 +483,7 @@
 <p>最终目的是为了获得当类间方差最大时的<strong>k1和k2</strong></p>
 <p>最后只需要判断每个像素点的值在这三类中的哪类，分别修改值为0，128，255即可。</p>
 <p>因此代码实现为：</p>
-<pre><code class="line-numbers language-C++">for (k1 = 1; k1 &lt; 256; k1++)&#123;
+<pre><code class="line-numbers language-cpp">for (k1 = 1; k1 &lt; 256; k1++)&#123;
     for (k2 = 1; k2 &lt; 256; k2++)&#123;
         for (int i = 0; i &lt; k1; i++)&#123;
             p1 += Pi;
@@ -514,7 +514,7 @@
 <h2 id="几何变换"><a href="#几何变换" class="headerlink" title="几何变换"></a>几何变换</h2><h3 id="图像的缩放"><a href="#图像的缩放" class="headerlink" title="图像的缩放"></a>图像的缩放</h3><h4 id="最近邻插值"><a href="#最近邻插值" class="headerlink" title="最近邻插值"></a>最近邻插值</h4><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215203920356-164025956439343.png" alt="image-20211215203920356" style="zoom:50%;">
 
 <p>由于<strong>缩放比例</strong>（即srcWidth / dstWidth）基本上是浮点数值，而最后得到的<strong>图像坐标</strong>（srcX）是整数。因此需要对等式右边的值进行四舍五入的操作：</p>
-<pre><code class="line-numbers language-C++">int srcX = static_cast&lt;int&gt;(dstX * (srcWidth / dstWidth) + 0.5f);
+<pre><code class="line-numbers language-cpp">int srcX = static_cast&lt;int&gt;(dstX * (srcWidth / dstWidth) + 0.5f);
 // 其中static_cast用于强制转换为int类型
 // +0.5f是为了实现四舍五入而不是舍去小数点后的值
 </code></pre>
@@ -538,7 +538,7 @@
 <p>由于图像双线性插值只会用相邻的4个点，因此上述公式的分母都是1。opencv中的源码如下，用了一些优化手段：</p>
 <p><strong>用整数计算代替float</strong>（下面代码中的 * 2048就是变11位小数为整数，最后有两个连乘，因此&gt;&gt;22位）</p>
 <p><strong>源图像和目标图像几何中心的对齐</strong></p>
-<pre><code class="line-numbers language-C++">SrcX=(dstX + 0.5) * (srcWidth/dstWidth) -0.5
+<pre><code class="line-numbers language-cpp">SrcX=(dstX + 0.5) * (srcWidth/dstWidth) -0.5
 SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
 </code></pre>
 <p>源图像和目标图像的原点（0，0）均选择左上角，然后根据插值公式计算目标图像每点像素，假设你需要将一幅5x5的图像缩小成3x3，那么源图像和目标图像各个像素之间的对应关系如下。如果没有这个中心对齐，根据基本公式去算，就会得到左边这样的结果；而用了对齐，就会得到右边的结果：</p>
@@ -747,7 +747,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
         </div>
         
@@ -768,8 +768,13 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/PyQt5/">#PyQt5</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
         </div>
         
         
@@ -789,16 +794,11 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         
         
         <div class="cube-box ">
-            <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/tags/opencv/">#opencv</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
         </div>
         
@@ -823,7 +823,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
         </div>
         
