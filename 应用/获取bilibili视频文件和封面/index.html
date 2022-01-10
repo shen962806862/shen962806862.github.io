@@ -13,6 +13,7 @@
     <title>获取bilibili视频文件和封面 | hanhan</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/prism.css">
     <!-- <link href="/css/monokai_sublime.min.css" rel="stylesheet"> -->
     <!-- endinject -->
     <style>
@@ -229,17 +230,37 @@
 <h2 id="2-py脚本与php的数据交互"><a href="#2-py脚本与php的数据交互" class="headerlink" title="2.py脚本与php的数据交互"></a>2.py脚本与php的数据交互</h2><p><strong>py文件如何向php文件传值？ ajax如何获取php文件的传值？php中如何调用py脚本？</strong></p>
 <p>传值其实很简单，，就是打印函数，python 的<strong>print</strong>和php 的<strong>echo</strong>。</p>
 <p>调用py脚本，用exec函数：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$c</span> = exec(<span class="string">&quot;/usr/bin/python GetBilibiliUpCover.py <span class="subst">&#123;$func&#125;</span> <span class="subst">&#123;$uid&#125;</span> <span class="subst">&#123;$bv&#125;</span>&quot;</span>);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="line-numbers language-php">$c = exec(&quot;/usr/bin/python GetBilibiliUpCover.py &#123;$func&#125; &#123;$uid&#125; &#123;$bv&#125;&quot;);
+</code></pre>
 <p>exec用于执行一个外部程序，主体为执行命令，可以附带参数传递，输出数组和状态返回。因为程序要在服务器里运行，所以输入的就是ubuntu的命令行了，ubuntu怎么运行python脚本就怎么来。</p>
 <p>后面的三个是输入参数。在python中通过如下方式获取：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sys.argv[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
+<pre><code class="line-numbers language-python">sys.argv[1]
+</code></pre>
 <p>argv是一个数组，第一位是模块的名称，这里不去管他，从1开始是按序输入的参数，这里输入了三个，就分别用1、2、3来获取就行。</p>
 <h2 id="3-前后端数据交互"><a href="#3-前后端数据交互" class="headerlink" title="3.前后端数据交互"></a>3.前后端数据交互</h2><p>本半吊子表示根本没系统学过前端知识，所以做这一部分的时候异常痛苦，，界面也丑的一言难尽==</p>
 <p>用的ajax，但一开始死都进不去succes步，总进error。。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    <span class="attr">type</span> : <span class="string">&quot;GET&quot;</span>,</span><br><span class="line">    <span class="attr">url</span> : <span class="string">&quot;getting.php&quot;</span>,</span><br><span class="line">    <span class="attr">data</span> : &#123;</span><br><span class="line">        <span class="string">&#x27;func&#x27;</span>:$(<span class="string">&quot;#f1&quot;</span>).val(),</span><br><span class="line">        <span class="string">&#x27;bv&#x27;</span>:$(<span class="string">&quot;#av_info&quot;</span>).val()</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">dataType</span> : <span class="string">&quot;text&quot;</span>,</span><br><span class="line">    <span class="attr">success</span> : <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">        $(<span class="string">&quot;#result&quot;</span>).empty();</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">&quot;dynamic_av&quot;</span>).style.display = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">var</span> data = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (msg != <span class="string">&#x27;&#x27;</span>)&#123;</span><br><span class="line">        	data = <span class="built_in">eval</span>(<span class="string">&quot;(&quot;</span>+msg+<span class="string">&quot;)&quot;</span>);</span><br><span class="line">    	&#125;</span><br><span class="line">    	$(<span class="string">&quot;#result_av&quot;</span>).html(<span class="string">&quot;AV号: &quot;</span> + data.av);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params">msg, textStatus</span>) </span>&#123;</span><br><span class="line">    	<span class="built_in">console</span>.log(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="line-numbers language-javascript">$.ajax(&#123;
+    type : &quot;GET&quot;,
+    url : &quot;getting.php&quot;,
+    data : &#123;
+        &#39;func&#39;:$(&quot;#f1&quot;).val(),
+        &#39;bv&#39;:$(&quot;#av_info&quot;).val()
+    &#125;,
+    dataType : &quot;text&quot;,
+    success : function(msg) &#123;
+        $(&quot;#result&quot;).empty();
+        document.getElementById(&quot;dynamic_av&quot;).style.display = &quot;&quot;;
+        var data = &#39;&#39;;
+        if (msg != &#39;&#39;)&#123;
+            data = eval(&quot;(&quot;+msg+&quot;)&quot;);
+        &#125;
+        $(&quot;#result_av&quot;).html(&quot;AV号: &quot; + data.av);
+    &#125;,
+    error: function (msg, textStatus) &#123;
+        console.log(msg);
+    &#125;
+&#125;);
+</code></pre>
 <p>后来发现一开始数据类型用的json，网上说必须要非常标准的json数据才能接收到，我也不明白为什么我在py文件里封装的json数据就不行。。。</p>
 <p>后来就改成text，文本用eval转化一下提取出来就解决了。</p>
 <h1 id="获取视频文件"><a href="#获取视频文件" class="headerlink" title="获取视频文件"></a>获取视频文件</h1><p>首先进F12，看一下：</p>
@@ -425,12 +446,12 @@
         
         
         <div class="cube-box ">
-            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
+            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
+            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
         </div>
         
         
@@ -450,28 +471,28 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
-        </div>
-        
-        
         <div class="cube-box ">
             <a href="/tags/PyQt5/">#PyQt5</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+            <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
         </div>
         
         
         <div class="cube-box ">
             <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
         </div>
         
         
@@ -495,12 +516,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/%E6%8B%86%E6%9C%BA/">#拆机</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
         </div>
         
@@ -595,6 +616,7 @@
     })();
 </script>
 
+<script src="/js/prism.js" async></script>
 <!-- <script src="/js/highlight.min.js"></script>
 <script>
     hljs.initHighlightingOnLoad();

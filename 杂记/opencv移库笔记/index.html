@@ -13,6 +13,7 @@
     <title>opencv移库笔记 | hanhan</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/prism.css">
     <!-- <link href="/css/monokai_sublime.min.css" rel="stylesheet"> -->
     <!-- endinject -->
     <style>
@@ -201,25 +202,62 @@
 <h2 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h2><p>16.0版本，用户名和密码设简单点！建议英文！</p>
 <p>切换中文输入法用Ctrl+空格。</p>
 <p>解压：<code>tar -zxvf xxx.tar.gz</code></p>
-<h3 id="分辨率"><a href="#分辨率" class="headerlink" title="分辨率"></a>分辨率</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cvt 1920 1080</span><br><span class="line">// 返回</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1920x1080 59.96 Hz (CVT 2.07M9) hsync: 67.16 kHz; pclk: 173.00 MHz</span></span><br><span class="line">Modeline &quot;1920x1080_60.00&quot;  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync</span><br><span class="line"></span><br><span class="line">// 增加显示模块，并设置为开机启动，编辑”/etc/profile”，在末尾增加：</span><br><span class="line">xrandr --newmode &quot;1920x1080_60.00&quot; 173.00 1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync</span><br><span class="line">xrandr --addmode VGA1 &quot;1920x1080_60.00&quot;</span><br><span class="line"></span><br><span class="line">// 立即启用</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<h3 id="分辨率"><a href="#分辨率" class="headerlink" title="分辨率"></a>分辨率</h3><pre><code class="line-numbers language-shell">cvt 1920 1080
+// 返回
+# 1920x1080 59.96 Hz (CVT 2.07M9) hsync: 67.16 kHz; pclk: 173.00 MHz
+Modeline &quot;1920x1080_60.00&quot;  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
 
+// 增加显示模块，并设置为开机启动，编辑”/etc/profile”，在末尾增加：
+xrandr --newmode &quot;1920x1080_60.00&quot; 173.00 1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync
+xrandr --addmode VGA1 &quot;1920x1080_60.00&quot;
+
+// 立即启用
+source /etc/profile
+</code></pre>
 <p>之后就可以在设置中的Display里修改啦。</p>
 <h1 id="opencv库"><a href="#opencv库" class="headerlink" title="opencv库"></a>opencv库</h1><h2 id="安装与编译"><a href="#安装与编译" class="headerlink" title="安装与编译"></a>安装与编译</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>1.在GitHub上下载了opencv4.1.1的库，并在Ubuntu中解压</p>
 <p>2.下载 <strong>ippicv_2019_lnx_intel64_general_20180723</strong>，这个压缩包无需解压</p>
 <p>3.将<strong>opencv-4.1.1/3rdparty/ippicv/ippicv.cmake</strong>文件中倒数第十行(以http开头的)修改成”<strong>file://path</strong>“,  <strong>path</strong>为下载的ippicv_2019_lnx_intel64_general_20180723在你的电脑中存放的位置（绝对路径）</p>
-<h3 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential</span><br><span class="line"></span><br><span class="line">sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev</span><br></pre></td></tr></table></figure>
+<h3 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h3><pre><code class="line-numbers language-shell">sudo apt-get install build-essential
 
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+
+sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+</code></pre>
 <h3 id="编译opencv"><a href="#编译opencv" class="headerlink" title="编译opencv"></a>编译opencv</h3><p>在opencv-4.1.1路径下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_GENERATE_PKGCONFIG=ON ..</span><br><span class="line">// 这里选择安装路径为/usr/local下，并开启了pkg-config</span><br><span class="line">// 因为opencv4开始就不会主动支持pkg-config了，但是编译还是需要这个。</span><br><span class="line">// 一定注意这两个点“..”，这是选择编译的内容为整个opencv文件夹</span><br><span class="line">// 编译结束后进入下一步：</span><br><span class="line">make -j8</span><br><span class="line">// 这一步比较久一点，8为选择编译时使用的内核数</span><br><span class="line">sudo make install</span><br><span class="line">opencv_version</span><br><span class="line">//编译结束后运行，若能查看到版本号就ok了</span><br><span class="line">sudo gedit /etc/ld.so.conf.d/opencv.conf</span><br><span class="line">//设置opencv的环境变量。(文件可能为空，即原来不存在，新建立的)</span><br><span class="line">//将如下内容添加到最后：</span><br><span class="line">/usr/local/lib  (依然要对应成你本身的路径，这个看看安装好之后，你的安装路径下的lib文件夹位置)</span><br><span class="line"></span><br><span class="line">//配置库</span><br><span class="line">sudo ldconfig</span><br><span class="line">//更改环境变量：</span><br><span class="line">sudo gedit /etc/bash.bashrc</span><br><span class="line">//在文件后添加</span><br><span class="line">PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/ubun/myinstall/lib/pkgconfig  </span><br><span class="line">export PKG_CONFIG_PATH</span><br></pre></td></tr></table></figure>
+<pre><code class="line-numbers language-shell">mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_GENERATE_PKGCONFIG=ON ..
+// 这里选择安装路径为/usr/local下，并开启了pkg-config
+// 因为opencv4开始就不会主动支持pkg-config了，但是编译还是需要这个。
+// 一定注意这两个点“..”，这是选择编译的内容为整个opencv文件夹
+// 编译结束后进入下一步：
+make -j8
+// 这一步比较久一点，8为选择编译时使用的内核数
+sudo make install
+opencv_version
+//编译结束后运行，若能查看到版本号就ok了
+sudo gedit /etc/ld.so.conf.d/opencv.conf
+//设置opencv的环境变量。(文件可能为空，即原来不存在，新建立的)
+//将如下内容添加到最后：
+/usr/local/lib  (依然要对应成你本身的路径，这个看看安装好之后，你的安装路径下的lib文件夹位置)
 
+//配置库
+sudo ldconfig
+//更改环境变量：
+sudo gedit /etc/bash.bashrc
+//在文件后添加
+PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/home/ubun/myinstall/lib/pkgconfig  
+export PKG_CONFIG_PATH
+</code></pre>
 <p>opencv 编译后主要文件位于 <strong>/usr/local/bin</strong>    <strong>/usr/local/include/opencv4</strong>     <strong>/usr/local/lib</strong></p>
 <h3 id="导入opencv扩展包"><a href="#导入opencv扩展包" class="headerlink" title="导入opencv扩展包"></a>导入opencv扩展包</h3><p>1.下载opencv_contrib-4.1.1扩展包</p>
 <p>2.将文件夹解压至opencv-4.1.1文件夹下，同时删除其下的build文件夹（之前的编译文件）</p>
 <p>3.下载可能缺少的.i文件（会导致编译失败）</p>
 <p>将下载的.i文件放至**/opencv_4.1.1/opencv_contrib-4.1.1/modules/xfeatures2d/src/**目录下</p>
 <p>4.按照上一节的步骤重新编译，其中编译命令做一点改动（增加一句）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=/home/shenzihan/opencv-4.1.1/opencv_contrib-4.1.1/modules/ -D OPENCV_GENERATE_PKGCONFIG=ON ..</span><br></pre></td></tr></table></figure>
-
+<pre><code class="line-numbers language-shell">cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=/home/shenzihan/opencv-4.1.1/opencv_contrib-4.1.1/modules/ -D OPENCV_GENERATE_PKGCONFIG=ON ..
+</code></pre>
 <p>5.在执行<strong>make -j4</strong>时可能会报错：<strong>fatal error: features2d/test/test_detectors_regression.impl.hpp: No such file or directory</strong></p>
 <p>按照内容，将opencv-4.1.1/modules/下的<strong>features2d</strong>文件夹复制到<strong>build</strong>文件夹下即可。</p>
 <h2 id="移植opencv"><a href="#移植opencv" class="headerlink" title="移植opencv"></a>移植opencv</h2><h3 id="总体流程"><a href="#总体流程" class="headerlink" title="总体流程"></a>总体流程</h3><p><strong>1.封装函数</strong></p>
@@ -227,17 +265,16 @@
 <p>也就是需要在每个opencv函数外面套一层壳，先将unsigned char和int 转为Mat CPoint等输入opencv函数，返回值再转回unsigned char和int作为移植函数的返回值，即可。</p>
 <p><strong>2.生成.so动态链接库</strong></p>
 <p>编译写好的移植函数生成.so文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -fpic -shared -o target.so source.cpp `pkg-config --cflags --libs opencv4` -std=c++11</span><br></pre></td></tr></table></figure>
-
+<pre><code class="line-numbers language-shell">g++ -fpic -shared -o target.so source.cpp `pkg-config --cflags --libs opencv4` -std=c++11
+</code></pre>
 <p>一步到位，直接生成.so文件</p>
 <p><strong>3.在测试文件中调用so文件测试功能</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> * LdSoHandle=<span class="built_in">dlopen</span>(<span class="string">&quot;./target.so&quot;</span>, RTLD_NOW|RTLD_GLOBAL);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="line-numbers language-C++">void * LdSoHandle=dlopen(&quot;./target.so&quot;, RTLD_NOW|RTLD_GLOBAL);
+</code></pre>
 <p><strong>4.编译测试文件生成可执行文件</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -std=c++11 main.cpp -o mai `pkg-config --cflags --libs opencv4` -ldl</span><br><span class="line">// -ldl一定要加上</span><br></pre></td></tr></table></figure>
-
-
-
+<pre><code class="line-numbers language-shell">g++ -std=c++11 main.cpp -o mai `pkg-config --cflags --libs opencv4` -ldl
+// -ldl一定要加上
+</code></pre>
 <h3 id="opencv图像类型参数的值"><a href="#opencv图像类型参数的值" class="headerlink" title="opencv图像类型参数的值"></a>opencv图像类型参数的值</h3><table>
 <thead>
 <tr>
@@ -469,12 +506,12 @@
         
         
         <div class="cube-box-bg ">
-            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
+            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
+        <div class="cube-box ">
+            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
         </div>
         
         
@@ -495,22 +532,17 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/tags/PyQt5/">#PyQt5</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+            <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
         </div>
         
         
@@ -519,7 +551,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
+            <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
             <a href="/tags/opencv/">#opencv</a>
         </div>
         
@@ -539,7 +576,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/%E6%8B%86%E6%9C%BA/">#拆机</a>
         </div>
         
@@ -549,7 +586,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
         </div>
         
@@ -639,6 +676,7 @@
     })();
 </script>
 
+<script src="/js/prism.js" async></script>
 <!-- <script src="/js/highlight.min.js"></script>
 <script>
     hljs.initHighlightingOnLoad();
