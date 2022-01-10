@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Szh">
+    
+    
+    
+    
+    
+    
+    <title>关于RSA加密算法 | hanhan</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
+
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: block;
+            content: 'Loading';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
+        }
+    </style>
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
+        
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="/">首页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-tags" aria-hidden="true"></i>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
+            <a href="/about">关于我</a>
+        </li>
+        
+    </ul>
+</nav>
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
+        
+        <li>
+            <a class="lrc-control">Open Lyrics</a>
+        </li>
+        
+        <li>
+            <a class="scroll-to-top">Top</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg " alt="头部背景图片">
+    
+    <div class="cube-type">
+        <span class="cube-typed-title">小涵の米奇妙妙屋</span>
+        <span class="cube-typed-cursor">|</span>
+    </div>
+    
+</header>
+
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+        
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        
+            z-index: -1;
+            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
+            background-repeat: no-repeat;
+            background-position: center 44px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
+            background-position: center 0;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
+        
+        <div class="cube-type">
+            <span class="cube-typed-title">小涵の米奇妙妙屋</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
+        
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '773',
+                height: '387'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            <div class="cube-article">
+<h1 class="title">关于RSA加密算法</h1>
+
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2020-05-16
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+    
+</div>
+    </div>
+
+    <div class="cube-article-content cube-markdown">
+        
+        <p>RSA是目前使用最广泛的公钥密码体制之一。</p>
+<h3 id="RSA产生公私钥对"><a href="#RSA产生公私钥对" class="headerlink" title="RSA产生公私钥对"></a>RSA产生公私钥对</h3><p><strong>1.随机选取两个相近但不相等的质数p和q（越大越难破解）</strong></p>
+<p>取p=11，q=13，n = p * q = 143，n即为密钥长度，143二进制为10001111，密钥为8位。实际应用中，一般为1024位。</p>
+<p><strong>2.计算n的欧拉函数z</strong></p>
+<p>z = (p-1)(q-1) = 120</p>
+<p><strong>3.随机选择一个整数e，作为公钥中用来加密的数字</strong></p>
+<p>条件1 &lt; e &lt; z，且e与z互质。假设随机选择e = 7（实际中常选择为65537）</p>
+<p><strong>4.计算e对于z的模反元素d，作为密钥中用来解密的数字</strong></p>
+<p>模反元素指存在一个整数d，使得e * d mod z = 1。带入可得d = 103</p>
+<p><strong>5.将n和e封装成公钥（143，7），n和d封装成密钥（143，103）</strong></p>
+<h3 id="题外话：关于m-e-mod-n的手动计算方法"><a href="#题外话：关于m-e-mod-n的手动计算方法" class="headerlink" title="题外话：关于m^e mod n的手动计算方法"></a>题外话：关于m^e mod n的手动计算方法</h3><p>利用 (a×b) mod m = ((a mod m) × (b mod m)) mod m 这个公式</p>
+<p>设三个变量a，b，c，对于m^e mod n，令a = e,b = m, c = 1</p>
+<p>然后重复以下步骤：</p>
+<p>1.判断a是奇数，进第2步；偶数进第3步</p>
+<p>2.a = a - 1, c = (c*b) mod n,回到第1步</p>
+<p>3.a = a / 2, b = (b*b) mod n,回到第1步</p>
+<p>直到a = 0, c 就是最终结果</p>
+<h3 id="RSA的加密和解密"><a href="#RSA的加密和解密" class="headerlink" title="RSA的加密和解密"></a>RSA的加密和解密</h3><p><strong>加密：c = m^e mod n</strong></p>
+<p><strong>解密：m = c^d mod n</strong></p>
+<p>首先对明文进行比特串分组，且保证每个分组对应的十进制数小于n，然后对每个分组进行一次加密，所有分组的密文组成的序列就是最终密文了。</p>
+<p>举两个栗子：</p>
+<p><strong>1.以数据加密为例：</strong></p>
+<p>甲向乙发送机密数据信息m=85，并已知乙的公钥(n,e)=(143,7)，于是可计算出：c = 123<br>甲将c发送至乙，乙利用私钥(n,d)=(143,103)对c进行计算：m = 85<br>则乙得到甲向其要发送的机密数据信息。甲向乙发送信息，甲所拥有的仅仅是乙的公钥。</p>
+<p><strong>2.以数字签名为例：</strong></p>
+<p>乙要向甲发送信息，并要让甲确信此信息是由乙本人所发出的，于是，乙将能代表自己身份的编码值（如：123），利用私钥(n,d)=(143,103)进行计算，并将结果发送给甲：m = 85<br>甲接受到乙的数字签名后利用乙的公钥(n,e)=(143,7)进行计算，得出代表乙身份的编码：c = 123<br>现甲经过验证已确信信息的发送方为乙。因为只有乙拥有私钥(n,d)，来对代表自己身份的编码123进行计算。在这里，乙向甲发送信息并进行签名，甲所拥有的也仅仅是乙的公钥来验证乙的签名。</p>
+<h3 id="RSA实际应用"><a href="#RSA实际应用" class="headerlink" title="RSA实际应用"></a>RSA实际应用</h3><p><strong>在基于序列号保护的共享软件中应用RSA。</strong></p>
+<p>在某一共享软件中，甲想用123为注册名进行软件注册，他现在拥有的仅仅是存在于共享软件程序中的公钥(n,e)=(143,7)。</p>
+<p>甲现将123为注册名向乙提出注册申请，乙得知此申请并通过此申请后，便利用所拥有的私钥(n,d)对注册名123进行计算：m = 85</p>
+<p>甲得到计算后的结果85（序列号），提供给共享软件的注册程序进行计算：c = 123</p>
+<p>然后注册程序将判断计算结果c是否为123（注册名），以决定注册是否通过。</p>
+<p>如果甲随意输入一组序列号利用公钥(n,e)进行计算，那他得到的结果将不是123，注册也就失败了。注意，在这里，共享软件的注册程序<strong>比较的是注册名</strong>，而不是序列号。</p>
+<p>如果甲跟踪注册程序得到了他所随意输入的序列号所产生的注册名，将其提供给注册程序，那注册程序也能够通过注册，但他由于没有(n,d)，所以他无法用自己的注册名进行软件注册，也就<strong>防止了非法注册机的制作</strong>。</p>
+<p>将RSA应用于此的目的仅仅是防止非法注册机的制作，在以上描述中，n=143，包括以下Demo中的n(HEX)=963251DC5A9C90D9F203A03C363BA411，以现在的计算机处理速度，能很快地将其因式分解得到相应的p，q，再结合暴露在共享软件注册程序中的e，从而计算出d，那么这个共享软件的保护就完全被破解了。解决的方法是要避免n过短，以及结合MD5等加密算法……</p>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        <li class="prev">
+        <a href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Eurl%E7%BC%96%E7%A0%81/">
+            <i class="cube-icon cube-prev" aria-hidden="true"></i>
+            关于url编码
+        </a>
+        </li>
+        
+            
+            <li class="next">
+            <a href="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/">
+                获取bilibili视频文件和封面
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+        </div>
+        <div class="cube-right">
+            
+
+<div class="cube-search cube-sidebar" id="cube-search">
+    <div class="search-container">
+        <input type="text" placeholder="Search" class="cube-search-input" id="cube-search-input">
+        <i class="cube-icon cube-icon-search cube-search-submit" aria-hidden="true"></i>
+    </div>
+    <!-- TODO 通过给window赋一个全局变量，通过脚本赋值 -->
+</div>
+<script>
+    (function (window) {
+        'use strict';
+        window.searchModule = {}
+        window.searchModule.JSONUrl = '/content.json'
+        window.searchModule.rootUrl = '/'
+    })(window)
+</script>
+<div class="cube-search-form">
+    <div class="cube-search-control">
+        <input type="text" placeholder="Search" class="search-input">
+        <a class="close-button">
+            <i class="cube-icon cube-close" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="cube-search-result"></div>
+</div>
+
+
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>Szh</span>
+    
+    
+    <div class="count">
+        <a class="count articles"><span>11</span>Article</a>
+        <a class="count tags"><span>12</span>Tags</a>
+        <a class="count categories"><span>3</span>Categories</a>
+    </div>
+</div>
+
+
+
+<div class="cube-music cube-sidebar" id="cube-music">
+    <div class="cube-player aplayer" id="cube-player"></div>
+</div>
+<script>
+    (function (window) {
+        window.musicModule = {}
+        window.musicModule.musicConfig = '{"narrow":false,"autoplay":false,"showlrc":3,"theme":"#b7daff","mutex":true,"mode":"circulation","preload":"auto","listmaxheight":"513px","music":[{"title":"石头歌 (先行曲)","author":"三无Marblue","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/三无Marblue - 石头歌 (先行曲).mp3","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/三无Marblue - 石头歌 (先行曲).jpg"},{"title":"有没有那么一首歌","author":"张茜","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/张茜 - 有没有那么一首歌.mp3","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/张茜 - 有没有那么一首歌.jpg"},{"title":"NEW BOY","author":"朴树","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/朴树 - NEW BOY.mp3","lrc":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/lrc/朴树 - NEW BOY.lrc","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/朴树 - NEW BOY.jpg"}]}'
+        window.musicModule.lrcConfig = {
+            open: 'Open Lyrics',
+            close: 'Close Lyrics'
+        }
+    })(window)
+</script>
+
+
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>Recent Posts</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%BA%94%E7%94%A8/web%E7%AB%AF%E5%B0%8F%E4%BD%9C%E5%93%81/" title="web端小作品">web端小作品</a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/%E6%9D%82%E8%AE%B0/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/" title="opencv移库笔记">opencv移库笔记</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/" title="PyQt5狗都不用:阴阳师挂机软件OnHook">PyQt5狗都不用:阴阳师挂机软件OnHook</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/" title="ID卡与IC卡原理">ID卡与IC卡原理</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-categories cube-sidebar" id="cube-categories">
+    <div class="title">
+        <a href="/categories">Categories</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E6%9D%82%E8%AE%B0/">#杂记</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
+    <div class="title">
+        <a href="/tags">Tagcloud</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/PyQt5/">#PyQt5</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/opencv/">#opencv</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E7%8E%AF%E5%A2%83/">#环境</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E6%8B%86%E6%9C%BA/">#拆机</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/github.png">
+            
+            <a href="https://github.com/shen962806862" target="_blank">GitHub</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/csdn.jpg">
+            
+            <a href="https://blog.csdn.net/shen962806862" target="_blank">CSDN</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/weibo.jpg">
+            
+            <a href="https://weibo.com/u/6056563979" target="_blank">新浪微博</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-friend-links cube-sidebar" id="cube-friend-links">
+    <div class="title">
+        <a>Friend Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/links.jpg">
+            <a href="http://www.maxwellzhu.pub/" target="_blank">祝大师</a>
+        </li>
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/links2.jpg">
+            <a href="http://www.hanhan0223.cn/" target="_blank">我的大号</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+    © 2017 Szh
+
+    <br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    <br>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp; </span>
+<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
+</body>
+</html>

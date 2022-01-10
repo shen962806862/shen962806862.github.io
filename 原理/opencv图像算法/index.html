@@ -185,13 +185,15 @@
     
     <a href="/tags/opencv/">#opencv</a>
     
+    <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
+    
 </div>
     </div>
 
     <div class="cube-article-content cube-markdown">
         
-        <h1 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h1><h2 id="低通滤波"><a href="#低通滤波" class="headerlink" title="低通滤波"></a>低通滤波</h2><h3 id="邻域滤波"><a href="#邻域滤波" class="headerlink" title="邻域滤波"></a>邻域滤波</h3><p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-14d8e1ccf33a81b447d0faf8566bb7ef_r-16402595643921.jpg" alt="preview"></p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211209161017369-16402595643922.png" alt="邻域计算公式"></p>
+        <h1 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h1><h2 id="低通滤波"><a href="#低通滤波" class="headerlink" title="低通滤波"></a>低通滤波</h2><h3 id="邻域滤波"><a href="#邻域滤波" class="headerlink" title="邻域滤波"></a>邻域滤波</h3><p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-14d8e1ccf33a81b447d0faf8566bb7ef_r-16402595643921.jpg" alt="preview"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211209161017369-16402595643922.png" alt="邻域计算公式"></p>
 <h3 id="中值滤波"><a href="#中值滤波" class="headerlink" title="中值滤波"></a>中值滤波</h3><p>图像的中值滤波是一种非线性图像处理方法,是统计排序滤波器的一种典型应用。中值滤波是通过<strong>对邻域内像素按灰度排序的结果</strong>决定<strong>中心像素</strong>的灰度。具体的操作过程如下：<font color="red">用一个奇数点的移动窗口，将窗口中心点的值用窗口内各点的中值代替。</font>假设窗口内有5个点，其值为1,2,3,4和5，那么此窗口内各点的中值即为3，也就是用3来代替中心点的像素值。</p>
 <p>中值滤波对于滤除<strong>脉冲干扰及图像扫描噪声</strong>最为有效，还可以克服线性滤波器（如领域简单平滑滤波）带来的图像细节模糊。</p>
 <p>数字图像存在冗余信息，具体分为六大冗余：空间冗余、时间冗余、视觉冗余、信息熵冗余、结构冗余、知识冗余。其中第一个空间冗余就可以很好的解释中值滤波的作用。空间冗余指的是：图像内部<strong>相邻像素之间存在较强的相关性而造成的冗余</strong>。简单来说就是，同一景物表面上采样点的颜色之间通常存在着空间相关性，相邻各点的取值往往相近或者相同，这就是空间冗余。而脉冲噪声通常是在一个邻域内有一个点或多个点的灰度值很高或很低，这就与周围像素存在较大差异，因此中值滤波能很好的去除这种噪声。</p>
@@ -236,31 +238,31 @@
 <p><strong>缺陷</strong>：均值滤波本身存在着固有的缺陷，即它不能很好地保护图像细节，在图像去噪的同时也破坏了图像的细节部分，从而使<strong>图像变得模糊，不能很好地去除噪声点</strong>。特别是椒盐噪声</p>
 <h4 id="算术均值滤波"><a href="#算术均值滤波" class="headerlink" title="算术均值滤波"></a>算术均值滤波</h4><p>这是<strong>最简单的均值滤波器，可以去除均匀噪声和高斯噪声，但会对图像造成一定程度的模糊</strong>。</p>
 <p>算术均值滤波器就是简单的计算窗口区域的像素均值，然后将均值赋值给窗口中心点处的像素：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210160750996-16402595643923.png" alt="image-20211210160750996" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210160750996-16402595643923.png" alt="image-20211210160750996" style="zoom:50%;">
 
 <p>其中，g(s,t)表示原始图像，f(x,y)表示均值滤波后得到的图像，Sxy表示滤波器窗口。</p>
 <p>基于上述公式，可以很容易的得到的算术均值滤波器的窗口模板，下面以3×3为例：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210160926601-16402595643924.png" alt="image-20211210160926601" style="zoom:67%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210160926601-16402595643924.png" alt="image-20211210160926601" style="zoom:67%;">
 
 
 
 <h4 id="几何均值滤波"><a href="#几何均值滤波" class="headerlink" title="几何均值滤波"></a>几何均值滤波</h4><p>滤波后图像的像素由模板窗口内像素的乘积的1/mn幂给出。 和算术均值滤波器相比，几何均值滤波器能够<strong>更好的取出高斯噪声，并且能够更多的保留图像的边缘信息</strong>。但其<strong>对0值是非常敏感</strong>的，在滤波器的窗口内只要有一个像素的灰度值为0，就会造成滤波器的输出结果为0。</p>
 <p>公式如下：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214172053056-16402595643925.png" alt="image-20211214172053056" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214172053056-16402595643925.png" alt="image-20211214172053056" style="zoom:50%;">
 
 
 
 <h4 id="谐波均值滤波"><a href="#谐波均值滤波" class="headerlink" title="谐波均值滤波"></a>谐波均值滤波</h4><p><strong>对盐粒噪声（白噪声）效果较好，不适用于胡椒噪声；比较适合处理高斯噪声。</strong></p>
 <p>公式如下：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210161208708-16402595643926.png" alt="image-20211210161208708" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210161208708-16402595643926.png" alt="image-20211210161208708" style="zoom:50%;">
 
 
 
-<h4 id="逆谐波均值滤波"><a href="#逆谐波均值滤波" class="headerlink" title="逆谐波均值滤波"></a>逆谐波均值滤波</h4><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210163038627-16402595643927.png" alt="image-20211210163038627" style="zoom:67%;">
+<h4 id="逆谐波均值滤波"><a href="#逆谐波均值滤波" class="headerlink" title="逆谐波均值滤波"></a>逆谐波均值滤波</h4><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210163038627-16402595643927.png" alt="image-20211210163038627" style="zoom:67%;">
 
 <p>其中Q称为滤波器的阶数，该滤波器可以用来<strong>消除椒盐噪声</strong>。但是不能同时处理盐粒噪声和胡椒噪声，当Q为正时，可以消除<strong>胡椒噪声</strong>；当Q为负时，消除<strong>盐粒噪声</strong>。当Q=0时，该滤波器退化为算术均值滤波器；Q=-1时，退化为谐波均值滤波器。</p>
 <h4 id="修正后的alpha均值滤波"><a href="#修正后的alpha均值滤波" class="headerlink" title="修正后的alpha均值滤波"></a>修正后的alpha均值滤波</h4><p>假设在Sxy模板领域内，去掉g(s,t)中最高灰度值的d/2和最低灰度值的d/2个像素。用gr(s,t)来代替剩余的mn-d个像素。由剩余像素点的平均值形成的滤波器称为修正后的alpha均值滤波器：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210173009541-16402595643938.png" alt="image-20211210173009541" style="zoom:67%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210173009541-16402595643938.png" alt="image-20211210173009541" style="zoom:67%;">
 
 <p>其中d取0~m*n-1之间的任意数。</p>
 <p>当d=0时，退变为算术均值滤波；</p>
@@ -276,28 +278,28 @@
 <h3 id="双边滤波"><a href="#双边滤波" class="headerlink" title="双边滤波"></a>双边滤波</h3><p>双边滤波是一种非线性滤波器，它可以达到保持边缘、降噪平滑的效果。和其他滤波原理一样，双边滤波也是采用加权平均的方法，用周边像素亮度值的加权平均代表某个像素的强度，所用的加权平均基于高斯分布[1]。最重要的是，双边滤波的权重不仅考虑了像素的<strong>欧氏距离</strong>（如普通的高斯低通滤波，只考虑了位置对中心像素的影响），还考虑了像素范围域中的<strong>辐射差异</strong>（例如卷积核中像素与中心像素之间相似程度、颜色强度，深度距离等），在计算中心像素的时候同时考虑这两个权重。它是一种可以保边去噪的滤波器。之所以可以达到此去噪效果，是因为滤波器是由两个函数构成。一个函数是由<strong>几何空间距离</strong>决定滤波器系数。另一个由<strong>像素差值</strong>决定滤波器系数。</p>
 <p>双边滤波的核函数是空间域核与像素范围域核的综合结果：<strong>在图像的平坦区域，像素值变化很小，对应的像素范围域权重接近于1，此时空间域权重起主要作用，相当于进行高斯模糊；在图像的边缘区域，像素值变化很大，像素范围域权重变大，从而保持了边缘的信息。</strong></p>
 <p><strong>空间域</strong>公式如下：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214142110264-16402595643939.png" alt="image-20211214142110264" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214142110264-16402595643939.png" alt="image-20211214142110264" style="zoom:50%;">
 
 <p><strong>像素范围</strong>域（颜色域）公式如下：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214142312682-164025956439310.png" alt="image-20211214142312682" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214142312682-164025956439310.png" alt="image-20211214142312682" style="zoom:50%;">
 
 <p>他们的乘积即为双边滤波的权重：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214145425919-164025956439311.png" alt="image-20211214145425919" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214145425919-164025956439311.png" alt="image-20211214145425919" style="zoom:50%;">
 
 <p>根据权重计算最后目标点的像素值：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214145506582-164025956439312.png" alt="image-20211214145506582" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214145506582-164025956439312.png" alt="image-20211214145506582" style="zoom:50%;">
 
 
 
 <h3 id="高斯滤波"><a href="#高斯滤波" class="headerlink" title="高斯滤波"></a>高斯滤波</h3><p>高斯滤波器是一种线性滤波器，能够有效的抑制噪声，平滑图像。其作用原理和均值滤波器类似，都是取滤波器窗口内的像素的均值作为输出。其窗口模板的系数和均值滤波器不同，均值滤波器的模板系数都是相同的为1；而高斯滤波器的<strong>模板系数，则随着距离模板中心的增大而系数减小</strong>。所以，高斯滤波器相比于均值滤波器对图像个<strong>模糊程度较小</strong>。</p>
 <p><strong>高斯滤波器</strong></p>
 <p>二维高斯函数如下：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/4caf5e01-f4ea-3bd4-85c4-a66b3d6e2c7e-164025956439313.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/4caf5e01-f4ea-3bd4-85c4-a66b3d6e2c7e-164025956439313.png" alt="img"></p>
 <p>其中e前的参数可以忽略，因为这只是个表示幅值的常数，并不影响相互之间的比例关系，并且最终都要进行归一化，所以实际只需要计算后半部分即可。该参数仅影响图像的亮度而不影响模糊。</p>
 <p>例如，要产生一个3×3的高斯滤波器模板，以模板的中心位置为坐标原点进行取样。模板在各个位置的坐标，如下所示（x轴水平向右，y轴竖直向下）</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/439761-20170216214155582-1833428662-164025956439314.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/439761-20170216214155582-1833428662-164025956439314.png" alt="img"></p>
 <p>对于窗口模板的大小为 (2k+1)×(2k+1)，模板中各个元素值的计算公式如下：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/20190502112714183-164025956439315.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/20190502112714183-164025956439315.png" alt="img"></p>
 <p>转化为代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j)</span><br><span class="line">        <span class="keyword">double</span> g = <span class="built_in">exp</span>(((i - m/<span class="number">2</span>)*(i - m/<span class="number">2</span>) + (j - n/<span class="number">2</span>)*(j - n/<span class="number">2</span>)) * <span class="number">-1.0</span> / (<span class="number">2</span> * sigma * sigma));</span><br></pre></td></tr></table></figure>
 
@@ -306,49 +308,49 @@
 
 <p>关于高斯分布的<strong>标准差σ的选值</strong>，代表着数据的离散程度。如果σ较小，那么生成的模板的中心系数较大，而周围的系数较小，这样对图像的平滑效果就不是很明显；反之，σ较大，则生成的模板的各个系数相差就不是很大，比较类似均值模板，对图像的平滑效果比较明显。</p>
 <p>高斯分布的概率分布密度图如下：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/439761-20170216214529738-2113566517-164025956439316.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/439761-20170216214529738-2113566517-164025956439316.png" alt="img"></p>
 <p>横轴表示可能得取值x，竖轴表示概率分布密度F(x)，那么不难理解这样一个曲线与x轴围成的图形面积为1。σσ（标准差）决定了这个图形的宽度，可以得出这样的结论：σσ越大，则图形越宽，尖峰越小，图形较为平缓；σσ越小，则图形越窄，越集中，中间部分也就越尖，图形变化比较剧烈。这其实很好理解，如果sigma也就是标准差越大，则表示该密度分布一定比较分散，由于面积为1，于是尖峰部分减小，宽度越宽（分布越分散）；同理，当σσ越小时，说明密度分布较为集中，于是尖峰越尖，宽度越窄！</p>
 <p>以上求出来的就是模板系数，滤波操作就是分别以图像的每个像素点为中心再根据模板系数求出加权平均像素，作为该点的滤波后像素。比如3x3模板，对选中像素点的外一圈共九个像素点，分别乘以对应位置的模板系数再求和，即为选中点的像素。</p>
 <h2 id="高通滤波（边缘检测）"><a href="#高通滤波（边缘检测）" class="headerlink" title="高通滤波（边缘检测）"></a>高通滤波（边缘检测）</h2><p>如何识别图像边缘？图里面有一条线,左边很亮,右边很暗,那人眼就很容易识别这条线作为边缘.也就是<strong>像素的灰度值快速变化的地方</strong></p>
 <h3 id="Roberts算子"><a href="#Roberts算子" class="headerlink" title="Roberts算子"></a>Roberts算子</h3><p>Roberts算子是一种最简单的算子，利用<strong>局部差分</strong>寻找边缘的算子。采用对角线相邻两像素之差近似梯度幅值检测边缘。检测<strong>垂直边缘的效果比斜向边缘要好</strong>，定位精度高，对噪声比较敏感，无法抑制噪声的影响。</p>
 <p>Roberts边缘算子是一个2x2的模板，采用的是对角方向相邻的两个像素之差。从图像处理的实际效果来看，边缘定位较准，对噪声敏感。模板如下：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-284a63fee4b9188ad867f10f9f9bf6fe_1440w-164025956439317.jpg" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-284a63fee4b9188ad867f10f9f9bf6fe_1440w-164025956439317.jpg" alt="img"></p>
 <p>对于输入图像f(x,y),使用Roberts算子后输出的目标图像为g(x,y),则</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-63587385584cf73f70733e2476279903_1440w-164025956439318.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-63587385584cf73f70733e2476279903_1440w-164025956439318.png" alt="img"></p>
 <h3 id="Sobel算子（一阶导数法）"><a href="#Sobel算子（一阶导数法）" class="headerlink" title="Sobel算子（一阶导数法）"></a>Sobel算子（一阶导数法）</h3><p><strong>基于寻找梯度强度</strong></p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929174912027-119968080-164025956439319.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929174912027-119968080-164025956439319.png" alt="img"></p>
 <p>对于f(t),其导数f’(t)反映了每一处的变化趋势.在变化最快的位置其导数最大. sobel算子的思路就是模拟求一阶导数.</p>
 <p>sobel算子是一个离散差分算子.它计算图像像素点亮度值的近似梯度。图像是二维的,即沿着宽度/高度两个方向。我们使用两个卷积核对原图像进行处理:</p>
 <p>水平方向：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929161108392-1943506049-164025956439320.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929161108392-1943506049-164025956439320.png" alt="img"></p>
 <p>原始像素灰度值–&gt;(右边像素值-左边像素值),反映了水平方向的变化情况.</p>
 <p>垂直方向同理：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929161120966-1646377214-164025956439321.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929161120966-1646377214-164025956439321.png" alt="img"></p>
 <p>这样就得到了两个新的矩阵,分别反映了每一点像素在水平方向上的亮度变化情况和在垂直方向上的亮度变换情况。</p>
-<p>综合考虑这两个方向的变化，使用<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929161733111-1912218409-164025956439322.png" alt="img">反映某个像素的梯度变化情况.</p>
-<p>有时候为了简单起见,也直接用绝对值相加替代：<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929161841863-988164813-164025956439323.png" alt="img"></p>
+<p>综合考虑这两个方向的变化，使用<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929161733111-1912218409-164025956439322.png" alt="img">反映某个像素的梯度变化情况.</p>
+<p>有时候为了简单起见,也直接用绝对值相加替代：<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929161841863-988164813-164025956439323.png" alt="img"></p>
 <p>在opencv中也可以通过以下卷积核（Scharr）大像素的变化情况：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929162114665-950047722-164025956439324.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190929162114665-950047722-164025956439324.png" alt="img"></p>
 <p>与滤波一样，对每个像素点的处理为：要操作像素点对应于Gx，Gy矩阵中心，对该像素点和周边9个像素点乘以相应系数求和，得到一个方向上的处理结果。完整的Sobel算子则需要对两个方向上的处理结果求和，得到完整的新像素值。</p>
 <h3 id="Prewitt算子"><a href="#Prewitt算子" class="headerlink" title="Prewitt算子"></a>Prewitt算子</h3><p>Prewitt算子的原理和sobel是一模一样的，唯一的区别就是卷积核存在差异：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211216204046572-164025956439325.png" alt="image-20211216204046572" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211216204046572-164025956439325.png" alt="image-20211216204046572" style="zoom:50%;">
 
 <p>Sobel相较于Prewitt，<strong>在中心权值上使用2来代替1，这样可以较好的抑制噪声。</strong></p>
 <h3 id="Laplacian算子（二阶微分法）"><a href="#Laplacian算子（二阶微分法）" class="headerlink" title="Laplacian算子（二阶微分法）"></a>Laplacian算子（二阶微分法）</h3><p><strong>基于过零点检测</strong></p>
 <p>对Sobel算子中的一阶导数函数再次求导可得：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190930104504107-1830102038-164025956439326.png" alt="img"></p>
-<p>二阶差分公式：<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/.%5Cimg%5C810956-20150926131132084-1009704410.gif" alt="CodeCogsEqn(../../../../../Notes/img/810956-20150926131132084-1009704410.gif)"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/583030-20190930104504107-1830102038-164025956439326.png" alt="img"></p>
+<p>二阶差分公式：<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/.%5Cimg%5C810956-20150926131132084-1009704410.gif" alt="CodeCogsEqn(../../../../../Notes/img/810956-20150926131132084-1009704410.gif)"></p>
 <p>Laplace算子的差分形式：</p>
 <p>分别对Laplace算子x,y两个方向的二阶导数进行差分就得到了离散函数的Laplace算子。在一个二维函数f(x,y)中，x,y两个方向的二阶差分分别为：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210153218813-164025956439327.png" alt="image-20211210153218813" style="zoom: 67%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210153218813-164025956439327.png" alt="image-20211210153218813" style="zoom: 67%;">
 
 <p>于是可得Laplace算子的差分形式为：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/.%5Cimg%5C810956-20150926131132865-1836740999.gif" alt="CodeCogsEqn(../../../../../Notes/img/810956-20150926131132865-1836740999.gif)"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/.%5Cimg%5C810956-20150926131132865-1836740999.gif" alt="CodeCogsEqn(../../../../../Notes/img/810956-20150926131132865-1836740999.gif)"></p>
 <p>写作滤波模板的形式如下：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210153440871-164025956439329.png" alt="image-20211210153440871" style="zoom: 50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210153440871-164025956439329.png" alt="image-20211210153440871" style="zoom: 50%;">
 
 <p>注意该模板的特点，在上下左右四个90度的方向上结果相同，也就是说在90度方向上无方向性。为了让该mask在45度的方向上也具有该性质，可以对该模板进行扩展定义为：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210153934870-164025956439328.png" alt="image-20211210153934870" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210153934870-164025956439328.png" alt="image-20211210153934870" style="zoom:50%;">
 
 <p>注：定义数字形式的拉普拉斯要求系数之和必为0。</p>
 <p>之后的操作与其他的空间滤波操作相同。将模板在原图上逐行移动，然后模板中各系数与其重合的像素相乘后求和，赋给与mask中心重合的像素。</p>
@@ -360,14 +362,14 @@
 <p>卷积的核心意义就是获取原始图像中像模板特征的性质。</p>
 <p><strong>2.用一阶偏导有限差分（Sobel）计算梯度值和方向</strong></p>
 <p>经典Canny算法用了四个梯度算子来分别计算水平，垂直和对角线方向的梯度。但是通常都不用四个梯度算子来分别计算四个方向。常用的边缘差分算子（如Rober，Prewitt，Sobel）计算水平和垂直方向的差分Gx和Gy。这样就可以如下计算梯度模和方向：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/1095344-20170213171940019-134049094-164025956439330.jpg" alt="img" style="zoom:80%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/1095344-20170213171940019-134049094-164025956439330.jpg" alt="img" style="zoom:80%;">
 
 <p>梯度角度θ范围从弧度-π到π，然后把它近似到四个方向，分别代表水平，垂直和两个对角线方向（0°,45°,90°,135°）。</p>
 <p>由于图像的坐标系是以左上角为原点向右和下延展，因此根据像素点计算出的角度值必然在一、四象限。那么可以分别以 ± π / 8（水平） 、π / 8 ~ 3π / 8（45°）、- π / 8 ~ - 3π / 8（-45°）、一四象限剩余部分（垂直）来分割，落在每个区域的梯度角给一个特定值，代表四个方向之一。</p>
 <p><strong>3.对梯度幅值进行非极大值抑制</strong></p>
 <p>意义就是寻找像素点局部最大值。</p>
 <p>沿着梯度方向，比较它前面和后面的梯度值即可（对于左右边界，则比较附近的两个值）。如果是最大值就保留，否则置为0。</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/621547-20160122165656406-4766340-164025956439331.jpg" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/621547-20160122165656406-4766340-164025956439331.jpg" alt="img"></p>
 <p>如上图，c点为需要判断的点，按照2中划分的四个区域，可以看到每个区域包含了八邻域中的两个点，通过判断c点的角度值所在区域，与该区域包含的那两个点进行比较即可。</p>
 <p>若想提高精度，如上右图：c的角度值在π / 8 ~ 3π / 8（45°）区域，不比较g1和g4，而是比较dTmp1和dTmp2，由于这两个点都是浮点坐标，因此需要采用线性插值方法来计算这两个点的幅值。</p>
 <p>通过角度θ可以计算出dTmp1在g1和g2之间的比例，设dis(dTmp1，g2) = w，则dis(g1，dTmp1) = 1 - w。所以dTmp1的幅值为：w * g2 + （1 - w）* g1。同理可得dTmp2的幅值。将c的幅值与这两个浮点坐标的幅值进行比较进行非极大值抑制。</p>
@@ -378,9 +380,9 @@
 <p>只需对所有被标记过的弱边缘点的八邻域进行遍历，若邻域中存在强边缘点，则保留；否则抑制掉。</p>
 <h3 id="方向算子"><a href="#方向算子" class="headerlink" title="方向算子"></a>方向算子</h3><p>方向算子利用一组模板分别计算在不同方向上的差分值，取其中最大的值作为边缘强度，而将与之对应的方向作为边缘方向。</p>
 <h4 id="Kirsch算子"><a href="#Kirsch算子" class="headerlink" title="Kirsch算子"></a>Kirsch算子</h4><p>类似于Sobel算子，也利用图像中某点的梯度幅值作为像素的灰度值，Sobel算子计算出某点两个方向的梯度值，Gx、Gy；但Kirsch算子 利用8个卷积模板计算出了<strong>某点8个方向的梯度幅值和方向</strong>，并以最大的卷积值作为该点的灰度值。</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211211151831396-164025956439332.png" alt="image-20211211151831396"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211211151831396-164025956439332.png" alt="image-20211211151831396"></p>
 <p>对每个像素点都用 这8个模板进行进行卷积（注意，每个卷积值都应取绝对值），求出该点的最大卷积值。</p>
-<h4 id="Nevitia算子"><a href="#Nevitia算子" class="headerlink" title="Nevitia算子"></a>Nevitia算子</h4><p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211211163622445-164025956439333.png" alt="image-20211211163622445"></p>
+<h4 id="Nevitia算子"><a href="#Nevitia算子" class="headerlink" title="Nevitia算子"></a>Nevitia算子</h4><p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211211163622445-164025956439333.png" alt="image-20211211163622445"></p>
 <h2 id="池化"><a href="#池化" class="headerlink" title="池化"></a>池化</h2><p><strong>池化的作用：</strong>减少特征图大小，也就是可以减少计算量和所需显存。</p>
 <h3 id="平均池化（mean-pooling）"><a href="#平均池化（mean-pooling）" class="headerlink" title="平均池化（mean-pooling）"></a>平均池化（mean-pooling）</h3><p>即对邻域内特征点只求平均</p>
 <p>优缺点：<strong>能很好的保留背景，但容易使得图片变模糊</strong></p>
@@ -392,7 +394,7 @@
 <p>反向传播：将特征值填充到正向传播中，值最大的索引位置，其他位置补0</p>
 <h3 id="随机池化（stochastic-pooling）"><a href="#随机池化（stochastic-pooling）" class="headerlink" title="随机池化（stochastic-pooling）"></a>随机池化（stochastic-pooling）</h3><p>只需对邻域中的元素按照其概率值大小随机选择，即元素值大的被选中的概率也大。而不像max-pooling那样，永远只取那个最大值元素。</p>
 <p>在区域内，将左图的数值进行归一化处理，即 1/（1+2+3+4）=0.1；2/10=0.2；3/10=0.3；4/10=0.4</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211223190801508-164025956439334.png" alt="image-20211223190801508" style="zoom: 67%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211223190801508-164025956439334.png" alt="image-20211223190801508" style="zoom: 67%;">
 
 <p>正向传播：对矩阵区域求加权平均即可，比如上面图中，池化输出值为：1 * 0.1+2 * 0.2+3 * 0.3+4 * 0.4=<strong>3</strong>。</p>
 <p>反向传播：只需保留前向传播已经记录被选中节点的位置的值，其它值都为0,这和max-pooling的反向传播非常类似。</p>
@@ -404,7 +406,7 @@
 <p><strong>1.为方便人眼辨识图像，须要将摄像机采集的图像进行gamma校正。</strong></p>
 <p><strong>2.为能更有效的保存图像亮度信息，需进行Gamma校正。</strong></p>
 <p>Gamma校正主要应用在<strong>图像增强、目标检测以及图像分析</strong>等领域。表达式如下：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-58d0f7160ef3cc1db393f612bf56c56c_1440w-164025956439335.jpg" alt="img" style="zoom:67%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-58d0f7160ef3cc1db393f612bf56c56c_1440w-164025956439335.jpg" alt="img" style="zoom:67%;">
 
 <p><strong>代码实现</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> newPixel = <span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">char</span>&gt;(<span class="built_in">pow</span>(pixel / <span class="number">255.0</span>, gamma) * <span class="number">255</span>);</span><br></pre></td></tr></table></figure>
@@ -414,20 +416,20 @@
 <h3 id="图像的归一化"><a href="#图像的归一化" class="headerlink" title="图像的归一化"></a>图像的归一化</h3><p>所谓归一化，就是把需要处理的数据限制在你需要的一定范围内。</p>
 <p>首先归一化是为了后面<strong>数据处理的方便</strong>，其次是保证<strong>程序运行时收敛加快</strong>。归一化的具体作用是<strong>归纳统一样本的统计分布性</strong>。归一化在0-1之间是统计的概率分布，归一化在某个区间上是统计的坐标分布。</p>
 <p>而图像的归一化用的最多的就是<strong>归一化到（min，max）范围内：</strong></p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211217182736311-164025956439336.png" alt="image-20211217182736311" style="zoom: 50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211217182736311-164025956439336.png" alt="image-20211217182736311" style="zoom: 50%;">
 
 <p><strong>代码实现</strong></p>
 <p>首先迭代整个图的像素点，获取max( src( x，y ) )和min像素点。</p>
 <p>然后再次迭代整张图的像素点，将低于min的设置为min，高于max 的设置为max，在（min，max）之间的通过上式计算即可。</p>
 <h3 id="图像的均衡化"><a href="#图像的均衡化" class="headerlink" title="图像的均衡化"></a>图像的均衡化</h3><p>直方图均衡化，是对图像像素值进行<strong>非线性拉伸</strong>，使得<strong>一定范围内像素值的数量的大致相同</strong>。这样原来直方图中的封顶部分对比度得到了增强，而两侧波谷的对比度降低，输出的直方图是一个较为平坦的分段直方图。如下图所示：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211217183206631-164025956439337.png" alt="image-20211217183206631" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211217183206631-164025956439337.png" alt="image-20211217183206631" style="zoom:50%;">
 
 <p>通过这种方法可以按照需要对图像的亮度进行调整，并且，这种方法是<strong>可逆</strong>的，也就是说知道了均衡化函数，也可以恢复原始的直方图。</p>
 <p><strong>为什么要选用累积分布函数?</strong></p>
 <p>均衡化过程中，必须要保证两个条件：①像素无论怎么映射，一定要保证原来的大小关系不变，较亮的区域，依旧是较亮的，较暗依旧暗，<strong>只是对比度增大，绝对不能明暗颠倒</strong>；②如果是八位图像，那么像素映射函数的值域应在0和255之间的，<strong>不能越界</strong>。综合以上两个条件，累积分布函数是个好的选择，因为<strong>累积分布函数是单调增函数</strong>（控制大小关系），并且<strong>值域是0到1</strong>（控制越界问题），所以直方图均衡化中使用的是累积分布函数。</p>
 <p><strong>为什么使用累积分布函数处理后像素值会均匀分布？</strong></p>
 <p>比较概率分布函数和累积分布函数，前者的二维图像是参差不齐的，后者是单调递增的。直方图均衡化过程中，映射方法是：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/758959-20160720114303966-941326077-164025956439338.jpg" alt="img" style="zoom: 80%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/758959-20160720114303966-941326077-164025956439338.jpg" alt="img" style="zoom: 80%;">
 
 <p>其中，n是图像中像素点的总数，nk是当前灰度级的像素个数，L是图像中可能的灰度级总数。</p>
 <p>于是对于像素值为k的点，只需要计算： 像素为0~k的点的数量 / 像素点总数，就可以得到直方图中的纵坐标（比例）。再乘以255，即为该点经过均衡化后的像素点。</p>
@@ -455,9 +457,9 @@
 <h3 id="灰度转伪彩色"><a href="#灰度转伪彩色" class="headerlink" title="灰度转伪彩色"></a>灰度转伪彩色</h3><p>本质就是将灰度值根据一定的比例关系转化为RGB三通道值。</p>
 <p>人类能够观察到的光的波长范围是有限的，并且人类视觉有一个特点，只能分辨出二十几种灰度，也就是说即使采集到的灰度图像分辨率超级高，有上百个灰度级，但是很遗憾，人们只能看出二十几个，也就是说信息损失了五十倍。但人类视觉对彩色的分辨能力相当强，能够分辨出几千种色度。</p>
 <p>以下为opencv中ColorMap提供的21种不同伪彩色：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211217143800078-164025956439339.png" alt="image-20211217143800078" style="zoom: 67%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211217143800078-164025956439339.png" alt="image-20211217143800078" style="zoom: 67%;">
 
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211217143838854-164025956439340.png" alt="image-20211217143838854" style="zoom:67%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211217143838854-164025956439340.png" alt="image-20211217143838854" style="zoom:67%;">
 
 <p>根据源码中获得的数组对每个像素进行转换即可。</p>
 <h2 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h2><h3 id="普通二值化"><a href="#普通二值化" class="headerlink" title="普通二值化"></a>普通二值化</h3><p>遍历判断图像每个像素点的值，如果大于设定的阈值，则修改为255，如果小于，则修改为0。</p>
@@ -472,10 +474,10 @@
 <h3 id="双阈值三值化"><a href="#双阈值三值化" class="headerlink" title="双阈值三值化"></a>双阈值三值化</h3><p>首先获取图像像素的直方图，即像素值为0<del>255的点分别有几个，并分别计算它们占总像素点数的比例（即一个点为该像素值的概率，Pi（i=0</del>255））。</p>
 <p>其次设定两个阈值k1和k2，将0<del>255分为三类（0</del>k1，k1<del>k2，k2</del>255），计算：</p>
 <p>一个点被分为其中一类的概率，表现为该类像素范围内概率的和。</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211223190634131-164025956439341.png" alt="image-20211223190634131" style="zoom:60%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211223190634131-164025956439341.png" alt="image-20211223190634131" style="zoom:60%;">
 
 <p>这三类各自的像素均值，表现为：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214201512456-164025956439342.png" alt="image-20211214201512456" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214201512456-164025956439342.png" alt="image-20211214201512456" style="zoom:50%;">
 
 <p>于是有：<strong>mg = p1 * m1 + p2 * m2 + p3 * m3</strong>，且 p1+p2+p3 = 1</p>
 <p>可得<strong>类间方差：</strong>（更多或更少类均同理）</p>
@@ -487,7 +489,7 @@
 
 
 
-<h2 id="几何变换"><a href="#几何变换" class="headerlink" title="几何变换"></a>几何变换</h2><h3 id="图像的缩放"><a href="#图像的缩放" class="headerlink" title="图像的缩放"></a>图像的缩放</h3><h4 id="最近邻插值"><a href="#最近邻插值" class="headerlink" title="最近邻插值"></a>最近邻插值</h4><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215203920356-164025956439343.png" alt="image-20211215203920356" style="zoom:50%;">
+<h2 id="几何变换"><a href="#几何变换" class="headerlink" title="几何变换"></a>几何变换</h2><h3 id="图像的缩放"><a href="#图像的缩放" class="headerlink" title="图像的缩放"></a>图像的缩放</h3><h4 id="最近邻插值"><a href="#最近邻插值" class="headerlink" title="最近邻插值"></a>最近邻插值</h4><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215203920356-164025956439343.png" alt="image-20211215203920356" style="zoom:50%;">
 
 <p>由于<strong>缩放比例</strong>（即srcWidth / dstWidth）基本上是浮点数值，而最后得到的<strong>图像坐标</strong>（srcX）是整数。因此需要对等式右边的值进行四舍五入的操作：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> srcX = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(dstX * (srcWidth / dstWidth) + <span class="number">0.5f</span>);</span><br><span class="line"><span class="comment">// 其中static_cast用于强制转换为int类型</span></span><br><span class="line"><span class="comment">// +0.5f是为了实现四舍五入而不是舍去小数点后的值</span></span><br></pre></td></tr></table></figure>
@@ -495,18 +497,18 @@
 <p>这种方法在放大图像时容易导致图像的严重失真，根源在于当坐标是浮点数时直接四舍五入取最近的整数。</p>
 <h4 id="双线性插值"><a href="#双线性插值" class="headerlink" title="双线性插值"></a>双线性插值</h4><p><strong>线性插值的解释</strong></p>
 <p>已知数据 (x0, y0) 与 (x1, y1)，要计算 [x0, x1] 区间内某一位置 x 在直线上的y值。</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/../../../../Notes/img/image-20211215211157981.png" alt="image-20211215211157981" style="zoom: 33%;"><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215211234352-164025956439345.png" alt="image-20211215211234352" style="zoom:50%;"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/../../../../Notes/img/image-20211215211157981.png" alt="image-20211215211157981" style="zoom: 33%;"><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215211234352-164025956439345.png" alt="image-20211215211234352" style="zoom:50%;"></p>
 <p>双线性插值是有两个变量的插值函数的线性插值扩展，其核心思想是在两个方向分别进行一次线性插值。如下图：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215211408942-164025956439346.png" alt="image-20211215211408942" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215211408942-164025956439346.png" alt="image-20211215211408942" style="zoom:50%;">
 
 <p>假如我们想得到未知函数 f 在点 P = (x, y) 的值，假设我们已知函数 f 在 Q11 = (x1, y1)、Q12 = (x1, y2), Q21 = (x2, y1) 以及 Q22 = (x2, y2) 四个点的值。最常见的情况，f就是一个像素点的像素值。首先在 x 方向进行线性插值，得到：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215211459010-164025956439347.png" alt="image-20211215211459010" style="zoom: 33%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215211459010-164025956439347.png" alt="image-20211215211459010" style="zoom: 33%;">
 
 <p>然后在上述基础上（R1和R2），在 y 方向进行线性插值，得到：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215211555916-164025956439348.png" alt="image-20211215211555916" style="zoom:33%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215211555916-164025956439348.png" alt="image-20211215211555916" style="zoom:33%;">
 
 <p>展开即为最终结果：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215211649737-164025956439449.png" alt="image-20211215211649737" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215211649737-164025956439449.png" alt="image-20211215211649737" style="zoom:50%;">
 
 <p><strong>代码实现</strong></p>
 <p>由于图像双线性插值只会用相邻的4个点，因此上述公式的分母都是1。opencv中的源码如下，用了一些优化手段：</p>
@@ -515,33 +517,33 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SrcX=(dstX + <span class="number">0.5</span>) * (srcWidth/dstWidth) <span class="number">-0.5</span></span><br><span class="line">SrcY=(dstY + <span class="number">0.5</span>) * (srcHeight/dstHeight) - <span class="number">0.5</span></span><br></pre></td></tr></table></figure>
 
 <p>源图像和目标图像的原点（0，0）均选择左上角，然后根据插值公式计算目标图像每点像素，假设你需要将一幅5x5的图像缩小成3x3，那么源图像和目标图像各个像素之间的对应关系如下。如果没有这个中心对齐，根据基本公式去算，就会得到左边这样的结果；而用了对齐，就会得到右边的结果：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215212542008-164025956439450.png" alt="image-20211215212542008" style="zoom: 50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215212542008-164025956439450.png" alt="image-20211215212542008" style="zoom: 50%;">
 
 
 
 <h4 id="双立方插值"><a href="#双立方插值" class="headerlink" title="双立方插值"></a>双立方插值</h4><h4 id="邻域像素再取样插值"><a href="#邻域像素再取样插值" class="headerlink" title="邻域像素再取样插值"></a>邻域像素再取样插值</h4><h4 id="lanczos插值"><a href="#lanczos插值" class="headerlink" title="lanczos插值"></a>lanczos插值</h4><h3 id="图像的旋转"><a href="#图像的旋转" class="headerlink" title="图像的旋转"></a>图像的旋转</h3><p>旋转矩阵的计算原理参考：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211216185301847-164025956439451.png" alt="image-20211216185301847"></p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211216185333652-164025956439452.png" alt="image-20211216185333652"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211216185301847-164025956439451.png" alt="image-20211216185301847"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211216185333652-164025956439452.png" alt="image-20211216185333652"></p>
 <p><strong>实现方法：</strong></p>
 <p><strong>采用反向映射。</strong>即从旋转后的图像出发，找到对应的原图像的点，然后将原图像中的灰度值传递过来即可，这样旋转后的图像的每个像素肯定可以对应到原图像中的一个点。</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/mapping-164025956439453.png" alt="img" style="zoom:78%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/mapping-164025956439453.png" alt="img" style="zoom:78%;">
 
 <p>采用不同的策略算法可以使像素更加准确，*具体参照<strong>图像缩放</strong>中的各种插值法，在旋转中是同理。</p>
-<h3 id="直线拟合"><a href="#直线拟合" class="headerlink" title="直线拟合"></a>直线拟合</h3><p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211216201057227-164025956439454.png" alt="image-20211216201057227"></p>
+<h3 id="直线拟合"><a href="#直线拟合" class="headerlink" title="直线拟合"></a>直线拟合</h3><p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211216201057227-164025956439454.png" alt="image-20211216201057227"></p>
 <p>这里只记录最常用的一种：<strong>最小二乘拟合算法</strong></p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211216201558546-164025956439455.png" alt="image-20211216201558546" style="zoom: 50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211216201558546-164025956439455.png" alt="image-20211216201558546" style="zoom: 50%;">
 
 <p>这种方法是以<strong>距离平方和</strong>为拟合判据，运行速度也最快。但是这个算法也有个很大的问题，就是当干扰点离直线较远时，一个干扰点就可能将整条拟合直线拉偏了。简单的说就是对干扰点的鲁棒性不够。</p>
 <p><strong>代码实现</strong></p>
 <p>假设直线表达式为：<strong>y = ax + b</strong>，a表示斜率，b表示截距。</p>
 <p>对于等精度测量所得到的N组数据（xi，yi），i＝1，2……，N，其中xi值被认为是准确的，所有的误差只联系着yi；用最小二乘法估计参数时，要求观测值yi的偏差的加权平方和为最小。对于等精度观测值的直线拟合来说，可使下式的值最小：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/1229247-20170831162433499-1199684995-164025956439456.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/1229247-20170831162433499-1199684995-164025956439456.png" alt="img"></p>
 <p>令上式等于D，并分别对a，b求一阶偏导数：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/1229247-20170831162808562-1511107057-164025956439457.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/1229247-20170831162808562-1511107057-164025956439457.png" alt="img"></p>
 <p>再求二阶偏导数：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/1229247-20170831162932452-566743597-164025956439458.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/1229247-20170831162932452-566743597-164025956439458.png" alt="img"></p>
 <p>很显然二阶偏导数均为<strong>非负数</strong>，于是令一阶偏导数等于0，解得a和b：</p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/1229247-20170831163153827-745964205-164025956439459.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/1229247-20170831163153827-745964205-164025956439459.png" alt="img"></p>
 <p>若要转化成<strong>方向向量</strong>：</p>
 <p>因为方向向量长度为1且起点为原点，所以易得：<strong>x^2 + a * x^2 = 1</strong>，解得：</p>
 <p>**x = 1 / sqrt( a^2 + 1 ) **</p>
@@ -553,9 +555,16 @@
 <div class="cube-article-nav">
     <ul>
         
+        <li class="prev">
+        <a href="/%E5%BA%94%E7%94%A8/web%E7%AB%AF%E5%B0%8F%E4%BD%9C%E5%93%81/">
+            <i class="cube-icon cube-prev" aria-hidden="true"></i>
+            web端小作品
+        </a>
+        </li>
+        
             
             <li class="next">
-            <a href="/Graphics-and-Image/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/">
+            <a href="/%E6%9D%82%E8%AE%B0/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/">
                 opencv移库笔记
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
@@ -605,9 +614,9 @@
     
     
     <div class="count">
-        <a class="count articles"><span>2</span>Article</a>
-        <a class="count tags"><span>1</span>Tags</a>
-        <a class="count categories"><span>1</span>Categories</a>
+        <a class="count articles"><span>11</span>Article</a>
+        <a class="count tags"><span>12</span>Tags</a>
+        <a class="count categories"><span>3</span>Categories</a>
     </div>
 </div>
 
@@ -644,7 +653,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a>
+                    <a href="/%E5%BA%94%E7%94%A8/web%E7%AB%AF%E5%B0%8F%E4%BD%9C%E5%93%81/" title="web端小作品">web端小作品</a>
                 </p>
             </div>
             
@@ -658,7 +667,46 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/Graphics-and-Image/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/" title="opencv移库笔记">opencv移库笔记</a>
+                    <a href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/%E6%9D%82%E8%AE%B0/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/" title="opencv移库笔记">opencv移库笔记</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/" title="PyQt5狗都不用:阴阳师挂机软件OnHook">PyQt5狗都不用:阴阳师挂机软件OnHook</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/" title="ID卡与IC卡原理">ID卡与IC卡原理</a>
                 </p>
             </div>
         </li>
@@ -677,7 +725,17 @@
         
         
         <div class="cube-box ">
-            <a href="/categories/Graphics-and-Image/">#Graphics and Image</a>
+            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E6%9D%82%E8%AE%B0/">#杂记</a>
         </div>
         
     </div>
@@ -692,8 +750,63 @@
     <div class="cube-boxs">
         
         
+        <div class="cube-box-bg ">
+            <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/PyQt5/">#PyQt5</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
+        </div>
+        
+        
         <div class="cube-box ">
             <a href="/tags/opencv/">#opencv</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E7%8E%AF%E5%A2%83/">#环境</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E6%8B%86%E6%9C%BA/">#拆机</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
         </div>
         
     </div>

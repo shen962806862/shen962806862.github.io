@@ -172,9 +172,37 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-web端小作品">
+    <header class="cube-excerpt-header">
+        <h1><a href="/%E5%BA%94%E7%94%A8/web%E7%AB%AF%E5%B0%8F%E4%BD%9C%E5%93%81/">web端小作品</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2022-01-10
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/%E5%89%8D%E7%AB%AF/" class="cube-excerpt-tag-link">#前端</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>一些<strong>H5</strong>的小玩意儿，自己写的或是网上漂的。</p>
+<h2 id="金翰林6栋洗衣机使用情况"><a href="#金翰林6栋洗衣机使用情况" class="headerlink" title="金翰林6栋洗衣机使用情况"></a>金翰林6栋洗衣机使用情况</h2>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/%E5%BA%94%E7%94%A8/web%E7%AB%AF%E5%B0%8F%E4%BD%9C%E5%93%81/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-opencv图像算法">
     <header class="cube-excerpt-header">
-        <h1><a href="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/">opencv图像算法</a></h1>
+        <h1><a href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/">opencv图像算法</a></h1>
         <div class="cube-excerpt-header-msg">
             <div class="cube-excerpt-date">
                 <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
@@ -185,14 +213,16 @@
                 
                 <a href="/tags/opencv/" class="cube-excerpt-tag-link">#opencv</a>
                 
+                <a href="/tags/%E5%9B%BE%E5%83%8F/" class="cube-excerpt-tag-link">#图像</a>
+                
             </div>
         </div>
     </header>
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <h1 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h1><h2 id="低通滤波"><a href="#低通滤波" class="headerlink" title="低通滤波"></a>低通滤波</h2><h3 id="邻域滤波"><a href="#邻域滤波" class="headerlink" title="邻域滤波"></a>邻域滤波</h3><p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-14d8e1ccf33a81b447d0faf8566bb7ef_r-16402595643921.jpg" alt="preview"></p>
-<p><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211209161017369-16402595643922.png" alt="邻域计算公式"></p>
+           <h1 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h1><h2 id="低通滤波"><a href="#低通滤波" class="headerlink" title="低通滤波"></a>低通滤波</h2><h3 id="邻域滤波"><a href="#邻域滤波" class="headerlink" title="邻域滤波"></a>邻域滤波</h3><p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-14d8e1ccf33a81b447d0faf8566bb7ef_r-16402595643921.jpg" alt="preview"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211209161017369-16402595643922.png" alt="邻域计算公式"></p>
 <h3 id="中值滤波"><a href="#中值滤波" class="headerlink" title="中值滤波"></a>中值滤波</h3><p>图像的中值滤波是一种非线性图像处理方法,是统计排序滤波器的一种典型应用。中值滤波是通过<strong>对邻域内像素按灰度排序的结果</strong>决定<strong>中心像素</strong>的灰度。具体的操作过程如下：<font color="red">用一个奇数点的移动窗口，将窗口中心点的值用窗口内各点的中值代替。</font>假设窗口内有5个点，其值为1,2,3,4和5，那么此窗口内各点的中值即为3，也就是用3来代替中心点的像素值。</p>
 <p>中值滤波对于滤除<strong>脉冲干扰及图像扫描噪声</strong>最为有效，还可以克服线性滤波器（如领域简单平滑滤波）带来的图像细节模糊。</p>
 <p>数字图像存在冗余信息，具体分为六大冗余：空间冗余、时间冗余、视觉冗余、信息熵冗余、结构冗余、知识冗余。其中第一个空间冗余就可以很好的解释中值滤波的作用。空间冗余指的是：图像内部<strong>相邻像素之间存在较强的相关性而造成的冗余</strong>。简单来说就是，同一景物表面上采样点的颜色之间通常存在着空间相关性，相邻各点的取值往往相近或者相同，这就是空间冗余。而脉冲噪声通常是在一个邻域内有一个点或多个点的灰度值很高或很低，这就与周围像素存在较大差异，因此中值滤波能很好的去除这种噪声。</p>
@@ -237,31 +267,31 @@
 <p><strong>缺陷</strong>：均值滤波本身存在着固有的缺陷，即它不能很好地保护图像细节，在图像去噪的同时也破坏了图像的细节部分，从而使<strong>图像变得模糊，不能很好地去除噪声点</strong>。特别是椒盐噪声</p>
 <h4 id="算术均值滤波"><a href="#算术均值滤波" class="headerlink" title="算术均值滤波"></a>算术均值滤波</h4><p>这是<strong>最简单的均值滤波器，可以去除均匀噪声和高斯噪声，但会对图像造成一定程度的模糊</strong>。</p>
 <p>算术均值滤波器就是简单的计算窗口区域的像素均值，然后将均值赋值给窗口中心点处的像素：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210160750996-16402595643923.png" alt="image-20211210160750996" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210160750996-16402595643923.png" alt="image-20211210160750996" style="zoom:50%;">
 
 <p>其中，g(s,t)表示原始图像，f(x,y)表示均值滤波后得到的图像，Sxy表示滤波器窗口。</p>
 <p>基于上述公式，可以很容易的得到的算术均值滤波器的窗口模板，下面以3×3为例：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210160926601-16402595643924.png" alt="image-20211210160926601" style="zoom:67%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210160926601-16402595643924.png" alt="image-20211210160926601" style="zoom:67%;">
 
 
 
 <h4 id="几何均值滤波"><a href="#几何均值滤波" class="headerlink" title="几何均值滤波"></a>几何均值滤波</h4><p>滤波后图像的像素由模板窗口内像素的乘积的1/mn幂给出。 和算术均值滤波器相比，几何均值滤波器能够<strong>更好的取出高斯噪声，并且能够更多的保留图像的边缘信息</strong>。但其<strong>对0值是非常敏感</strong>的，在滤波器的窗口内只要有一个像素的灰度值为0，就会造成滤波器的输出结果为0。</p>
 <p>公式如下：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214172053056-16402595643925.png" alt="image-20211214172053056" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211214172053056-16402595643925.png" alt="image-20211214172053056" style="zoom:50%;">
 
 
 
 <h4 id="谐波均值滤波"><a href="#谐波均值滤波" class="headerlink" title="谐波均值滤波"></a>谐波均值滤波</h4><p><strong>对盐粒噪声（白噪声）效果较好，不适用于胡椒噪声；比较适合处理高斯噪声。</strong></p>
 <p>公式如下：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210161208708-16402595643926.png" alt="image-20211210161208708" style="zoom:50%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210161208708-16402595643926.png" alt="image-20211210161208708" style="zoom:50%;">
 
 
 
-<h4 id="逆谐波均值滤波"><a href="#逆谐波均值滤波" class="headerlink" title="逆谐波均值滤波"></a>逆谐波均值滤波</h4><img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210163038627-16402595643927.png" alt="image-20211210163038627" style="zoom:67%;">
+<h4 id="逆谐波均值滤波"><a href="#逆谐波均值滤波" class="headerlink" title="逆谐波均值滤波"></a>逆谐波均值滤波</h4><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210163038627-16402595643927.png" alt="image-20211210163038627" style="zoom:67%;">
 
 <p>其中Q称为滤波器的阶数，该滤波器可以用来<strong>消除椒盐噪声</strong>。但是不能同时处理盐粒噪声和胡椒噪声，当Q为正时，可以消除<strong>胡椒噪声</strong>；当Q为负时，消除<strong>盐粒噪声</strong>。当Q=0时，该滤波器退化为算术均值滤波器；Q=-1时，退化为谐波均值滤波器。</p>
 <h4 id="修正后的alpha均值滤波"><a href="#修正后的alpha均值滤波" class="headerlink" title="修正后的alpha均值滤波"></a>修正后的alpha均值滤波</h4><p>假设在Sxy模板领域内，去掉g(s,t)中最高灰度值的d/2和最低灰度值的d/2个像素。用gr(s,t)来代替剩余的mn-d个像素。由剩余像素点的平均值形成的滤波器称为修正后的alpha均值滤波器：</p>
-<img src="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210173009541-16402595643938.png" alt="image-20211210173009541" style="zoom:67%;">
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211210173009541-16402595643938.png" alt="image-20211210173009541" style="zoom:67%;">
 
 <p>其中d取0~m*n-1之间的任意数。</p>
 <p>当d=0时，退变为算术均值滤波；</p>
@@ -270,13 +300,13 @@
         
     </article>
     <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/">Read More</a>
+        <a class="cube-excerpt-more" href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/">Read More</a>
     </footer>
 </div>
 
 <div class="cube-excerpt" id="cube-excerpt-opencv移库笔记">
     <header class="cube-excerpt-header">
-        <h1><a href="/Graphics-and-Image/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/">opencv移库笔记</a></h1>
+        <h1><a href="/%E6%9D%82%E8%AE%B0/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/">opencv移库笔记</a></h1>
         <div class="cube-excerpt-header-msg">
             <div class="cube-excerpt-date">
                 <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
@@ -286,6 +316,8 @@
                 <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
                 
                 <a href="/tags/opencv/" class="cube-excerpt-tag-link">#opencv</a>
+                
+                <a href="/tags/%E7%8E%AF%E5%A2%83/" class="cube-excerpt-tag-link">#环境</a>
                 
             </div>
         </div>
@@ -396,7 +428,502 @@
         
     </article>
     <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/Graphics-and-Image/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/">Read More</a>
+        <a class="cube-excerpt-more" href="/%E6%9D%82%E8%AE%B0/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-PyQt5狗都不用:阴阳师挂机软件OnHook">
+    <header class="cube-excerpt-header">
+        <h1><a href="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/">PyQt5狗都不用:阴阳师挂机软件OnHook</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2021-08-11
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/PyQt5/" class="cube-excerpt-tag-link">#PyQt5</a>
+                
+                <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/" class="cube-excerpt-tag-link">#小软件</a>
+                
+                <a href="/tags/%E8%84%9A%E6%9C%AC/" class="cube-excerpt-tag-link">#脚本</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p><strong>阴阳师玩家占比最大的行为就是刷魂土了，但作为万年老咸鱼，单刷得12体，500樱饼完全挂不了多少局自动。而手动挂……既然是重复操作，就有办法用自动化脚本来代替，于是想到了最简单的模拟鼠标事件来实现。</strong></p>
+<p>源码（包含2.0的GUI程序和单独的挂机python脚本）：<a target="_blank" rel="noopener" href="https://github.com/shen962806862/on-hook">Github</a></p>
+<p>百度云：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1cdx-o7NJC2iCyk6jyX2aCA">OnHook</a> 提取码：mc13</p>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>很简单的思路——每一轮只需要两次移动和点击事件，识别到开始界面第一次移动并点击开始按钮，识别到结束界面第二次移动点击奖励界面退出去，然后循环。</p>
+<p>为了怕被检测封号，需要对这样机械的行为进行一定<strong>伪装</strong>：比如一次点击事件的点击次数随机1-3次；每次点击的间隔在0.15-0.3s之间随机；每次移动的时间在0.05-0.25s随机；每次点击的像素点坐标在识别到的点击区域中随机等等。不知道有多大用，感觉是跟我个人手动挂的习惯比较相符的==</p>
+<p>python现成的<strong>pyautogui</strong>库：</p>
+<p><strong>click(x, y)</strong> 函数模拟点击</p>
+<p><strong>move(x, y)</strong> 函数模拟移动</p>
+<p><strong>locateOnScreen(image_path, confidence=0.8)</strong> 函数获取指定png图片在当前屏幕状态下的左上角坐标和宽高（这里值得一提的是这个函数默认100%相同才识别，有点苛刻，需要修改参数confidence=0.8差不多。但是这个参数的使用是需要调用<strong>cv2</strong>这个库的，python的依赖属实==顺带吐槽一下，这个库能一下让后面封装的exe应用程序的大小扩大一倍，pyinstaller出来的exe实在太大了）。</p>
+<p>整体代码结构，如果把一整个放到while里，按照顺序死循环识别图片，会导致响应的不够及时。而为每一类图片的识别开一个线程又太奢侈了，于是最终选择了<strong>协程</strong>——又称为微线程，它是实现<strong>多任务</strong>的另一种方式，只不过是比线程更小的执行单元（操作系统为了程序运行的高效性，每个线程都有自己缓存Cache等等数据，操作系统还会帮你做这些数据的恢复操作，所以线程的切换非常耗性能。但是协程的切换只是单纯地操作CPU的上下文，一秒钟切换上百万次都不会卡死）。</p>
+<p>同样的，python有封装好的非常好用的三方库<strong>gevent</strong>：</p>
+<p><strong>spawn(func, info)</strong>  函数将生成一个协程并绑定func函数，可带输入信息；</p>
+<p>将所有协程加入一个list中，通过 <strong>joinall(list)</strong> 将存储所有协程的矩阵加入协程池，并开始执行所有协程，当所有协程执行完后返回；</p>
+<p><strong>sleep(time)</strong> 将立即休眠当前线程指定时间。</p>
+<p>最后就是组装了。将通过pyautogui库实现的识别指定位置并模拟点击行为封装成函数，在<strong>spawn</strong>中导入，输入为每一类的图片路径即可实现脚本功能。因为这个函数中写有while(True)，因此每个协程都不会主动停止，需等待外部指令中断运行。</p>
+<p><strong>也不知道是不是还没过完以前做上位机时的瘾，，每次写个脚本都想封装成exe配个GUI界面……而我只会qt……PyQt5的封装实在太大了，用了各种方法也没能给它压缩下去==想学一下C#了……</strong></p>
+<h3 id="version-1-0"><a href="#version-1-0" class="headerlink" title="version 1.0"></a>version 1.0</h3><p><img src="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/1.png" alt="img" style="zoom: 60%;"> <img src="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/2.png" alt="img" style="zoom: 60%;"> <img src="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/3.png" alt="img" style="zoom:60%;"></p>
+<p>经典老界面，我这审美没救了。</p>
+<p>P1：可以选择挂机方案，输入挂机轮数（不输入就是无限挂），主窗口显示每次鼠标行为的信息，停止后返回总挂机轮数和用时。</p>
+<p>P2：设置挂机方案，双击编辑方案名和选择该方案所需识别的截图。</p>
+<p>P3：截图功能，仿QQ。（这里学到了PyQt一个很重要的函数**paintEvent( )**，超级有用，是实现动态效果的好帮手，帮助实现了2.0版本中不少特效）</p>
+<p>这软件单独一个窗口，用起来不方便，也不好看，功能还四不像，跟个缝合怪似的，做完就被我放弃了。。</p>
+<p>我老想让一个软件的功能尽可能完善，所以每次能想到的可能会用到的都加进去，就很冗余。。</p>
+<p>于是立马着手2.0版本👇</p>
+<h3 id="version2-0"><a href="#version2-0" class="headerlink" title="version2.0"></a>version2.0</h3><p><img src="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/2-1.png" alt="img" style="zoom:80%;">    <img src="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/2-2.png" alt="img" style="zoom:80%;">     <img src="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/2-3.png" alt="img" style="zoom:80%;"></p>
+<p>嗯，主界面如上图所示，挂在客户端的左上角，面积很小，然后改了改UI，看上去还行哈哈。</p>
+<p>设计的灵感来自于炉石的HDT插件（看胜率那个），也是悬挂在炉石界面的顶部，看上去轻便美观，一目了然。</p>
+<p><strong>功能介绍：</strong></p>
+<p><strong>1.第二块</strong></p>
+<p>用于显示挂机成功的轮数，简洁明了~停止后再次开始就会重新计数。</p>
+<p><strong>2.第三块</strong></p>
+<p>是控制开始结束的按钮，主要绑定了三个事件：1.按钮图标的变化；2.挂机线程的启动/停止；3.时间统计框的弹出/落下。</p>
+<p><img src="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/1.gif" alt="img"></p>
+<ol>
+<li>很简单，每次点击判断状态然后修改图标至相应状态 即可；</li>
+<li>这里要注意，挂机脚本的函数内是死循环！也就是说当协程被执行，GUI界面会处于假死状态，无法进行任何的UI交互。因此，使用<strong>QThread</strong>分出一个子线程用于控制挂机任务，将挂机任务的函数内容重写至<strong>QThread</strong>的<strong>run( )</strong> 函数内即可。这里还要注意，中止时不仅需要杀死这个子线程，同时也需要杀死已加入协程池的所有协程。否则鼠标事件依旧会执行。</li>
+<li>这个就是纯UI的设计了，使用了github上的方案pyqt5Custom.Toast类👉<a target="_blank" rel="noopener" href="https://github.com/kadir014/pyqt5-custom-widgets">pyqt5Custom</a>。</li>
+</ol>
+<p>首先是一个水平布局，包含一个icon图标、文本Label和关闭按钮，设置了qss样式（黑色半透明，圆角，按钮default、press、hover等不同样式）。其次是动态升起和落下的特效，这里用到了上述的<strong>paintEvent( ) 事件。</strong></p>
+<p>这个函数不能被直接调用，而是被动触发的，触发条件为——<strong>当窗口需要被重绘时（包含第一次显示）（这里又关联了另一个pyqt5内置函数：update( ) 用于发送窗口绘制事件）。</strong>那么动态原理就简单了<strong>：</strong></p>
+<ol>
+<li>通过在父子类中<strong>相互调用彼此的update函数实现循环</strong>，不断触发paintEvent，在其中使用<strong>setGeometry函数</strong>不断的调整这个框的显示位置直至达到预期的显示位置。</li>
+<li>控制窗体移动的速度变化：采用<strong>先快后慢</strong>的变化曲线，在视觉感官上会比较自然舒服。因此选用了在0~1之间呈现此曲线的 <strong>y = 1 - (1-x) ^ 4</strong> 函数。设置参数speed控制速度快慢，计算每次重绘窗体和开始移动时的时间戳之差<strong>t</strong>，用 <strong>speed * t</strong> 作为x的输入，那么随着时间的变化，y的值会逐渐接近1直至达到。最后只需要将：<strong>原坐标 +/- (y * 移动距离)</strong> 这一数据作为setGeometry的输入，就可以实现移动效果了。</li>
+</ol>
+<p><img src="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/2-4.png" alt="img" style="zoom:90%;">   <img src="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/2.gif" alt="img" style="zoom:95%;"></p>
+<p><strong>3.第一块</strong></p>
+<p>用于打开设置选项，如上图所示。选项中包含挂机方案的选择、创建桌面快捷方式和关闭程序的按钮。</p>
+<p>唔，弹出收回的动态效果是对上述Toast类的修改，修改了内部的布局内容和动态弹出的方向。另外在收回时的速度曲线我认为是应该跟上述的 <strong>y = 1 - (1-x) ^ 4</strong>  <strong>关于y=x对称</strong>的，即先慢后快，因此修改了曲线函数为 <strong>y = x ^ 3</strong>。</p>
+<p>而GUI界面中所有按钮包括方案的分段按钮组的特效都是在paintEvent( ) 这个函数的基础上来实现的。这个函数真的非常非常的重要！</p>
+<p>设置选项里的按钮们的颜色、背景颜色和动态效果等其实我也没想到什么更好的方案，总觉得怪怪的，但又还行。。就先这样了。</p>
+<p>PyQt5这个库我暂时是不想再用了。。因为封装的应用程序实在是太大了。。。好蠢，而且启动速度也很慢……接下来要学C#和C++了，正好也是实验室主用的编程语言~</p>
+<p><strong>不过这个GUI界面我还是比较满意的哈哈哈~就酱</strong></p>
+<h3 id="something"><a href="#something" class="headerlink" title="something"></a>something</h3><p>今天是2022.1.9，从我加入实验室以来已经快一学期了，确实干上了C#相关的活。。。但感觉自定义UI还是Qt香就是说QAQ</p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-ID卡与IC卡原理">
+    <header class="cube-excerpt-header">
+        <h1><a href="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/">ID卡与IC卡原理</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2020-08-14
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/%E7%94%B5%E5%AD%90/" class="cube-excerpt-tag-link">#电子</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <h1 id="ID卡（非接触卡）的读卡原理"><a href="#ID卡（非接触卡）的读卡原理" class="headerlink" title="ID卡（非接触卡）的读卡原理"></a>ID卡（非接触卡）的读卡原理</h1><h2 id="1-简单描述"><a href="#1-简单描述" class="headerlink" title="1.简单描述"></a>1.简单描述</h2><p>ID卡全称为身份识别卡（<strong>Identification Card</strong>）,是一种<strong>不可写入</strong>的感应卡,含<strong>固定的编号</strong>,主要类型有台湾SYRIS的<strong>EM格式，</strong>美国HID,TI,MOTOROLA等。</p>
+<p>在出厂时，厂家会将ID号写死在芯片的内部，是不允许进行二次修改的。国内常见的型号有EM4100和EM4102。</p>
+<p>有别于IC卡这种高频（13.56MHz）、可加密的存储卡，ID卡属于低频（<strong>125KHz</strong>）的只读卡。</p>
+<h2 id="2-读卡流程"><a href="#2-读卡流程" class="headerlink" title="2.读卡流程"></a>2.读卡流程</h2><p>1.读卡器采用射频识别技术（RFID），持续发射特定频率的射频信号</p>
+<p>2.当ID卡进入读卡器工作范围时，将产生感应电流，将自身芯片内的编码信息通过线圈发送出去</p>
+<p>3.读卡器接收到从ID卡发送来的调制信号，经过解调后，得到ID卡的编码信息</p>
+<h2 id="3-工作原理"><a href="#3-工作原理" class="headerlink" title="3.工作原理"></a>3.工作原理</h2><p><strong>1.读卡器发送射频信号：推挽式功放电路</strong>（放大）+<strong>LC谐振电路</strong>（选频）</p>
+<p><img src="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/%E5%8A%9F%E6%94%BE-225x300.png" alt="img"> <strong>+</strong>  <img src="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/LC-247x300.png" alt="img"></p>
+<p><strong>2.ID卡返回编码信息：负载调制</strong></p>
+<p><strong>关于负载调制</strong>：</p>
+<p>通常使用电阻负载调制，原理图如下：</p>
+<p><img src="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/fuzai.png" alt="img"></p>
+<p>当芯片工作时，会产生由内部存储的编码信息的数据流（即0和1，也就是高低电平），数据流控制开关s的变化，从而改变右端负载的大小。当数据为1时，s接通，负载变小，品质因数会降低，<strong>谐振回路两端电压降低</strong>；数据为0时同理。线圈右端的电压变化，通过线圈电感耦合传递给读写器，最终改变<strong>读写器两端电压的振幅变化，产生包络</strong>。如下图所示：</p>
+<p><img src="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/xinhao.png" alt="img"></p>
+<p>图中a为原本信号，b为ID卡线圈的电压，c为读卡器收到的<strong>未解调的电压信号</strong>，而红框中包络即为解调后的信号。</p>
+<p><strong>整体过程：</strong>当ID卡靠近读卡器，谐振将能量感应到了卡内线圈上，产生电流并对电容进行充电，于是产生了使芯片工作的电源电压。芯片输出存储的数据流，通过负载调制的方式将数据发送给了读卡器。</p>
+<p><strong>3.读卡器解调信号获取编码：包络检波+滤波整形</strong></p>
+<p>上文中提到读卡器接收到的载波的包络即为我们想要的数据，这些数据的编码方式为<strong>曼彻斯特码</strong>。要获取这些数据就需要<strong>包络检波</strong>。</p>
+<p><img src="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/jianbo.png" alt="img"></p>
+<p>上图为包络检波部分电路，获取到载波的包络部分，但是还需要进行<strong>滤波整形</strong>获得平滑的直流电压（曼彻斯特码），如下图：</p>
+<p><img src="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/lvbo.png" alt="img"></p>
+<p>以上电路就是读卡器和ID卡内所需的一些电路。在最后获取到ID卡相应卡号的曼彻斯特码后，只需要对其进行解码即可获得ID卡卡号，并和后台数据对比判断能否通过验证~</p>
+<h2 id="4-曼彻斯特码"><a href="#4-曼彻斯特码" class="headerlink" title="4.曼彻斯特码"></a>4.曼彻斯特码</h2><p>常见编码方式分为以下几种：</p>
+<p><strong>1.NRZ编码</strong>（不归零编码）：数据1和0分别用高低电平表示，当一位数据传输完后电平信号不归零。</p>
+<p><strong>2.BiPhase编码</strong>（双相编码）：每当一位数据传输后，电平跳变一次。</p>
+<p><strong>3.曼彻斯特编码</strong>：利用<strong>信号边沿</strong>来表示0和1，并且跳变发生在<strong>位帧中间</strong>，比如上升沿表示1，下降沿0。</p>
+<p><strong>曼彻斯特码的编码</strong></p>
+<p>设数据传输的波特率为f，则一个位的时长为1/f，半个位帧的时长为T = 1/2f。</p>
+<p>设两个函数RisingEdge(T)和FallingEdge(T)，执行过程如下：</p>
+<p><strong>RisingEdge(T)：输出低电平，等待T，输出高电平，等待T，返回；</strong></p>
+<p><strong>FallingEdge(T)：输出高电平，等待T，输出低电平，等待T，返回。</strong></p>
+<p>编码的流程如下：</p>
+<p><img src="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/bianma.png" alt="img"></p>
+<p><strong>曼彻斯特码的解码</strong></p>
+<p>1.获取数据流的波特率</p>
+<p>2.同步数据流的时钟信号（区分位帧边沿和半位帧边沿）</p>
+<p>3.根据编码原理进行解码即可</p>
+<h2 id="5-常见ID卡型号的卡号数据格式（EM4100）"><a href="#5-常见ID卡型号的卡号数据格式（EM4100）" class="headerlink" title="5.常见ID卡型号的卡号数据格式（EM4100）"></a>5.常见ID卡型号的卡号数据格式（EM4100）</h2><p>EM4100可存储64bits数据，可读不可写，它的数据格式如下：</p>
+<p><img src="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/em4100.png" alt="img"></p>
+<p>**1.**第一行，是9个“1”，这是EM4100固定的格式</p>
+<p>**2.**D00<del>D03，就是第一个ID号，P0代表的是第一行的偶校验（例：0010_1/0001_1/0110_0）当D00</del>D03中0的个数不为偶数时，偶校验置1。P0-P9均为每行前四位的偶校验，ID号共10位</p>
+<p>**3.**PC0~PC3为每列（P0-P9）的偶校验，（例：0000000110_0）</p>
+<p><strong>4.<strong>举个栗子：卡号为</strong>06001259E3</strong>，转换可得<strong>111111111 00000 01100 00000 00000 00011 00101 01010 10010 11101 00110 01000（这一串64位就是曼彻斯特码解码后得到的数据）</strong></p>
+<p>**5.**在编写程序判断卡号时，应舍弃前63位数据，只取第一次64位码中的停止位0作为开头，以0111111111作为校验开头，判断第二次64位数据中的前63位数据是否符合。同理，判断完后本次的第64位停止位0作为开头再次判断，重复三次，确认卡号正确。</p>
+<p>**6.**卡号06001259E3，其中的第一位0为版本号，第二位6为客户号，后面8位为ID号。</p>
+<p><strong>7.<strong>若卡面有标注卡号，格式一般为</strong>0001202659 (18,23011)。</strong>分别为ABA码和wiegand26码。ABA码由8位ID号转换成10进制可得，共10位，少位在前补0。wiegand26码这组数据分别为8位ID号的倒数56位和倒数后四位转换成十进制组成。</p>
+<h1 id="关于IC卡"><a href="#关于IC卡" class="headerlink" title="关于IC卡"></a>关于IC卡</h1><h2 id="相比于ID卡，IC卡在目前的应用更加的广泛"><a href="#相比于ID卡，IC卡在目前的应用更加的广泛" class="headerlink" title="相比于ID卡，IC卡在目前的应用更加的广泛"></a>相比于ID卡，IC卡在目前的应用更加的广泛</h2><p><strong>1、安全性</strong> IC卡的安全性远大于ID卡，ID卡内的卡号读取无任何权限,易于仿制。IC卡内所记录数据的读取，写入均需相应的密码认证,甚至卡片内每个区均有不同的密码保护，全面保护数据安全，IC卡写数据的密码与读出数据的密码可设为不同，提供了良好分级管理方式，确保系统安全。</p>
+<p><strong>2、可记录性</strong> ID卡不可写入数据,其记录内容(卡号)只可由芯片生产厂一次性写入，开发商只可读出卡号加以利用，无法根据系统的实际需要制订新的号码管理制度。IC卡不仅可由授权用户读出大量数据，而且亦可由授权用户写入大量数据(如新的卡号，用户的权限，用户资料等)，IC卡所记录内容可反复擦写。</p>
+<p><strong>3、存储容量</strong> ID卡仅仅记录卡号；而IC卡(比如Philips mifare1卡)可以记录约1000个字符的内容</p>
+<p><strong>4、脱机与联网运行</strong> 由于ID卡卡内无内容，故其卡片持有者的权限，系统功能操作要完全依赖于计算机网络平台数据库的支持。 而IC卡本身已记录了大量用户相关内容(卡号，用户资料，权限，消费余额等大量信息)，完全可以脱离计算机平台运行,实现联网与脱机自动转换的运行方式，能够达到大范围使用，少布线的需求。</p>
+<p><strong>5、一卡通扩展应用</strong> ID卡由于无记录,无分区,只能依赖网络软件来处理各子系统的信息,这就大大增加对网络的依赖；如果在ID卡系统完成后,用户欲增加功能点，则需要另外布线,这不仅增加了工程施工难度,而且增加了不必要的投资.所以说,使用ID卡来做系统,难以进行系统扩展,难以实现真正的一卡通。 而IC卡存储区自身分为16个分区，每个分区有不同的密码,具有多个子系统独立管理功能，如第一分区实现门禁，第二分区实现消费,第三分区实现员工考勤等等。充分实现一卡通的目的,并且可以做到完全模块化设计，用户即使要增加功能点，也无需再布线,只需增加硬件和软件模块，这便于IC卡系统以后的随时升级扩展,实现平稳升级,减少重复投资。</p>
+<p><strong>6、智能化系统的维护和运行</strong> 比如：电脑发行了一张新的用户ID卡,就必须通过ID卡系统的网络,用人工方式将所有ID卡号一个个下载到各ID卡读卡控制器中，否则ID卡被作为无效卡而不能使用;若要更改用户权限，则需在每个ID卡控制器上输入有权限的ID卡号。 又比如：在系统投入使用后经常要新增ID卡,则每新增一张卡或修改了某一张卡片的权限,就必需在该卡可用的所有控制器上输入该卡片号码，这就增加了工作量</p>
+<h2 id="关于手机NFC功能"><a href="#关于手机NFC功能" class="headerlink" title="关于手机NFC功能"></a>关于手机NFC功能</h2><p>苹果手机仅支持apple pay，门禁、公交等功能并不支持。小米还是香嗷。</p>
+<p>在b站看到稚晖大佬做了一个可以存储多张ic卡信息的小卡片，开源了👉<a target="_blank" rel="noopener" href="https://github.com/peng-zhihui/L-ink_Card">L-ink_Card</a></p>
+<p>以后有机会想自己实现一哈</p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-关于url编码">
+    <header class="cube-excerpt-header">
+        <h1><a href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Eurl%E7%BC%96%E7%A0%81/">关于url编码</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2020-05-20
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/" class="cube-excerpt-tag-link">#加密与编码</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <h3 id="为什么需要URL编码"><a href="#为什么需要URL编码" class="headerlink" title="为什么需要URL编码"></a>为什么需要URL编码</h3><p>1.URL 只能使用 ASCII 字符集来通过因特网进行发送。也就是说URL只能使用英文字母、阿拉伯数字和某些标点符号，不能使用其他文字和符号。这意味着 如果URL中有汉字，就必须编码后使用。但问题在于，标准的国际组织并没有规定具体的编码方法，而是交给应用程序（浏览器）自己决定。这会导致”URL编码”成为了一个混乱的领域。</p>
+<p>2.对于get传参的网页来说，采取的是如下方式 ( <strong>? key = value</strong> )</p>
+<p>问题在于，若是传的参数中包含？和=怎么办，就冲突了，所以需要编码以区分</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.biquge.tv/modules/article/search.php?searchkey=xxx</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="如何进行URL编码"><a href="#如何进行URL编码" class="headerlink" title="如何进行URL编码"></a>如何进行URL编码</h3><p>Url编码通常也被称为百分号编码（percent-encoding），编码方式非常简单。</p>
+<p>使用%百分号加上两位的字符——0123456789ABCDEF——代表一个字节的十六进制形式。</p>
+<p>对于ASCII字符，字母a 在ASCII码中对应的字节是0x61，那么Url编码之后得到的就是%61，字母abc， url编码后得到的就是%61%62%63。</p>
+<p>对于非ASCII字符，在无BOM编码格式中有UTF-8和GBK两种。</p>
+<p>1.”中文”使用UTF-8字符集得到的字节为0xE4 0xB8 0xAD 0xE6 0x96 0x87，经过Url编码之后得到”%E4%B8%AD%E6%96%87”。</p>
+<p>2.“中文”使用GBK编码得到 %D6%D0%CE%C4。</p>
+<p><strong>注意一定要先进行编码再向服务器提交，这样可以保证只使用了固定的一种编码方式。</strong></p>
+<h3 id="python中的URL编码与解码"><a href="#python中的URL编码与解码" class="headerlink" title="python中的URL编码与解码"></a>python中的URL编码与解码</h3><p>封装成以下库：</p>
+<p><img src="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Eurl%E7%BC%96%E7%A0%81/3YXY0RNS559LLMX2S.png" alt="img"></p>
+<p>编码和解码的调用：</p>
+<p><img src="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Eurl%E7%BC%96%E7%A0%81/C8_WNYJOSO1DW4U4DCI.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Eurl%E7%BC%96%E7%A0%81/4XY3KDFEVGWA8D_BZOXX.png" alt="img"></p>
+<h3 id="小说爬取"><a href="#小说爬取" class="headerlink" title="小说爬取"></a>小说爬取</h3><p>爬小说的脚本写的时候没碰到什么别的问题，就是一个编码的问题，之前不了解，所以写了这篇文章码一下。</p>
+<p>在用爬虫向网页提交搜索信息（小说名字）的时候：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.biquge.tv/modules/article/search.php?searchkey=%bd%a3%c0%b4</span><br></pre></td></tr></table></figure>
+
+<p>需要用到URL编码来提交（因为我爬的那个网站用的是get方式提交信息，并且是GBK编码）</p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Eurl%E7%BC%96%E7%A0%81/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-关于RSA加密算法">
+    <header class="cube-excerpt-header">
+        <h1><a href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8ERSA%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">关于RSA加密算法</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2020-05-16
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/" class="cube-excerpt-tag-link">#加密与编码</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>RSA是目前使用最广泛的公钥密码体制之一。</p>
+<h3 id="RSA产生公私钥对"><a href="#RSA产生公私钥对" class="headerlink" title="RSA产生公私钥对"></a>RSA产生公私钥对</h3><p><strong>1.随机选取两个相近但不相等的质数p和q（越大越难破解）</strong></p>
+<p>取p=11，q=13，n = p * q = 143，n即为密钥长度，143二进制为10001111，密钥为8位。实际应用中，一般为1024位。</p>
+<p><strong>2.计算n的欧拉函数z</strong></p>
+<p>z = (p-1)(q-1) = 120</p>
+<p><strong>3.随机选择一个整数e，作为公钥中用来加密的数字</strong></p>
+<p>条件1 &lt; e &lt; z，且e与z互质。假设随机选择e = 7（实际中常选择为65537）</p>
+<p><strong>4.计算e对于z的模反元素d，作为密钥中用来解密的数字</strong></p>
+<p>模反元素指存在一个整数d，使得e * d mod z = 1。带入可得d = 103</p>
+<p><strong>5.将n和e封装成公钥（143，7），n和d封装成密钥（143，103）</strong></p>
+<h3 id="题外话：关于m-e-mod-n的手动计算方法"><a href="#题外话：关于m-e-mod-n的手动计算方法" class="headerlink" title="题外话：关于m^e mod n的手动计算方法"></a>题外话：关于m^e mod n的手动计算方法</h3><p>利用 (a×b) mod m = ((a mod m) × (b mod m)) mod m 这个公式</p>
+<p>设三个变量a，b，c，对于m^e mod n，令a = e,b = m, c = 1</p>
+<p>然后重复以下步骤：</p>
+<p>1.判断a是奇数，进第2步；偶数进第3步</p>
+<p>2.a = a - 1, c = (c*b) mod n,回到第1步</p>
+<p>3.a = a / 2, b = (b*b) mod n,回到第1步</p>
+<p>直到a = 0, c 就是最终结果</p>
+<h3 id="RSA的加密和解密"><a href="#RSA的加密和解密" class="headerlink" title="RSA的加密和解密"></a>RSA的加密和解密</h3><p><strong>加密：c = m^e mod n</strong></p>
+<p><strong>解密：m = c^d mod n</strong></p>
+<p>首先对明文进行比特串分组，且保证每个分组对应的十进制数小于n，然后对每个分组进行一次加密，所有分组的密文组成的序列就是最终密文了。</p>
+<p>举两个栗子：</p>
+<p><strong>1.以数据加密为例：</strong></p>
+<p>甲向乙发送机密数据信息m=85，并已知乙的公钥(n,e)=(143,7)，于是可计算出：c = 123<br>甲将c发送至乙，乙利用私钥(n,d)=(143,103)对c进行计算：m = 85<br>则乙得到甲向其要发送的机密数据信息。甲向乙发送信息，甲所拥有的仅仅是乙的公钥。</p>
+<p><strong>2.以数字签名为例：</strong></p>
+<p>乙要向甲发送信息，并要让甲确信此信息是由乙本人所发出的，于是，乙将能代表自己身份的编码值（如：123），利用私钥(n,d)=(143,103)进行计算，并将结果发送给甲：m = 85<br>甲接受到乙的数字签名后利用乙的公钥(n,e)=(143,7)进行计算，得出代表乙身份的编码：c = 123<br>现甲经过验证已确信信息的发送方为乙。因为只有乙拥有私钥(n,d)，来对代表自己身份的编码123进行计算。在这里，乙向甲发送信息并进行签名，甲所拥有的也仅仅是乙的公钥来验证乙的签名。</p>
+<h3 id="RSA实际应用"><a href="#RSA实际应用" class="headerlink" title="RSA实际应用"></a>RSA实际应用</h3><p><strong>在基于序列号保护的共享软件中应用RSA。</strong></p>
+<p>在某一共享软件中，甲想用123为注册名进行软件注册，他现在拥有的仅仅是存在于共享软件程序中的公钥(n,e)=(143,7)。</p>
+<p>甲现将123为注册名向乙提出注册申请，乙得知此申请并通过此申请后，便利用所拥有的私钥(n,d)对注册名123进行计算：m = 85</p>
+<p>甲得到计算后的结果85（序列号），提供给共享软件的注册程序进行计算：c = 123</p>
+<p>然后注册程序将判断计算结果c是否为123（注册名），以决定注册是否通过。</p>
+<p>如果甲随意输入一组序列号利用公钥(n,e)进行计算，那他得到的结果将不是123，注册也就失败了。注意，在这里，共享软件的注册程序<strong>比较的是注册名</strong>，而不是序列号。</p>
+<p>如果甲跟踪注册程序得到了他所随意输入的序列号所产生的注册名，将其提供给注册程序，那注册程序也能够通过注册，但他由于没有(n,d)，所以他无法用自己的注册名进行软件注册，也就<strong>防止了非法注册机的制作</strong>。</p>
+<p>将RSA应用于此的目的仅仅是防止非法注册机的制作，在以上描述中，n=143，包括以下Demo中的n(HEX)=963251DC5A9C90D9F203A03C363BA411，以现在的计算机处理速度，能很快地将其因式分解得到相应的p，q，再结合暴露在共享软件注册程序中的e，从而计算出d，那么这个共享软件的保护就完全被破解了。解决的方法是要避免n过短，以及结合MD5等加密算法……</p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8ERSA%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-获取bilibili视频文件和封面">
+    <header class="cube-excerpt-header">
+        <h1><a href="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/">获取bilibili视频文件和封面</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2020-04-30
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/%E8%84%9A%E6%9C%AC/" class="cube-excerpt-tag-link">#脚本</a>
+                
+                <a href="/tags/%E5%89%8D%E7%AB%AF/" class="cube-excerpt-tag-link">#前端</a>
+                
+                <a href="/tags/python%E7%88%AC%E8%99%AB/" class="cube-excerpt-tag-link">#python爬虫</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>前两天在阿草微博粉丝群水群的时候，看到有朋友说<del>馋</del>想要一个往期视频的封面，但不知道咋保存~（网上有封面提取的网站）</p>
+<p>我一想，应该可以用爬虫去实现嘛，挺有意思的，就尝试着写了一下，链接如下👇</p>
+<p><a target="_blank" rel="noopener" href="http://www.hanhan0223.cn/TextProject/BilibiliGetting/bilibili.php">获取b站视频封面</a></p>
+<p>（现在挂在我的云服务器上，但等到过期了就寄了，GitHub Page并不支持php。话说当初学php就是因为在云服务器上建站用的WordPress，想改别人的主题但是看不懂代码才去学的）</p>
+<p>三项功能：</p>
+<ol>
+<li><p>输入视频的网址、BV号获取AV号（AV号明面上已经被b站禁了，但后台实际还在）；</p>
+</li>
+<li><p>输入视频的网址、BV号、AV号获取视频封面；</p>
+</li>
+<li><p>输入up主的UID获取该up主所有视频的封面，并打包成zip文件下载。</p>
+</li>
+</ol>
+<h1 id="获取封面"><a href="#获取封面" class="headerlink" title="获取封面"></a>获取封面</h1><h2 id="1-爬取图片的脚本"><a href="#1-爬取图片的脚本" class="headerlink" title="1.爬取图片的脚本"></a>1.爬取图片的脚本</h2><p><strong>如何找到b站视频的相关信息和封面图片的源网址呢？</strong></p>
+<h3 id="关于封面图"><a href="#关于封面图" class="headerlink" title="关于封面图"></a>关于封面图</h3><p>最开始学爬虫的朋友们应该都爬过豆瓣top250这个经典案例。</p>
+<p><img src="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/html0-1024x394.png" alt="img"></p>
+<p>在body里找到img属性，里面的src就是图片的原链接了。但是要注意到一点，这里图片源文件的后缀：webp。这是一种有损压缩格式图片，优势在于网络传输快，但爬取视频封面是为了什么！是为了高清图啊！所以不能这么爬。</p>
+<p><img src="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/html0.5-1024x388.png" alt="img"></p>
+<p>在个人主页中，可以通过选取工具定位到img标签，发现src里的也是webp格式图片</p>
+<p><img src="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/src1-1024x470.png" alt="img"></p>
+<p>打开链接图片很糊而且像素低。那么问题来了，哪里有高清的呢！答案就在视频界面里。</p>
+<p><img src="http://www.hanhan0223.cn/wp-content/uploads/2020/04/html2-1024x415.png" alt="img"></p>
+<p>不在body中！因为视频界面并没有显示封面图片！而是在head中！找到属性（itemprop）为image的，发现content中的链接，后缀为jpg格式，这就找对了，打开发现确实是高清图</p>
+<p><img src="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/src2-1024x479.png" alt="img"></p>
+<p>链接位置找到了，剩下的就简单了~就不多说了。</p>
+<h3 id="关于AV号"><a href="#关于AV号" class="headerlink" title="关于AV号"></a>关于AV号</h3><p>之前b站因为av号名称违规（？）改为了BV号，但是av号并没有完全删除，在b站中搜索视频av号同样能获取视频，这说明av号这项数据依旧保存着，那如何找出该数据呢？在b站的数据接口。</p>
+<p><img src="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/link1-1024x378.png" alt="img"></p>
+<p>打开解析器network选项，可以看到该视频数据接口的url。archive（档案）后面的内容aid同理可以替换成bvid</p>
+<p><img src="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/data1.png" alt="img"></p>
+<p>可以看到该网址返回的是一串json数据，里面包含了av、bv、投币、收藏、点赞、分享、评论、观看数、这些数据，在这里便可以获取到AV号了，在就脚本中解析该json数据然后提取就可以显示在网页中了。</p>
+<p>而个人空间同样拥有数据接口保存了该页所有视频的标题、简介、bv等信息，也可以获取下来，不再赘述。</p>
+<h2 id="2-py脚本与php的数据交互"><a href="#2-py脚本与php的数据交互" class="headerlink" title="2.py脚本与php的数据交互"></a>2.py脚本与php的数据交互</h2><p><strong>py文件如何向php文件传值？ ajax如何获取php文件的传值？php中如何调用py脚本？</strong></p>
+<p>传值其实很简单，，就是打印函数，python 的<strong>print</strong>和php 的<strong>echo</strong>。</p>
+<p>调用py脚本，用exec函数：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$c</span> = exec(<span class="string">&quot;/usr/bin/python GetBilibiliUpCover.py <span class="subst">&#123;$func&#125;</span> <span class="subst">&#123;$uid&#125;</span> <span class="subst">&#123;$bv&#125;</span>&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>exec用于执行一个外部程序，主体为执行命令，可以附带参数传递，输出数组和状态返回。因为程序要在服务器里运行，所以输入的就是ubuntu的命令行了，ubuntu怎么运行python脚本就怎么来。</p>
+<p>后面的三个是输入参数。在python中通过如下方式获取：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sys.argv[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>argv是一个数组，第一位是模块的名称，这里不去管他，从1开始是按序输入的参数，这里输入了三个，就分别用1、2、3来获取就行。</p>
+<h2 id="3-前后端数据交互"><a href="#3-前后端数据交互" class="headerlink" title="3.前后端数据交互"></a>3.前后端数据交互</h2><p>本半吊子表示根本没系统学过前端知识，所以做这一部分的时候异常痛苦，，界面也丑的一言难尽==</p>
+<p>用的ajax，但一开始死都进不去succes步，总进error。。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    <span class="attr">type</span> : <span class="string">&quot;GET&quot;</span>,</span><br><span class="line">    <span class="attr">url</span> : <span class="string">&quot;getting.php&quot;</span>,</span><br><span class="line">    <span class="attr">data</span> : &#123;</span><br><span class="line">        <span class="string">&#x27;func&#x27;</span>:$(<span class="string">&quot;#f1&quot;</span>).val(),</span><br><span class="line">        <span class="string">&#x27;bv&#x27;</span>:$(<span class="string">&quot;#av_info&quot;</span>).val()</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">dataType</span> : <span class="string">&quot;text&quot;</span>,</span><br><span class="line">    <span class="attr">success</span> : <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">        $(<span class="string">&quot;#result&quot;</span>).empty();</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">&quot;dynamic_av&quot;</span>).style.display = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">var</span> data = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (msg != <span class="string">&#x27;&#x27;</span>)&#123;</span><br><span class="line">        	data = <span class="built_in">eval</span>(<span class="string">&quot;(&quot;</span>+msg+<span class="string">&quot;)&quot;</span>);</span><br><span class="line">    	&#125;</span><br><span class="line">    	$(<span class="string">&quot;#result_av&quot;</span>).html(<span class="string">&quot;AV号: &quot;</span> + data.av);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params">msg, textStatus</span>) </span>&#123;</span><br><span class="line">    	<span class="built_in">console</span>.log(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>后来发现一开始数据类型用的json，网上说必须要非常标准的json数据才能接收到，我也不明白为什么我在py文件里封装的json数据就不行。。。</p>
+<p>后来就改成text，文本用eval转化一下提取出来就解决了。</p>
+<h1 id="获取视频文件"><a href="#获取视频文件" class="headerlink" title="获取视频文件"></a>获取视频文件</h1><p>首先进F12，看一下：</p>
+<p><img src="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/image-20220110093329162.png" alt="image-20220110093329162"></p>
+<p>可以看到视频源文件这边并不是mp4的源文件，而是开头带了<strong>blob：</strong>的链接，是无法访问的（暂时不了解这方面的技术，所以找了个取巧的办法）</p>
+<p>点击开发者工具的左上角，切换为手机模拟状态，可以看到：</p>
+<p><img src="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/image-20220110093926135.png" alt="image-20220110093926135"></p>
+<p>手机端的src不再是blob了，而是变成了这样一个url，打开即可下载mp4源文件了~舒服！</p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-第一次笔记本拆机体验">
+    <header class="cube-excerpt-header">
+        <h1><a href="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/">第一次笔记本拆机体验</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2020-04-13
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/%E6%8B%86%E6%9C%BA/" class="cube-excerpt-tag-link">#拆机</a>
+                
+                <a href="/tags/%E7%A1%AC%E4%BB%B6/" class="cube-excerpt-tag-link">#硬件</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>小的时候总觉得电脑是个很神奇很牛掰的东西，虽然后来对电脑的构成还有运行原理等有了一个大致的了解，但依旧玄乎中带一点敬仰（奇怪的用词）。前段时间给母亲大人配了一台台式，自己亲自买了各种组件，组装起来后才发现其实真没什么难度。。基本是熟练度和经验的关系了。不过这倒是让我对电脑组成和运行有了更深刻的认识~</p>
+<p>恰巧我的笔记本最近也毛病重重（贼卡），于是在我的一位同学祝大师（sdl，wsl）的帮助下，对电脑运行的CPU占用率、硬盘测速、甜甜圈视频输出、内存延时、模具散热、坏道检测等多项数据进行了测试。发现了唯一的问题在于机械盘坏道有点多（跑了1%就有几十柱坏道，神奇，讲道理坏成这样应该经常会卡死，而我只是运行慢一些。。）</p>
+<p>然后开始拆机~清灰，然后取出机械硬盘在台式机进行一些测试。</p>
+<h3 id="拆机简录"><a href="#拆机简录" class="headerlink" title="拆机简录"></a>拆机简录</h3><p><img src="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200412210853-1024x576.jpg" alt="img"></p>
+<p>首先把四周的螺丝拧开~然后掰开后盖。因为后盖四周带有卡扣固定，所以在掀开的过程中需要拿螺丝刀一点一点的撬开。注意到上图中左右两个网格状的梯形，里面有两坨圆形的灰色，这都是灰，因为这两个网格正对电脑的散热风扇，久而久之在散热过程中就积灰了。</p>
+<p>最后掀开，如下：</p>
+<p><img src="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200412210925-1024x769.jpg" alt="img"></p>
+<p><img src="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200412210929-1024x768.jpg" alt="img"></p>
+<p>上图中左右上角是风扇，可以看到积灰很多。风扇上面是散热管，它与风扇之间的缝隙同样是积灰非常严重的地方，需要清理。</p>
+<p>中间蓝色是主板，主板上面那块绿色就是内存条，我的是一根8g的（反正也要换硬件，顺便再加个8g内存条？）</p>
+<p>右边风扇下面的绿色是固态硬盘（当时配的128g，这次打算换成256g，我c盘就剩12G了，括个容），用作电脑的系统盘存储。</p>
+<p>左边风扇下面那块蓝青色板子就是机械硬盘了（配的1T，叠瓦的据说坏的快，在犹豫换1T的机械还是固态，，价格差了五六百，但固态体验要好很多）</p>
+<p>机械盘右上角那一小块贴了白色标签的就是无线网卡</p>
+<p>右下方那一大块是电池了，图里已经拆了~</p>
+<p><img src="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200412210932-1024x768.jpg" alt="img"></p>
+<p>拆下之后对积灰的缝隙，风扇的缝隙进行了清理，顿时感觉舒爽了很多hhhh</p>
+<h3 id="问题测试"><a href="#问题测试" class="headerlink" title="问题测试"></a>问题测试</h3><p>取下机械硬盘，接到我家台式机上，在里面下了个300英雄打了一把人机，发现流畅的一批，，惊了</p>
+<p>又接回来进入ubuntu系统，跑了一下pycharm，，还是很流畅</p>
+<p>大概是系统问题，，，遇事不决重装系统~</p>
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p><img src="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200415143255-1024x812.jpg" alt="img"></p>
+<p>京东物流是真的快！当晚9点多下单，第二天上午就到了！1TB的SSD硬盘，SATA接口（换机械的），打折799.</p>
+<p>然后是数据转移！</p>
+<p>把原来的机械盘和新的固态盘都接到我家台式机上，先格式化好新盘，转gpt分区。我用了DiskGenius的磁盘克隆功能，一键复制分区和数据（大概三个小时左右，我1T基本用满了），然后就搞定啦。</p>
+<p>剩下的机械盘格式化了塞家里电脑凑合用着，舒服！</p>
+<p>把固态塞进笔记本，开机，测试了一下软件启动速度，真香！</p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-PyQt5再尝试:Windows桌面便笺">
+    <header class="cube-excerpt-header">
+        <h1><a href="/%E5%BA%94%E7%94%A8/PyQt5%E5%86%8D%E5%B0%9D%E8%AF%95-Windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AC%BA/">PyQt5再尝试:Windows桌面便笺</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2020-04-08
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/PyQt5/" class="cube-excerpt-tag-link">#PyQt5</a>
+                
+                <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/" class="cube-excerpt-tag-link">#小软件</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p><strong>考研党给自己制定了每日计划去执行，但是市面上的桌面便笺软件都不是很合我胃口，于是花了一个礼拜多点，完成了这款完全按照我自己心意来的桌面便笺，用起来相当舒心、顺手嘿嘿。</strong></p>
+<p>国际惯例贴上源代码、以及软件下载链接~</p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/shen962806862/memo/">memo-master</a></p>
+<p>百度网盘：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1wImGLcBkOV0c29CRr4rj5w">memo</a> 提取码：61uy</p>
+<h3 id="Version：1-0-【2020-4-8】"><a href="#Version：1-0-【2020-4-8】" class="headerlink" title="Version：1.0 【2020.4.8】"></a>Version：1.0 【2020.4.8】</h3><p>先上图~</p>
+<p><img src="/%E5%BA%94%E7%94%A8/PyQt5%E5%86%8D%E5%B0%9D%E8%AF%95-Windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AC%BA/%E4%B8%BB%E7%95%8C%E9%9D%A2.png" alt="img"></p>
+<ul>
+<li>主图标选择了我非常喜欢的滑稽表情~</li>
+<li>灯泡是用来展开、隐藏下边菜单栏的开关~</li>
+<li>菜单栏分别是新建一个便笺、设置（字体样式，便笺样式等）以及关于（软件的简单使用tips）</li>
+<li>右边就是建的一个个便笺了~</li>
+</ul>
+<p><strong>功能简介：</strong></p>
+<ol>
+<li>双击可以修改内容（目前无法使用删除键，修改方式为鼠标全选后直接输入文本，待debug）</li>
+<li>右边按钮为当日完成情况，初始化为X，点击表示完成√</li>
+<li>删除：拖动单条便笺到主图标滑稽上，松开鼠标即可删除</li>
+<li>按~键（ESC下面）即可最小化至托盘</li>
+<li>拖动主图标即可拖动整个便笺软件移动</li>
+<li>对便笺样式以及内容的修改信息均会保存，在下次启动时直接调用~</li>
+<li>主图标以及各种按钮的图标均可找自己喜欢的图片修改（要求：png图片、背景透明（怎么弄透明百度有教程，可网站上在线生成也可ps自己弄）、将处理好的图片与想改的图标做替换（文件名要相同））</li>
+<li>因为在x64系统下封装，仅适用于x64系统，linux和Windows x32目前不支持~</li>
+<li>关于里面的介绍是之前写的，忘改了，，下版再说吧，懒得重新改</li>
+</ol>
+<p><strong>对于下版的一些想法：</strong></p>
+<p>1.优化UI、以及界面控制，修复一些按键bug</p>
+<p>2.添加时间数据，记录计划的创建、删除时间以及每天完成情况；每日0：00更新所有便笺状态为X</p>
+<p>3.添加数据分析功能，生成统计文件。哦甚至一键生成统计图表（？这个好像有点麻烦，，得慢慢来）</p>
+<p>4.添加一键换图标功能（仅需上传png图片）</p>
+<p>5.想和网站做点联动，但不知道做啥==下版见</p>
+<p>就酱~</p>
+<h3 id="Version：1-1-【2020-4-24】"><a href="#Version：1-1-【2020-4-24】" class="headerlink" title="Version：1.1 【2020.4.24】"></a>Version：1.1 【2020.4.24】</h3><p><strong>1.1版本搞定！</strong></p>
+<p>1.优化了设置和关于界面的UI</p>
+<p>2.添加了主图标右键可以打开菜单栏操作功能</p>
+<p>3.新增部分设置选项（置顶功能设置、勾选重启以创建桌面快捷方式、边缘自动隐藏功能）</p>
+<p>4.完善了每个便笺个体的信息保存，软件在下一天启动时所有便笺状态归于未完成</p>
+<p>5.删除了任务栏图标，只保留托盘图标了</p>
+<p>6.更新了数据统计功能，从整体和个体角度分析完成情况</p>
+<p>7.新增简单的一键换肤功能（不提倡，建议ps手动修图手动在img文件夹下替换）</p>
+<p>8.关于与个人网站的联动，会做一个内测版本，将我每日的学习进度展示在我的个人网站上~暂时不打算封装起来</p>
+<p><img src="/%E5%BA%94%E7%94%A8/PyQt5%E5%86%8D%E5%B0%9D%E8%AF%95-Windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AC%BA/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1.png" alt="img"> <img src="/%E5%BA%94%E7%94%A8/PyQt5%E5%86%8D%E5%B0%9D%E8%AF%95-Windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AC%BA/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A12.png" alt="img"></p>
+<p>这个小项目就告一段落了~~</p>
+<p>接下来的安排基本以考研为主了，以算法题为主要练习对象，偶尔有需求再写点脚本什么的~</p>
+<h3 id="Version：1-2-【2020-6-6】"><a href="#Version：1-2-【2020-6-6】" class="headerlink" title="Version：1.2 【2020.6.6】"></a>Version：1.2 【2020.6.6】</h3><p>1.新增了倒计时功能，置于电脑屏幕正上方，右键为设置（内容和结束时间）、隐藏。隐藏后可在菜单栏打开。</p>
+<p>2.新增了版本检测以及自动更新功能（有一点小bug没解决，点更新会跳cmd框并且更新时鼠标操作其他地方进度条的显示会卡死，但是不影响更新的）。更新后再次点击图标重启（重启才会删除旧版本，我没封装成正式软件，也没解决父子进程独立的问题，用的更新方法比较简单~）</p>
+<p>3.修复了个别显示以及数据统计的小bug~</p>
+<p><img src="/%E5%BA%94%E7%94%A8/PyQt5%E5%86%8D%E5%B0%9D%E8%AF%95-Windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AC%BA/7PC9Y8N_89I7VABO4Q4WBK.png" alt="img"></p>
+<p>唔，越来越感觉这软件粗制滥造了hhhh，等我有空研究一下软件构造方面的知识之后再重构一遍~</p>
+<h3 id="Version：2-0【2022-1-9】"><a href="#Version：2-0【2022-1-9】" class="headerlink" title="Version：2.0【2022.1.9】"></a>Version：2.0【2022.1.9】</h3><p>没想到，这小玩意儿最后居然被我拿来当毕设了。。就挺水的==</p>
+<p>当时为了凑毕设字数就重构了一遍代码（UI与逻辑分离之类的），但是时间比较紧，也没重构完。。所以也就没更新</p>
+<p>现在把博客从云服务器迁到github上，才想起来这回事儿。。有空搞搞？（十有八九是没下文了）</p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/%E5%BA%94%E7%94%A8/PyQt5%E5%86%8D%E5%B0%9D%E8%AF%95-Windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AC%BA/">Read More</a>
     </footer>
 </div>
 
@@ -416,11 +943,17 @@
             </li>
             
         
+            
+            <li class="cube-pagination-index">
+                <a href="/page/2">2</a>
+            </li>
+            
+        
     
 
     
-    <li class="cube-pagination-next disabled">
-        <span>Next »</span>
+    <li class="cube-pagination-next">
+        <a href="/page/2/">Next »</a>
     </li>
     
 </ul>
@@ -463,9 +996,9 @@
     
     
     <div class="count">
-        <a class="count articles"><span>2</span>Article</a>
-        <a class="count tags"><span>1</span>Tags</a>
-        <a class="count categories"><span>1</span>Categories</a>
+        <a class="count articles"><span>11</span>Article</a>
+        <a class="count tags"><span>12</span>Tags</a>
+        <a class="count categories"><span>3</span>Categories</a>
     </div>
 </div>
 
@@ -502,7 +1035,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/Graphics-and-Image/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a>
+                    <a href="/%E5%BA%94%E7%94%A8/web%E7%AB%AF%E5%B0%8F%E4%BD%9C%E5%93%81/" title="web端小作品">web端小作品</a>
                 </p>
             </div>
             
@@ -516,7 +1049,46 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/Graphics-and-Image/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/" title="opencv移库笔记">opencv移库笔记</a>
+                    <a href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/%E6%9D%82%E8%AE%B0/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/" title="opencv移库笔记">opencv移库笔记</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/" title="PyQt5狗都不用:阴阳师挂机软件OnHook">PyQt5狗都不用:阴阳师挂机软件OnHook</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/" title="ID卡与IC卡原理">ID卡与IC卡原理</a>
                 </p>
             </div>
         </li>
@@ -535,7 +1107,17 @@
         
         
         <div class="cube-box ">
-            <a href="/categories/Graphics-and-Image/">#Graphics and Image</a>
+            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E6%9D%82%E8%AE%B0/">#杂记</a>
         </div>
         
     </div>
@@ -551,7 +1133,62 @@
         
         
         <div class="cube-box ">
+            <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/PyQt5/">#PyQt5</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/opencv/">#opencv</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E7%8E%AF%E5%A2%83/">#环境</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/%E6%8B%86%E6%9C%BA/">#拆机</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
         </div>
         
     </div>

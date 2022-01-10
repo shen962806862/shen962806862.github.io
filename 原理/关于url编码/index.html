@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Szh">
+    
+    
+    
+    
+    
+    
+    <title>关于url编码 | hanhan</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
+
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: block;
+            content: 'Loading';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
+        }
+    </style>
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
+        
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="/">首页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-tags" aria-hidden="true"></i>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
+            <a href="/about">关于我</a>
+        </li>
+        
+    </ul>
+</nav>
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
+        
+        <li>
+            <a class="lrc-control">Open Lyrics</a>
+        </li>
+        
+        <li>
+            <a class="scroll-to-top">Top</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg " alt="头部背景图片">
+    
+    <div class="cube-type">
+        <span class="cube-typed-title">小涵の米奇妙妙屋</span>
+        <span class="cube-typed-cursor">|</span>
+    </div>
+    
+</header>
+
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+        
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        
+            z-index: -1;
+            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
+            background-repeat: no-repeat;
+            background-position: center 44px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
+            background-position: center 0;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
+        
+        <div class="cube-type">
+            <span class="cube-typed-title">小涵の米奇妙妙屋</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
+        
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '773',
+                height: '387'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            <div class="cube-article">
+<h1 class="title">关于url编码</h1>
+
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2020-05-20
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+    
+</div>
+    </div>
+
+    <div class="cube-article-content cube-markdown">
+        
+        <h3 id="为什么需要URL编码"><a href="#为什么需要URL编码" class="headerlink" title="为什么需要URL编码"></a>为什么需要URL编码</h3><p>1.URL 只能使用 ASCII 字符集来通过因特网进行发送。也就是说URL只能使用英文字母、阿拉伯数字和某些标点符号，不能使用其他文字和符号。这意味着 如果URL中有汉字，就必须编码后使用。但问题在于，标准的国际组织并没有规定具体的编码方法，而是交给应用程序（浏览器）自己决定。这会导致”URL编码”成为了一个混乱的领域。</p>
+<p>2.对于get传参的网页来说，采取的是如下方式 ( <strong>? key = value</strong> )</p>
+<p>问题在于，若是传的参数中包含？和=怎么办，就冲突了，所以需要编码以区分</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.biquge.tv/modules/article/search.php?searchkey=xxx</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="如何进行URL编码"><a href="#如何进行URL编码" class="headerlink" title="如何进行URL编码"></a>如何进行URL编码</h3><p>Url编码通常也被称为百分号编码（percent-encoding），编码方式非常简单。</p>
+<p>使用%百分号加上两位的字符——0123456789ABCDEF——代表一个字节的十六进制形式。</p>
+<p>对于ASCII字符，字母a 在ASCII码中对应的字节是0x61，那么Url编码之后得到的就是%61，字母abc， url编码后得到的就是%61%62%63。</p>
+<p>对于非ASCII字符，在无BOM编码格式中有UTF-8和GBK两种。</p>
+<p>1.”中文”使用UTF-8字符集得到的字节为0xE4 0xB8 0xAD 0xE6 0x96 0x87，经过Url编码之后得到”%E4%B8%AD%E6%96%87”。</p>
+<p>2.“中文”使用GBK编码得到 %D6%D0%CE%C4。</p>
+<p><strong>注意一定要先进行编码再向服务器提交，这样可以保证只使用了固定的一种编码方式。</strong></p>
+<h3 id="python中的URL编码与解码"><a href="#python中的URL编码与解码" class="headerlink" title="python中的URL编码与解码"></a>python中的URL编码与解码</h3><p>封装成以下库：</p>
+<p><img src="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Eurl%E7%BC%96%E7%A0%81/3YXY0RNS559LLMX2S.png" alt="img"></p>
+<p>编码和解码的调用：</p>
+<p><img src="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Eurl%E7%BC%96%E7%A0%81/C8_WNYJOSO1DW4U4DCI.png" alt="img"></p>
+<p><img src="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Eurl%E7%BC%96%E7%A0%81/4XY3KDFEVGWA8D_BZOXX.png" alt="img"></p>
+<h3 id="小说爬取"><a href="#小说爬取" class="headerlink" title="小说爬取"></a>小说爬取</h3><p>爬小说的脚本写的时候没碰到什么别的问题，就是一个编码的问题，之前不了解，所以写了这篇文章码一下。</p>
+<p>在用爬虫向网页提交搜索信息（小说名字）的时候：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.biquge.tv/modules/article/search.php?searchkey=%bd%a3%c0%b4</span><br></pre></td></tr></table></figure>
+
+<p>需要用到URL编码来提交（因为我爬的那个网站用的是get方式提交信息，并且是GBK编码）</p>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        <li class="prev">
+        <a href="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/">
+            <i class="cube-icon cube-prev" aria-hidden="true"></i>
+            ID卡与IC卡原理
+        </a>
+        </li>
+        
+            
+            <li class="next">
+            <a href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8ERSA%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">
+                关于RSA加密算法
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+        </div>
+        <div class="cube-right">
+            
+
+<div class="cube-search cube-sidebar" id="cube-search">
+    <div class="search-container">
+        <input type="text" placeholder="Search" class="cube-search-input" id="cube-search-input">
+        <i class="cube-icon cube-icon-search cube-search-submit" aria-hidden="true"></i>
+    </div>
+    <!-- TODO 通过给window赋一个全局变量，通过脚本赋值 -->
+</div>
+<script>
+    (function (window) {
+        'use strict';
+        window.searchModule = {}
+        window.searchModule.JSONUrl = '/content.json'
+        window.searchModule.rootUrl = '/'
+    })(window)
+</script>
+<div class="cube-search-form">
+    <div class="cube-search-control">
+        <input type="text" placeholder="Search" class="search-input">
+        <a class="close-button">
+            <i class="cube-icon cube-close" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="cube-search-result"></div>
+</div>
+
+
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>Szh</span>
+    
+    
+    <div class="count">
+        <a class="count articles"><span>11</span>Article</a>
+        <a class="count tags"><span>12</span>Tags</a>
+        <a class="count categories"><span>3</span>Categories</a>
+    </div>
+</div>
+
+
+
+<div class="cube-music cube-sidebar" id="cube-music">
+    <div class="cube-player aplayer" id="cube-player"></div>
+</div>
+<script>
+    (function (window) {
+        window.musicModule = {}
+        window.musicModule.musicConfig = '{"narrow":false,"autoplay":false,"showlrc":3,"theme":"#b7daff","mutex":true,"mode":"circulation","preload":"auto","listmaxheight":"513px","music":[{"title":"石头歌 (先行曲)","author":"三无Marblue","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/三无Marblue - 石头歌 (先行曲).mp3","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/三无Marblue - 石头歌 (先行曲).jpg"},{"title":"有没有那么一首歌","author":"张茜","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/张茜 - 有没有那么一首歌.mp3","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/张茜 - 有没有那么一首歌.jpg"},{"title":"NEW BOY","author":"朴树","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/朴树 - NEW BOY.mp3","lrc":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/lrc/朴树 - NEW BOY.lrc","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/朴树 - NEW BOY.jpg"}]}'
+        window.musicModule.lrcConfig = {
+            open: 'Open Lyrics',
+            close: 'Close Lyrics'
+        }
+    })(window)
+</script>
+
+
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>Recent Posts</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%BA%94%E7%94%A8/web%E7%AB%AF%E5%B0%8F%E4%BD%9C%E5%93%81/" title="web端小作品">web端小作品</a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/%E6%9D%82%E8%AE%B0/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/" title="opencv移库笔记">opencv移库笔记</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/" title="PyQt5狗都不用:阴阳师挂机软件OnHook">PyQt5狗都不用:阴阳师挂机软件OnHook</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/" title="ID卡与IC卡原理">ID卡与IC卡原理</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-categories cube-sidebar" id="cube-categories">
+    <div class="title">
+        <a href="/categories">Categories</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/categories/%E6%9D%82%E8%AE%B0/">#杂记</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
+    <div class="title">
+        <a href="/tags">Tagcloud</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/PyQt5/">#PyQt5</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/opencv/">#opencv</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E7%8E%AF%E5%A2%83/">#环境</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E6%8B%86%E6%9C%BA/">#拆机</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/github.png">
+            
+            <a href="https://github.com/shen962806862" target="_blank">GitHub</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/csdn.jpg">
+            
+            <a href="https://blog.csdn.net/shen962806862" target="_blank">CSDN</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/weibo.jpg">
+            
+            <a href="https://weibo.com/u/6056563979" target="_blank">新浪微博</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-friend-links cube-sidebar" id="cube-friend-links">
+    <div class="title">
+        <a>Friend Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/links.jpg">
+            <a href="http://www.maxwellzhu.pub/" target="_blank">祝大师</a>
+        </li>
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/links2.jpg">
+            <a href="http://www.hanhan0223.cn/" target="_blank">我的大号</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+    © 2017 Szh
+
+    <br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    <br>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp; </span>
+<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
+</body>
+</html>

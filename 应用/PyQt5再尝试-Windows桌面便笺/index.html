@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Szh">
+    
+    
+    
+    
+    
+    
+    <title>PyQt5再尝试:Windows桌面便笺 | hanhan</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
+
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: block;
+            content: 'Loading';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
+        }
+    </style>
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
+        
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="/">首页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-tags" aria-hidden="true"></i>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
+            <a href="/about">关于我</a>
+        </li>
+        
+    </ul>
+</nav>
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
+        
+        <li>
+            <a class="lrc-control">Open Lyrics</a>
+        </li>
+        
+        <li>
+            <a class="scroll-to-top">Top</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg " alt="头部背景图片">
+    
+    <div class="cube-type">
+        <span class="cube-typed-title">小涵の米奇妙妙屋</span>
+        <span class="cube-typed-cursor">|</span>
+    </div>
+    
+</header>
+
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+        
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        
+            z-index: -1;
+            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
+            background-repeat: no-repeat;
+            background-position: center 44px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
+            background-position: center 0;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
+        
+        <div class="cube-type">
+            <span class="cube-typed-title">小涵の米奇妙妙屋</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
+        
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '773',
+                height: '387'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            <div class="cube-article">
+<h1 class="title">PyQt5再尝试:Windows桌面便笺</h1>
+
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2020-04-08
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/PyQt5/">#PyQt5</a>
+    
+    <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
+    
+</div>
+    </div>
+
+    <div class="cube-article-content cube-markdown">
+        
+        <p><strong>考研党给自己制定了每日计划去执行，但是市面上的桌面便笺软件都不是很合我胃口，于是花了一个礼拜多点，完成了这款完全按照我自己心意来的桌面便笺，用起来相当舒心、顺手嘿嘿。</strong></p>
+<p>国际惯例贴上源代码、以及软件下载链接~</p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/shen962806862/memo/">memo-master</a></p>
+<p>百度网盘：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1wImGLcBkOV0c29CRr4rj5w">memo</a> 提取码：61uy</p>
+<h3 id="Version：1-0-【2020-4-8】"><a href="#Version：1-0-【2020-4-8】" class="headerlink" title="Version：1.0 【2020.4.8】"></a>Version：1.0 【2020.4.8】</h3><p>先上图~</p>
+<p><img src="/%E5%BA%94%E7%94%A8/PyQt5%E5%86%8D%E5%B0%9D%E8%AF%95-Windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AC%BA/%E4%B8%BB%E7%95%8C%E9%9D%A2.png" alt="img"></p>
+<ul>
+<li>主图标选择了我非常喜欢的滑稽表情~</li>
+<li>灯泡是用来展开、隐藏下边菜单栏的开关~</li>
+<li>菜单栏分别是新建一个便笺、设置（字体样式，便笺样式等）以及关于（软件的简单使用tips）</li>
+<li>右边就是建的一个个便笺了~</li>
+</ul>
+<p><strong>功能简介：</strong></p>
+<ol>
+<li>双击可以修改内容（目前无法使用删除键，修改方式为鼠标全选后直接输入文本，待debug）</li>
+<li>右边按钮为当日完成情况，初始化为X，点击表示完成√</li>
+<li>删除：拖动单条便笺到主图标滑稽上，松开鼠标即可删除</li>
+<li>按~键（ESC下面）即可最小化至托盘</li>
+<li>拖动主图标即可拖动整个便笺软件移动</li>
+<li>对便笺样式以及内容的修改信息均会保存，在下次启动时直接调用~</li>
+<li>主图标以及各种按钮的图标均可找自己喜欢的图片修改（要求：png图片、背景透明（怎么弄透明百度有教程，可网站上在线生成也可ps自己弄）、将处理好的图片与想改的图标做替换（文件名要相同））</li>
+<li>因为在x64系统下封装，仅适用于x64系统，linux和Windows x32目前不支持~</li>
+<li>关于里面的介绍是之前写的，忘改了，，下版再说吧，懒得重新改</li>
+</ol>
+<p><strong>对于下版的一些想法：</strong></p>
+<p>1.优化UI、以及界面控制，修复一些按键bug</p>
+<p>2.添加时间数据，记录计划的创建、删除时间以及每天完成情况；每日0：00更新所有便笺状态为X</p>
+<p>3.添加数据分析功能，生成统计文件。哦甚至一键生成统计图表（？这个好像有点麻烦，，得慢慢来）</p>
+<p>4.添加一键换图标功能（仅需上传png图片）</p>
+<p>5.想和网站做点联动，但不知道做啥==下版见</p>
+<p>就酱~</p>
+<h3 id="Version：1-1-【2020-4-24】"><a href="#Version：1-1-【2020-4-24】" class="headerlink" title="Version：1.1 【2020.4.24】"></a>Version：1.1 【2020.4.24】</h3><p><strong>1.1版本搞定！</strong></p>
+<p>1.优化了设置和关于界面的UI</p>
+<p>2.添加了主图标右键可以打开菜单栏操作功能</p>
+<p>3.新增部分设置选项（置顶功能设置、勾选重启以创建桌面快捷方式、边缘自动隐藏功能）</p>
+<p>4.完善了每个便笺个体的信息保存，软件在下一天启动时所有便笺状态归于未完成</p>
+<p>5.删除了任务栏图标，只保留托盘图标了</p>
+<p>6.更新了数据统计功能，从整体和个体角度分析完成情况</p>
+<p>7.新增简单的一键换肤功能（不提倡，建议ps手动修图手动在img文件夹下替换）</p>
+<p>8.关于与个人网站的联动，会做一个内测版本，将我每日的学习进度展示在我的个人网站上~暂时不打算封装起来</p>
+<p><img src="/%E5%BA%94%E7%94%A8/PyQt5%E5%86%8D%E5%B0%9D%E8%AF%95-Windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AC%BA/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1.png" alt="img"> <img src="/%E5%BA%94%E7%94%A8/PyQt5%E5%86%8D%E5%B0%9D%E8%AF%95-Windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AC%BA/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A12.png" alt="img"></p>
+<p>这个小项目就告一段落了~~</p>
+<p>接下来的安排基本以考研为主了，以算法题为主要练习对象，偶尔有需求再写点脚本什么的~</p>
+<h3 id="Version：1-2-【2020-6-6】"><a href="#Version：1-2-【2020-6-6】" class="headerlink" title="Version：1.2 【2020.6.6】"></a>Version：1.2 【2020.6.6】</h3><p>1.新增了倒计时功能，置于电脑屏幕正上方，右键为设置（内容和结束时间）、隐藏。隐藏后可在菜单栏打开。</p>
+<p>2.新增了版本检测以及自动更新功能（有一点小bug没解决，点更新会跳cmd框并且更新时鼠标操作其他地方进度条的显示会卡死，但是不影响更新的）。更新后再次点击图标重启（重启才会删除旧版本，我没封装成正式软件，也没解决父子进程独立的问题，用的更新方法比较简单~）</p>
+<p>3.修复了个别显示以及数据统计的小bug~</p>
+<p><img src="/%E5%BA%94%E7%94%A8/PyQt5%E5%86%8D%E5%B0%9D%E8%AF%95-Windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AC%BA/7PC9Y8N_89I7VABO4Q4WBK.png" alt="img"></p>
+<p>唔，越来越感觉这软件粗制滥造了hhhh，等我有空研究一下软件构造方面的知识之后再重构一遍~</p>
+<h3 id="Version：2-0【2022-1-9】"><a href="#Version：2-0【2022-1-9】" class="headerlink" title="Version：2.0【2022.1.9】"></a>Version：2.0【2022.1.9】</h3><p>没想到，这小玩意儿最后居然被我拿来当毕设了。。就挺水的==</p>
+<p>当时为了凑毕设字数就重构了一遍代码（UI与逻辑分离之类的），但是时间比较紧，也没重构完。。所以也就没更新</p>
+<p>现在把博客从云服务器迁到github上，才想起来这回事儿。。有空搞搞？（十有八九是没下文了）</p>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        <li class="prev">
+        <a href="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/">
+            <i class="cube-icon cube-prev" aria-hidden="true"></i>
+            第一次笔记本拆机体验
+        </a>
+        </li>
+        
+            
+            <li class="next">
+            <a href="/%E5%BA%94%E7%94%A8/PyQt5%E5%88%9D%E5%B0%9D%E8%AF%95-Unicode%E8%BD%AC%E6%8D%A2%E5%99%A8/">
+                PyQt5初尝试:Unicode转换器
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+        </div>
+        <div class="cube-right">
+            
+
+<div class="cube-search cube-sidebar" id="cube-search">
+    <div class="search-container">
+        <input type="text" placeholder="Search" class="cube-search-input" id="cube-search-input">
+        <i class="cube-icon cube-icon-search cube-search-submit" aria-hidden="true"></i>
+    </div>
+    <!-- TODO 通过给window赋一个全局变量，通过脚本赋值 -->
+</div>
+<script>
+    (function (window) {
+        'use strict';
+        window.searchModule = {}
+        window.searchModule.JSONUrl = '/content.json'
+        window.searchModule.rootUrl = '/'
+    })(window)
+</script>
+<div class="cube-search-form">
+    <div class="cube-search-control">
+        <input type="text" placeholder="Search" class="search-input">
+        <a class="close-button">
+            <i class="cube-icon cube-close" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="cube-search-result"></div>
+</div>
+
+
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>Szh</span>
+    
+    
+    <div class="count">
+        <a class="count articles"><span>11</span>Article</a>
+        <a class="count tags"><span>12</span>Tags</a>
+        <a class="count categories"><span>3</span>Categories</a>
+    </div>
+</div>
+
+
+
+<div class="cube-music cube-sidebar" id="cube-music">
+    <div class="cube-player aplayer" id="cube-player"></div>
+</div>
+<script>
+    (function (window) {
+        window.musicModule = {}
+        window.musicModule.musicConfig = '{"narrow":false,"autoplay":false,"showlrc":3,"theme":"#b7daff","mutex":true,"mode":"circulation","preload":"auto","listmaxheight":"513px","music":[{"title":"石头歌 (先行曲)","author":"三无Marblue","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/三无Marblue - 石头歌 (先行曲).mp3","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/三无Marblue - 石头歌 (先行曲).jpg"},{"title":"有没有那么一首歌","author":"张茜","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/张茜 - 有没有那么一首歌.mp3","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/张茜 - 有没有那么一首歌.jpg"},{"title":"NEW BOY","author":"朴树","url":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/朴树 - NEW BOY.mp3","lrc":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/lrc/朴树 - NEW BOY.lrc","pic":"https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/朴树 - NEW BOY.jpg"}]}'
+        window.musicModule.lrcConfig = {
+            open: 'Open Lyrics',
+            close: 'Close Lyrics'
+        }
+    })(window)
+</script>
+
+
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>Recent Posts</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%BA%94%E7%94%A8/web%E7%AB%AF%E5%B0%8F%E4%BD%9C%E5%93%81/" title="web端小作品">web端小作品</a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/%E6%9D%82%E8%AE%B0/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/" title="opencv移库笔记">opencv移库笔记</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/" title="PyQt5狗都不用:阴阳师挂机软件OnHook">PyQt5狗都不用:阴阳师挂机软件OnHook</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%8E%9F%E7%90%86/ID%E5%8D%A1%E4%B8%8EIC%E5%8D%A1%E5%8E%9F%E7%90%86/" title="ID卡与IC卡原理">ID卡与IC卡原理</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-categories cube-sidebar" id="cube-categories">
+    <div class="title">
+        <a href="/categories">Categories</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E6%9D%82%E8%AE%B0/">#杂记</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
+    <div class="title">
+        <a href="/tags">Tagcloud</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/PyQt5/">#PyQt5</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/opencv/">#opencv</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/%E7%8E%AF%E5%A2%83/">#环境</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E6%8B%86%E6%9C%BA/">#拆机</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/github.png">
+            
+            <a href="https://github.com/shen962806862" target="_blank">GitHub</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/csdn.jpg">
+            
+            <a href="https://blog.csdn.net/shen962806862" target="_blank">CSDN</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/weibo.jpg">
+            
+            <a href="https://weibo.com/u/6056563979" target="_blank">新浪微博</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-friend-links cube-sidebar" id="cube-friend-links">
+    <div class="title">
+        <a>Friend Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/links.jpg">
+            <a href="http://www.maxwellzhu.pub/" target="_blank">祝大师</a>
+        </li>
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/links2.jpg">
+            <a href="http://www.hanhan0223.cn/" target="_blank">我的大号</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+    © 2017 Szh
+
+    <br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    <br>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp; </span>
+<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
+</body>
+</html>
