@@ -399,7 +399,25 @@
 <p>正向传播：对矩阵区域求加权平均即可，比如上面图中，池化输出值为：1 * 0.1+2 * 0.2+3 * 0.3+4 * 0.4=<strong>3</strong>。</p>
 <p>反向传播：只需保留前向传播已经记录被选中节点的位置的值，其它值都为0,这和max-pooling的反向传播非常类似。</p>
 <p>优点：<strong>方法简单，泛化能力更强（带有随机性）</strong></p>
-<h2 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h2><h3 id="gamma变换（校正）"><a href="#gamma变换（校正）" class="headerlink" title="gamma变换（校正）"></a>gamma变换（校正）</h3><p>Gamma校正是一种非常重要的线性变换。对输入图像的灰度值进行指数变换，进而校正亮度偏差，通常应用于<strong>扩展暗调的细节</strong>。gamma校正可使得图像看起来更符合人眼的特性。</p>
+<h2 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h2><h3 id="亮度与对比度"><a href="#亮度与对比度" class="headerlink" title="亮度与对比度"></a>亮度与对比度</h3><h4 id="基础线性变化"><a href="#基础线性变化" class="headerlink" title="基础线性变化"></a>基础线性变化</h4><p>在查询opencv的亮度与对比度变化算法时，大多是博客都采用的最基础的线性变换：</p>
+<p>​                                                                <strong>out = in * α + β</strong></p>
+<p>其中 α 为对比度的变化，β 为亮度变化。</p>
+<p><strong>亮度（β）：</strong>像素点的值就是0~255，0为黑表示最暗，255为白表示最亮。因此调节亮度就是简单的对像素值进行增减即可，即 <strong>β ∈ (-100，-100)</strong> 。</p>
+<p><strong>对比度（α）：</strong>这里就存在问题了，线性变化的对比度调节非常不明显，在视觉上依旧呈现的是亮度的变化，在进行代码编写的时候一直达不到Photoshop里面的对比度调节效果。</p>
+<h4 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h4><p>通过查阅资料不难发现，对比度的调节原理如下：</p>
+<p>对比度反应了图片上亮区域和暗区域的层次感。而反应到图像编辑上，调整对比度就是在保证<strong>平均亮度</strong>不变的情况下，扩大或缩小<strong>亮的点和暗的点的差异</strong>。既然是要保证平均亮度不变，所以对每个点的调整比例必须作用在<strong>该值和平均亮度的差值</strong>之上，这样才能够保证计算后的平均亮度不变。</p>
+<p>因此很容易得出对比度变化的调整公式如下：</p>
+<p>​                                                    <strong>out = (in - average) * α + in</strong></p>
+<p>其中average为图像的平均亮度，α ∈ (-1，1) 。</p>
+<p>但是实际处理中，并没有太多的必要去计算一张图的平均亮度：一来耗时间，二来在平均亮度上的精确度并不会给图像的处理带来太多的好处。因此一般<strong>假设一张图的平均亮度为127</strong>，即一半亮度，而一张正常拍照拍出来的图平均亮度应该是在[100,150]。在视觉上基本没有任何区别。</p>
+<p>于是可得最终的亮度对比度调节公式：</p>
+<p>​                                                    <strong>out = (in - average) * α + in + β</strong></p>
+<p>达到了和Photoshop相同的效果。</p>
+<h3 id="通道混合"><a href="#通道混合" class="headerlink" title="通道混合"></a>通道混合</h3><p>也就是<strong>调整某一个通道中的颜色成分</strong>，可以理解为调整图片某一颜色区域的颜色。</p>
+<p>对于<strong>选中通道的每一个像素值</strong>，进行如下变换：</p>
+<p>​                            <strong>out = red * r + green * g + blue * b + constant * 255</strong></p>
+<p>其中，<strong>red、green、blue ∈ (-2, 2)</strong> ，**constant ∈ (-1, 1)**，r、g、b为每一个像素点的三个通道的值。</p>
+<h3 id="gamma变换（校正）"><a href="#gamma变换（校正）" class="headerlink" title="gamma变换（校正）"></a>gamma变换（校正）</h3><p>Gamma校正是一种非常重要的非线性变换。对输入图像的灰度值进行指数变换，进而校正亮度偏差，通常应用于<strong>扩展暗调的细节</strong>。gamma校正可使得图像看起来更符合人眼的特性。</p>
 <p>当Gamma校正的值大于1时，图像的高光部分被压缩而暗调部分被扩展；</p>
 <p>当Gamma校正的值小于1时，图像的高光部分被压缩而暗调部分被压缩。</p>
 <p>gamma校正的作用：</p>
@@ -747,7 +765,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
         </div>
         
@@ -778,7 +796,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
         </div>
         
@@ -823,7 +841,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
         </div>
         
