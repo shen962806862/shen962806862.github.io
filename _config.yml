@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: hanhan
+title: 小涵の米奇妙妙屋
 subtitle: ''
 description: ''
 keywords:
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://shen962806862.github.io/
+url: https://www.hanhan0223.cn/
 permalink: :category/:title/
 permalink_defaults:
 pretty_urls:
