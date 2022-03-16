@@ -508,15 +508,23 @@ Laplace算子的差分形式：
 
 Gamma校正是一种非常重要的非线性变换。对输入图像的灰度值进行指数变换，进而校正亮度偏差，通常应用于**扩展暗调的细节**。gamma校正可使得图像看起来更符合人眼的特性。
 
-当Gamma校正的值大于1时，图像的高光部分被压缩而暗调部分被扩展；
+但其实Gamma校正不仅会改变亮度，还会改变彩色图像中rgb的比率。
 
-当Gamma校正的值小于1时，图像的高光部分被压缩而暗调部分被压缩。
+![1357029831_5904](opencv图像算法/1357029831_5904-16474189847913.png)
 
-gamma校正的作用：
+当Gamma校正的值大于1时，图像的高光部分被压缩而暗调部分被扩展，图像整体变暗；
 
-**1.为方便人眼辨识图像，须要将摄像机采集的图像进行gamma校正。**
+当Gamma校正的值小于1时，图像的高光部分被压缩而暗调部分被压缩，图像整体变亮。
 
-**2.为能更有效的保存图像亮度信息，需进行Gamma校正。**
+**gamma校正的作用：**
+
+1.人眼对外界光源的感光值与输入光强不是呈线性关系的，而是呈指数型关系的。在低照度下，人眼更容易分辨出亮度的变化，随着照度的增加，人眼不易分辨出亮度的变化。而摄像机感光与输入光强呈线性关系。
+
+![img](opencv图像算法/aHR0cHM6Ly93d3cuemRhaW90LmNvbS8lRTglQUUlQTElRTclQUUlOTclRTYlOUMlQkElRTglQTclODYlRTglQTclODkvR2FtbWElRTclOUYlQUIlRTYlQUQlQTMvLzE1MzUxNzU5NTk1MTUucG5n.png)
+
+2.为能更有效的保存图像亮度信息。未经Gamma变换和经过Gamma变换保存图像信息如下所示：可以观察到，未经Gamma变换的情况下，低灰度时，有较大范围的灰度值被保存成同一个值，造成信息丢失；同时高灰度值时，很多比较接近的灰度值却被保存成不同的值，造成空间浪费。经过Gamma变换后，改善了存储的有效性和效率。
+
+![在这里插入图片描述](opencv图像算法/aHR0cHM6Ly93d3cuemRhaW90LmNvbS8lRTglQUUlQTElRTclQUUlOTclRTYlOUMlQkElRTglQTclODYlRTglQTclODkvR2FtbWElRTclOUYlQUIlRTYlQUQlQTMvMTUzNTE3NjA3Mjk1NS5wbmc.png)
 
 Gamma校正主要应用在**图像增强、目标检测以及图像分析**等领域。表达式如下：
 
@@ -787,6 +795,8 @@ int srcX = static_cast<int>(dstX * (srcWidth / dstWidth) + 0.5f);
 由于图像双线性插值只会用相邻的4个点，因此上述公式的分母都是1。opencv中的源码如下，用了一些优化手段：
 
 **用整数计算代替float**（下面代码中的 * 2048就是变11位小数为整数，最后有两个连乘，因此>>22位）
+
+
 
 **源图像和目标图像几何中心的对齐**
 
