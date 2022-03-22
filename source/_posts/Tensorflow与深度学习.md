@@ -381,3 +381,61 @@ Epoch 100/100
 
 #### e.g - keras实现逻辑回归
 
+```python
+import tensorflow as tf
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 读取csv信息
+data = pd.read_csv("../dataset/credit-a.csv", header=None)
+# iloc[,]获取行列数据，此处x为第一列到最后一列（不包含）的所有行
+x = data.iloc[53:, :-1]
+y = data.iloc[53:, -1].replace(-1, 0)
+# 将数据集分割为训练集和测试集
+test = data.iloc[:53, :-1]
+test_rst = data.iloc[:53, -1].replace(-1, 0)
+
+# 创建Sequential模型
+model = tf.keras.Sequential(
+    [tf.keras.Input(15,),        # 输入层
+     tf.keras.layers.Dense(4, activation='relu'),  # 隐藏层（4个神经元）
+     tf.keras.layers.Dense(4, activation='relu'),  # 隐藏层（4个神经元）
+     tf.keras.layers.Dense(1, activation='sigmoid')]  # 输出层
+)
+# 获取模型的信息
+# model.summary()
+# 模型的编译和训练
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['acc'])
+history = model.fit(x, y, epochs=100)
+# 预测
+predict = model.predict(test)
+
+# plt.plot(history.epoch, history.history.get('loss'))
+plt.plot(history.epoch, history.history.get('acc'))
+plt.show()
+```
+
+训练结果如下：
+
+```python
+Epoch 1/100
+19/19 [==============================] - 0s 412us/step - loss: 116.4543 - acc: 0.6017
+Epoch 2/100
+19/19 [==============================] - 0s 386us/step - loss: 94.4256 - acc: 0.5967
+	······
+Epoch 99/100
+19/19 [==============================] - 0s 372us/step - loss: 0.3965 - acc: 0.8367
+Epoch 100/100
+19/19 [==============================] - 0s 403us/step - loss: 0.3923 - acc: 0.8517
+```
+
+**epoch与loss曲线**
+
+<img src="Tensorflow与深度学习/image-20220322143347250.png" alt="image-20220322143347250" style="zoom:50%;" />
+
+**epoch与acc曲线**
+
+<img src="Tensorflow与深度学习/image-20220322143454820.png" alt="image-20220322143454820" style="zoom:50%;" />
+
+### softmax多分类
+
