@@ -383,6 +383,23 @@
 <p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211211151831396-164025956439332.png" alt="image-20211211151831396"></p>
 <p>对每个像素点都用 这8个模板进行进行卷积（注意，每个卷积值都应取绝对值），求出该点的最大卷积值。</p>
 <h4 id="Nevitia算子"><a href="#Nevitia算子" class="headerlink" title="Nevitia算子"></a>Nevitia算子</h4><p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211211163622445-164025956439333.png" alt="image-20211211163622445"></p>
+<h2 id="霍夫变换"><a href="#霍夫变换" class="headerlink" title="霍夫变换"></a>霍夫变换</h2><h3 id="直线检测"><a href="#直线检测" class="headerlink" title="直线检测"></a>直线检测</h3><h4 id="标准霍夫变换"><a href="#标准霍夫变换" class="headerlink" title="标准霍夫变换"></a>标准霍夫变换</h4><p>首先该检测算法的输入图像只能是边缘二值图像。</p>
+<p><strong>1.一条直线在图像二维空间可由两个变量表示：</strong></p>
+<p>· 在笛卡尔坐标系：<strong>y = kx + b</strong>，可由k、b表示。</p>
+<p>· 在极坐标系：<strong>ρ = xcosθ + ysinθ</strong>，可由ρ、θ表示</p>
+<p><strong>2.对于点（x0，y0），可将经过这个点的一簇直线定义为ρ = x0cosθ + y0sinθ</strong></p>
+<p><strong>2.很自然的，对于两个点，满足同一对（ρ，θ）时，这两个点处于同一直线上</strong></p>
+<p><strong>3.于是，当有更多个点满足同一对（ρ，θ）时，该对表示的直线由更多的点组成.。一般可以通过设置直线上点的阈值来定义多少个点组成的（ρ，θ）能被认为是一条直线。</strong></p>
+<p><strong>4.霍夫变换追踪图像中每个点对应的所有（ρ，θ）并记录数量，若超过了阈值, 那么可以认为这个交点所代表的参数对在原图像中为一条直线。</strong></p>
+<p><strong>代码实现</strong></p>
+<p>对于图像的每个像素点，遍历 [0, PI] 共180个θ值，得到相应的ρ，并对每一组（ρ，θ）记录值+1（计分板）。</p>
+<p>遍历计分板，找出分数大于设定阈值的（ρ，θ）对，即为检测到的直线参数，再将其还原为数学概念上的直线即可。</p>
+<h4 id="累计概率霍夫变换（常用）"><a href="#累计概率霍夫变换（常用）" class="headerlink" title="累计概率霍夫变换（常用）"></a>累计概率霍夫变换（常用）</h4><p>它是对标准霍夫变换的改进。在一定的范围内进行霍夫变换，计算单独线段的方向以及范围，从而减少计算量，缩短计算时间。之所以称PPHT为“概率”的，是因为并不将累加器平面内的所有可能的点累加，而只是累加其中的一部分，该想法是如果峰值如果足够高，只用一小部分时间去寻找它就够了。这样猜想的话，可以实质性地减少计算时间。</p>
+<p><strong>代码实现</strong></p>
+<p>1.随机获取边缘图像上的前景点，映射到极坐标系画曲线；</p>
+<p>2.当极坐标系里面有交点达到最小投票数，将该点对应x-y坐标系的直线L找出来；</p>
+<p>3.搜索边缘图像上前景点，在直线L上的点（且点与点之间距离小于maxLineGap的）连成线段，然后这些点全部删除，并且记录该线段的参数（起始点和终止点），当然线段长度要满足最小长度；</p>
+<p>4.重复1. 2. 3.。</p>
 <h2 id="池化"><a href="#池化" class="headerlink" title="池化"></a>池化</h2><p><strong>池化的作用：</strong>减少特征图大小，也就是可以减少计算量和所需显存。</p>
 <h3 id="平均池化（mean-pooling）"><a href="#平均池化（mean-pooling）" class="headerlink" title="平均池化（mean-pooling）"></a>平均池化（mean-pooling）</h3><p>即对邻域内特征点只求平均</p>
 <p>优缺点：<strong>能很好的保留背景，但容易使得图片变模糊</strong></p>
@@ -797,7 +814,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/PyQt5/">#PyQt5</a>
         </div>
         
@@ -822,7 +839,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
         </div>
         
@@ -832,7 +849,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
         </div>
         
@@ -847,7 +864,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
         </div>
         
