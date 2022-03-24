@@ -311,7 +311,13 @@
 <p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/439761-20170216214529738-2113566517-164025956439316.png" alt="img"></p>
 <p>横轴表示可能得取值x，竖轴表示概率分布密度F(x)，那么不难理解这样一个曲线与x轴围成的图形面积为1。σσ（标准差）决定了这个图形的宽度，可以得出这样的结论：σσ越大，则图形越宽，尖峰越小，图形较为平缓；σσ越小，则图形越窄，越集中，中间部分也就越尖，图形变化比较剧烈。这其实很好理解，如果sigma也就是标准差越大，则表示该密度分布一定比较分散，由于面积为1，于是尖峰部分减小，宽度越宽（分布越分散）；同理，当σσ越小时，说明密度分布较为集中，于是尖峰越尖，宽度越窄！</p>
 <p>以上求出来的就是模板系数，滤波操作就是分别以图像的每个像素点为中心再根据模板系数求出加权平均像素，作为该点的滤波后像素。比如3x3模板，对选中像素点的外一圈共九个像素点，分别乘以对应位置的模板系数再求和，即为选中点的像素。</p>
-<h2 id="高通滤波（边缘检测）"><a href="#高通滤波（边缘检测）" class="headerlink" title="高通滤波（边缘检测）"></a>高通滤波（边缘检测）</h2><p>如何识别图像边缘？图里面有一条线,左边很亮,右边很暗,那人眼就很容易识别这条线作为边缘.也就是<strong>像素的灰度值快速变化的地方</strong></p>
+<h2 id="高通滤波（边缘检测）"><a href="#高通滤波（边缘检测）" class="headerlink" title="高通滤波（边缘检测）"></a>高通滤波（边缘检测）</h2><p>如何识别图像边缘？图里面有一条线,左边很亮,右边很暗,那人眼就很容易识别这条线作为边缘.也就是<strong>像素的灰度值快速变化的地方</strong>，那么如何来数学化这个问题，就是<strong>梯度。</strong></p>
+<ol>
+<li>要获得一幅图像的梯度，就需要在图像的每个像素点计算对x和对y的偏导数，也就是 **gx = f(x+1,y) - f(x,y) 和 gy = f(x,y+1) - f(x,y)**，转化为模板也就是，水平和垂直的 <strong>[-1,1]</strong> 模板。</li>
+<li>而当我们对对角线方向的边缘感兴趣时，就产生了<strong>Roberts算子</strong>，原理就是把一维的模板斜过来。</li>
+<li>Roberts算子中2x2的模板在概念上很简单，但在实际应用中，它对于用关于中心点对称的模板来计算边缘方向不是很有用。相对来说3x3考虑了中心点对端数据的性质，并携带了关于边缘方向的更多信息。于是就产生了 <strong>Prewitt算子</strong>。它的3x3模板考虑到了水平/垂直和斜边的信息，相比于Roberts更准确。</li>
+<li>在Prewitt的基础上，在卷积核的中心位置处使用2代替1，<strong>能较为有效的平滑图像，抑制噪声</strong>，这就是<strong>Sobel算子</strong>。而针对不同的需求，可以设计不同的卷积核，例如需要对对角线方向有更好的响应，那么可以将2设置在卷积核的两个对角。</li>
+</ol>
 <h3 id="Roberts算子"><a href="#Roberts算子" class="headerlink" title="Roberts算子"></a>Roberts算子</h3><p>Roberts算子是一种最简单的算子，利用<strong>局部差分</strong>寻找边缘的算子。采用对角线相邻两像素之差近似梯度幅值检测边缘。检测<strong>垂直边缘的效果比斜向边缘要好</strong>，定位精度高，对噪声比较敏感，无法抑制噪声的影响。</p>
 <p>Roberts边缘算子是一个2x2的模板，采用的是对角方向相邻的两个像素之差。从图像处理的实际效果来看，边缘定位较准，对噪声敏感。模板如下：</p>
 <p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-284a63fee4b9188ad867f10f9f9bf6fe_1440w-164025956439317.jpg" alt="img"></p>
@@ -793,7 +799,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
         </div>
         
@@ -819,17 +825,17 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
         </div>
         
@@ -839,12 +845,12 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
         </div>
         
@@ -874,7 +880,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
         </div>
         
