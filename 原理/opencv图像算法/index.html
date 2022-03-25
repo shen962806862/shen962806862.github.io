@@ -381,6 +381,7 @@
 <p>通过角度θ可以计算出dTmp1在g1和g2之间的比例，设dis(dTmp1，g2) = w，则dis(g1，dTmp1) = 1 - w。所以dTmp1的幅值为：w * g2 + （1 - w）* g1。同理可得dTmp2的幅值。将c的幅值与这两个浮点坐标的幅值进行比较进行非极大值抑制。</p>
 <p><strong>4.用双阈值算法检测、连接边缘</strong></p>
 <p>一般的边缘检测算法用一个阈值来滤除噪声或颜色变化引起的小的梯度值，而保留大的梯度值。Canny算法应用双阈值，即一个高阈值和一个低阈值来区分边缘像素。如果边缘像素点梯度值大于高阈值，则被认为是强边缘点。如果边缘梯度值小于高阈值，大于低阈值，则标记为弱边缘点。小于低阈值的点则被抑制掉。</p>
+<p><font color="red">一般来说，建议高低阈值的比率为2：1或3：1</font></p>
 <p><strong>4.5.滞后边界跟踪</strong></p>
 <p>强边缘点可以认为是真的边缘。弱边缘点则可能是真的边缘，也可能是噪声或颜色变化引起的。为得到精确的结果，后者引起的弱边缘点应该去掉。通常认为<strong>真实边缘引起的弱边缘点和强边缘点是连通的</strong>，而又噪声引起的弱边缘点则不会。所谓的滞后边界跟踪算法<strong>检查一个弱边缘点的8连通领域像素</strong>，只要有强边缘点存在，那么这个弱边缘点被认为是真是边缘保留下来。</p>
 <p>只需对所有被标记过的弱边缘点的八邻域进行遍历，若邻域中存在强边缘点，则保留；否则抑制掉。</p>
@@ -799,7 +800,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
         </div>
         
@@ -825,7 +826,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
         </div>
         
@@ -875,7 +876,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/%E7%8E%AF%E5%A2%83/">#环境</a>
         </div>
         
