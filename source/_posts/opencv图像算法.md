@@ -297,6 +297,85 @@ sobel算子是一个离散差分算子.它计算图像像素点亮度值的近�
 
 与滤波一样，对每个像素点的处理为：要操作像素点对应于Gx，Gy矩阵中心，对该像素点和周边9个像素点乘以相应系数求和，得到一个方向上的处理结果。完整的Sobel算子则需要对两个方向上的处理结果求和，得到完整的新像素值。
 
+<font color="red">**opencv的Sobel函数**</font>
+
+**1.采用了可分离的卷积核**
+
+![img](opencv图像算法/v2-ca8a3f87bdf380be3f64c68891545da2_1440w.jpg)
+
+图A是可分离的；它可以表示为两个一维卷积（B和C）；D是一个不可分割内核的例子。**可分离的内核是可以被认为是两个一维的内核，首先与x内核进行卷积然后与y内核进行卷积来应用**。这种分解的好处是内核卷积的计算成本大约是图像面积乘以内核区域。这意味着用n×n内核卷积区域A的图像需要时间与**An2**成正比，同时n×1内核与图像卷积一次，然后与1×n内核卷积占用与An + An = 2An成比例。
+
+**随着图像尺寸与卷积核尺寸的增大，用分离的卷积核依次对图像进行卷积操作，可以有效地提高运算速度。因此，在二维图像处理中，经常将一个可分离卷积核分解为一维水平核 kernalX 和一维垂直核 kernalY 的乘积。**
+
+秩为 1 的矩阵可以分解为一个列向量与一个行向量的乘积，因此秩为 1 的卷积核是可分离卷积核。
+
+可分离卷积核 w 与图像 f 的卷积（same 卷积），等于先用 f 与 w1 卷积，再用 w2 对结果进行卷积：
+
+<img src="opencv图像算法/image-20220328111400326.png" alt="image-20220328111400326" style="zoom:67%;" />
+
+**2.行、列卷积核的生成**
+
+阅读源码：
+
+```C++
+for( int k = 0; k < 2; k++ )	// 分别生成行、列
+{
+    Mat* kernel = k == 0 ? &kx : &ky;
+    int order = k == 0 ? dx : dy;
+    int ksize = k == 0 ? ksizeX : ksizeY;	// ksize都是相同的
+
+    CV_Assert( ksize > order );
+
+    if( ksize == 1 )
+        kerI[0] = 1;
+    else if( ksize == 3 )	// 卷积核大小设为3时使用固定值
+    {
+        if( order == 0 )
+            kerI[0] = 1, kerI[1] = 2, kerI[2] = 1;
+        else if( order == 1 )
+            kerI[0] = -1, kerI[1] = 0, kerI[2] = 1;
+        else
+            kerI[0] = 1, kerI[1] = -2, kerI[2] = 1;
+    }
+    else	// 大于3时进行计算，巧妙
+    {
+        int oldval, newval;
+        kerI[0] = 1;
+        for( i = 0; i < ksize; i++ )
+            kerI[i+1] = 0;
+
+        for( i = 0; i < ksize - order - 1; i++ )
+        {
+            oldval = kerI[0];
+            for( j = 1; j <= ksize; j++ )
+            {
+                newval = kerI[j]+kerI[j-1];
+                kerI[j-1] = oldval;
+                oldval = newval;
+            }
+        }
+
+        for( i = 0; i < order; i++ )
+        {
+            oldval = -kerI[0];
+            for( j = 1; j <= ksize; j++ )
+            {
+                newval = kerI[j-1] - kerI[j];
+                kerI[j-1] = oldval;
+                oldval = newval;
+            }
+        }
+        // 以上计算，假设ksize=5，order=1，可得一维核：[-1，-2，0，2，1]
+    }
+}
+```
+
+设ksize=3，dx=1，dy=0，带入运算可得：
+
+<img src="opencv图像算法/image-20220328112628256.png" alt="image-20220328112628256" style="zoom:67%;" />
+
+卷积核的效果和二维的是相同的。
+
 
 
 ### Prewitt算子
