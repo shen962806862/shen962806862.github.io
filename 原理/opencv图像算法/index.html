@@ -404,6 +404,11 @@
 <img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20220328112628256.png" alt="image-20220328112628256" style="zoom:67%;">
 
 <p>卷积核的效果和二维的是相同的。</p>
+<p><strong>3.可分离卷积的计算</strong></p>
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/i=20210310094136247.png" alt="在这里插入图片描述" style="zoom:80%;">
+
+<p>我们首先在5x5图像上用3x1卷积。这样的话卷积核就能横向扫描5个位置，纵向扫描3个位置，如上图所标的点所示。</p>
+<p>现在得到的是一个3x5的矩阵，这个矩阵经过1x3卷积核的卷积操作——从横向上的 3 个位置以及纵向上的 3个位置来扫描该矩阵。</p>
 <h3 id="Prewitt算子"><a href="#Prewitt算子" class="headerlink" title="Prewitt算子"></a>Prewitt算子</h3><p>Prewitt算子的原理和sobel是一模一样的，唯一的区别就是卷积核存在差异：</p>
 <img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211216204046572-164025956439325.png" alt="image-20211216204046572" style="zoom:50%;">
 
@@ -892,12 +897,12 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/%E5%B0%8F%E8%BD%AF%E4%BB%B6/">#小软件</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
         </div>
         
@@ -907,7 +912,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/opencv/">#opencv</a>
         </div>
         
@@ -927,7 +932,7 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/%E6%8B%86%E6%9C%BA/">#拆机</a>
         </div>
         
