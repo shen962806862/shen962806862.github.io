@@ -7,6 +7,10 @@
             <!-- moment.js对象 -->
             <%= item.date.format('YYYY-MM-DD') %>
         </div>
+        <div class="cube-article-updated">
+            <i class="cube-icon cube-icon-updated" aria-hidden="true"></i>
+            <%= item.updated.format('YYYY-MM-DD') %>
+        </div>
         <%- partial('post/tag', { item: item }) %>
     </div>
 <% } else { %>
@@ -15,6 +19,10 @@
             <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
             <!-- moment.js对象 -->
             <%= item.date.format('YYYY-MM-DD') %>
+        </div>
+        <div class="cube-article-updated page">
+            <i class="cube-icon cube-icon-updated" aria-hidden="true"></i>
+            <%= item.updated.format('YYYY-MM-DD') %>
         </div>
     </div>
 <% } %>

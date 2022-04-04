@@ -1188,23 +1188,25 @@ div.cube-excerpt .cube-excerpt-header .cube-excerpt-date {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 34%;
     flex: 1 1 34%;
+    min-width: 100px;
     text-align: right;
     color: #444
 }
 
 div.cube-excerpt .cube-excerpt-header .cube-excerpt-updated {
     -webkit-box-flex: 1;
-    -ms-flex: 1 1 18%;
-    flex: 1 1 18%;
+    -ms-flex: 1 1 20%;
+    flex: 1 1 20%;
     padding-left: 15px;
+    min-width: 100px;
     text-align: left;
     color: #444
 }
 
 div.cube-excerpt .cube-excerpt-header .cube-excerpt-tags {
     -webkit-box-flex: 1;
-    -ms-flex: 1 1 48%;
-    flex: 1 1 48%;
+    -ms-flex: 1 1 46%;
+    flex: 1 1 46%;
     max-width: 50%;
     text-align: left;
     overflow: hidden;
@@ -1362,8 +1364,9 @@ div.cube-article .cube-article-header {
 
 div.cube-article .cube-article-date {
     -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
+    -ms-flex: 1 1 34%;
+    flex: 1 1 34%;
+    min-width: 100px;
     text-align: right;
     color: #444
 }
@@ -1372,12 +1375,29 @@ div.cube-article .cube-article-date.page {
     text-align: center
 }
 
+div.cube-article .cube-article-updated {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 20%;
+    flex: 1 1 20%;
+    padding-left: 15px;
+    min-width: 100px;
+    text-align: left;
+    color: #444
+}
+
+div.cube-article .cube-article-updated.page {
+    text-align: center
+}
+
 div.cube-article .cube-article-tags {
     -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    padding-left: 15px;
-    text-align: left
+    -ms-flex: 1 1 46%;
+    flex: 1 1 46%;
+    text-align: left;
+    overflow: hidden;
+    word-break: break-all;
+    white-space: nowrap;
+    text-overflow: ellipsis
 }
 
 div.cube-article .cube-article-tags a {
@@ -2230,7 +2250,14 @@ div.cube-article .cube-article-tags a:visited {
     content: ""
 }
 
-.cube-icon-date:before,
+.cube-icon-date:before {
+    content: "\f133";
+}
+
+.cube-icon-updated:before {
+    content: "\f274";
+}
+
 .fa-calendar:before {
     content: ""
 }
