@@ -4,14 +4,26 @@
         <a href="<%- url_for('/tags') %>"><%= __('tagcloud') %></a>
     </div>
     <div class="cube-boxs">
+        <%
+            var len = site.tags.length;
+            var arr = [...new Array(len).keys()];
+            for (var i = len-1; i > 0; i--) {
+                let j = Math.floor(Math.random() * i);
+                let tmp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = tmp;
+            } 
+            arr.splice(8);
+        %>
         <% site.tags.forEach(function (tag, index) { %>
         <% let rand = Math.floor(Math.random() * 4)
             let i = index % 4
         %>
-        <div class="<% if (rand === i) { %><%= 'cube-box-bg' %> <% } else { %><%= 'cube-box' %> <% } %>">
-            <a href="<%- url_for(tag.path) %>">#<%= tag.name %></a>
-        </div>
-        <% }) %>
+        <% if (arr.indexOf(index) != -1) { %> 
+            <div class="<% if (rand === i) { %><%= 'cube-box-bg' %> <% } else { %><%= 'cube-box' %> <% } %>">
+                <a href="<%- url_for(tag.path) %>">#<%= tag.name %></a>
+            </div>
+        <% }}) %>
     </div>
 </div>
 <% } %>

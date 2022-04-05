@@ -82,16 +82,21 @@ friend_links: friend_links.jpg
 widgets:
 - search
 - author
-- music
 - recent_posts
 - categories
 - tagcloud
 - links
+- toc
 
 # when you want to use the search, firstly make the `search: true`,
 # then you should install hexo-generator-json-content
 # run `npm install hexo-generator-json-content -save` (in your hexo directory)
 search: true
+
+post_toc:
+  showNumber: false
+  maxDepth: 2
+  minDepth: 1
 
 # supported by DIYgod awesome project APlayer, you can find more on https://github.com/MoePlayer/APlayer
 # and you can see the doc on https://aplayer.js.org/docs/#/

@@ -10,7 +10,7 @@
 </nav>
 <nav class="cube-side-menu" id="cube-side-menu">
     <ul class="cube-menu-list">
-        <% if (theme.music.length > 0) { %>
+        <% if (theme.widgets.indexOf('music') != -1) { %>
         <li>
             <a class="lrc-control"><%= __('open_music_lrc') %></a>
         </li>

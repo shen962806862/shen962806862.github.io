@@ -24,9 +24,9 @@
         <%- partial('gallery', { item: item }) %>
             <% if (item.excerpt) { %>
                 <%- item.excerpt %>
-                    <% } else { %>
-                        <%- item.content %>
-                            <% } %>
+            <% } else { %>
+                <%- item.content %>
+            <% } %>
     </article>
     <footer class="cube-excerpt-footer">
         <a class="cube-excerpt-more" href="<%- url_for(item.path) %>">

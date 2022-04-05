@@ -6647,6 +6647,46 @@ nav.cube-menu ul.cube-menu-collapse li a:visited {
         background-color: #72d572
     }
 
+    .cube-toc {
+        position: sticky;
+        top: 10px;
+    }
+
+    .cube-toc ol{
+        list-style: none;
+        display: block;
+        margin-left: 0.8em;
+        padding: 0.4em;
+    }
+
+    .toc {
+        display: inline-block;
+        padding: 0;
+        text-align: left;
+    }
+    
+    .toc li{
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+    }
+
+    .toc li a {
+        text-decoration: none;
+        padding-left: 1em;
+        font-size: 1.1em;
+        color: #999;
+    }
+
+    .toc li a:visited {
+        text-decoration: none;
+        color: #999;
+    }
+
+    .toc li a:hover {
+        text-decoration: underline;
+        color: rgb(137, 169, 241);
+    }
+
     .cube-friend-links ul.list,
     .cube-links ul.list {
         padding: 20px;
