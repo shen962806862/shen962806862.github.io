@@ -970,10 +970,10 @@
 }
 
 .cube-markdown :not(pre) code {
-    color: #d14;
+    color: #e6db74;
     margin: 2px 5px;
     padding: 2px 10px;
-    border: 1px solid #d6d6d6;
+    /* border: 1px solid #d6d6d6; */
     background-color: #2d2d2d;
     font-size: 1em;
     word-wrap: break-word;
@@ -5922,8 +5922,8 @@ header.cube-header-background span.cube-typed-title {
 
 @media (min-width:768px) {
     div.cube-content {
-        margin-left: 200px;
-        margin-right: 50px;
+        margin-left: 150px;
+        margin-right: 150px;
         margin-top: 25px;
         display: -webkit-box;
         display: -ms-flexbox;
@@ -5931,13 +5931,13 @@ header.cube-header-background span.cube-typed-title {
         visibility: hidden;
         -webkit-box-pack: justify;
         -ms-flex-pack: justify;
-        justify-content: space-between
+        justify-content: space-evenly
     }
 }
 
 @media (min-width:768px) and (max-width:1120px) and (min-width:768px) {
     div.cube-content {
-        margin-left: 15%;
+        margin-left: 5%;
         margin-right: 25px
     }
 }
@@ -5945,21 +5945,21 @@ header.cube-header-background span.cube-typed-title {
 @media (min-width:768px) {
     div.cube-left {
         -webkit-box-flex: 0;
-        -ms-flex: 0 1 70%;
-        flex: 0 1 70%;
-        max-width: 70%
+        -ms-flex: 0 1 23%;
+        flex: 0 1 23%;
+        max-width: 23%
     }
 
     div.cube-right {
         -webkit-box-flex: 0;
-        -ms-flex: 0 1 28%;
-        flex: 0 1 28%;
-        max-width: 28%
+        -ms-flex: 0 1 70%;
+        flex: 0 1 70%;
+        max-width: 70%
     }
 }
 
 @media (max-width:768px) {
-    div.cube-right {
+    div.cube-left {
         display: none
     }
 }
