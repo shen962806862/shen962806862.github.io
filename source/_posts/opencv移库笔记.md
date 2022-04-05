@@ -25,7 +25,7 @@ tags:
 
 3.`./vmware-install.pl`即可完成安装
 
-
+<!-- more -->
 
 ## Ubuntu
 

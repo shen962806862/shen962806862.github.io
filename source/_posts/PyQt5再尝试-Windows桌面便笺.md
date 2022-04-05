@@ -17,6 +17,8 @@ GitHub：[memo-master](https://github.com/shen962806862/memo/)
 
 ### Version：1.0 【2020.4.8】
 
+<!-- more -->
+
 先上图~
 
 ![img](PyQt5再尝试-Windows桌面便笺/主界面.png)
