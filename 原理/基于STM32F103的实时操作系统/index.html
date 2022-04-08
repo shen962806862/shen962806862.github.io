@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Szh">
+    
+    
+    
+    
+    
+    
+    <title>基于STM32F103的实时操作系统 | 小涵の米奇妙妙屋</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/prism.css">
+    <!-- <link href="/css/monokai_sublime.min.css" rel="stylesheet"> -->
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
+
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: block;
+            content: 'Loading';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
+        }
+    </style>
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
+        
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="/">首页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-tags" aria-hidden="true"></i>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
+            <a href="/about">关于我</a>
+        </li>
+        
+    </ul>
+</nav>
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
+        
+        <li>
+            <a class="scroll-to-top">Top</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg " alt="头部背景图片">
+    
+    <div class="cube-type">
+        <span class="cube-typed-title">小涵の米奇妙妙屋</span>
+        <span class="cube-typed-cursor">|</span>
+    </div>
+    
+</header>
+
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+        
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        
+            z-index: -1;
+            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
+            background-repeat: no-repeat;
+            background-position: center 44px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
+            background-position: center 0;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
+        
+        <div class="cube-type">
+            <span class="cube-typed-title">小涵の米奇妙妙屋</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
+        
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '680',
+                height: '280'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            
+
+<div class="cube-search cube-sidebar" id="cube-search">
+    <div class="search-container">
+        <input type="text" placeholder="Search" class="cube-search-input" id="cube-search-input">
+        <i class="cube-icon cube-icon-search cube-search-submit" aria-hidden="true"></i>
+    </div>
+    <!-- TODO 通过给window赋一个全局变量，通过脚本赋值 -->
+</div>
+<script>
+    (function (window) {
+        'use strict';
+        window.searchModule = {}
+        window.searchModule.JSONUrl = '/content.json'
+        window.searchModule.rootUrl = '/'
+    })(window)
+</script>
+<div class="cube-search-form">
+    <div class="cube-search-control">
+        <input type="text" placeholder="Search" class="search-input">
+        <a class="close-button">
+            <i class="cube-icon cube-close" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="cube-search-result"></div>
+</div>
+
+
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>Szh</span>
+    
+    
+    <div class="count">
+        <a class="count articles"><span>13</span>Article</a>
+        <a class="count tags"><span>15</span>Tags</a>
+        <a class="count categories"><span>3</span>Categories</a>
+    </div>
+</div>
+
+
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>Recent Posts</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="基于STM32F103的实时操作系统">基于STM32F103的实时操作系统</a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%8E%9F%E7%90%86/Tensorflow%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" title="Tensorflow与深度学习">Tensorflow与深度学习</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-categories cube-sidebar" id="cube-categories">
+    <div class="title">
+        <a href="/categories">Categories</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/categories/%E6%9D%82%E8%AE%B0/">#杂记</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
+    <div class="title">
+        <a href="/tags">Tagcloud</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        
+         
+            <div class="cube-box ">
+                <a href="/tags/PyQt5/">#PyQt5</a>
+            </div>
+        
+        
+        
+        
+        
+        
+         
+            <div class="cube-box ">
+                <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+            </div>
+        
+        
+        
+        
+        
+        
+        
+        
+         
+            <div class="cube-box ">
+                <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
+            </div>
+        
+        
+         
+            <div class="cube-box-bg ">
+                <a href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
+            </div>
+        
+        
+         
+            <div class="cube-box ">
+                <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
+            </div>
+        
+        
+        
+        
+         
+            <div class="cube-box ">
+                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+            </div>
+        
+        
+         
+            <div class="cube-box ">
+                <a href="/tags/Tensorflow/">#Tensorflow</a>
+            </div>
+        
+        
+         
+            <div class="cube-box ">
+                <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">#嵌入式</a>
+            </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/github.png">
+            
+            <a href="https://github.com/shen962806862" target="_blank">GitHub</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/csdn.jpg">
+            
+            <a href="https://blog.csdn.net/shen962806862" target="_blank">CSDN</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-toc cube-sidebar" id="cube-toc">
+    <div class="title">
+        <a>Toc</a>
+    </div>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%95%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="toc-text">底层架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#STM32%E7%A1%AC%E4%BB%B6%E6%94%AF%E6%8C%81"><span class="toc-text">STM32硬件支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SysTick%E7%B3%BB%E7%BB%9F%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">SysTick系统滴答定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PendSV%E5%8F%AF%E6%82%AC%E8%B5%B7%E5%BC%82%E5%B8%B8"><span class="toc-text">PendSV可悬起异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%87%E7%BC%96%E5%AE%9E%E7%8E%B0"><span class="toc-text">汇编实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="toc-text">系统结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%8E%A7%E5%88%B6%E5%9D%97TCB"><span class="toc-text">任务控制块TCB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%B1%E7%BB%AA%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8"><span class="toc-text">就绪任务列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-text">任务的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E5%88%86%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3"><span class="toc-text">部分函数接口</span></a></li></ol></li></ol>
+</div>
+
+
+        </div>
+        <div class="cube-right">
+            <div class="cube-article">
+<h1 class="title">基于STM32F103的实时操作系统</h1>
+
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2022-04-08
+        </div>
+        <div class="cube-article-updated">
+            <i class="cube-icon cube-icon-updated" aria-hidden="true"></i>
+            2022-04-08
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
+    
+    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">#嵌入式</a>
+    
+    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">#操作系统</a>
+    
+</div>
+    </div>
+
+    <div class="cube-article-content cube-markdown">
+        
+        <h1 id="底层架构"><a href="#底层架构" class="headerlink" title="底层架构"></a>底层架构</h1><h2 id="STM32硬件支持"><a href="#STM32硬件支持" class="headerlink" title="STM32硬件支持"></a>STM32硬件支持</h2><p>Cortex-M3内核提供了以下异常：</p>
+<p><img src="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/5629cbeecb7eb91876bda5289eedf86b1fa27fbd.png@942w_677h_progressive.webp" alt="img"></p>
+<p>编号大于15的均属于外部中断。</p>
+<p>异常是可以打断正常执行流的事件，这是实现实时操作系统的关键，本文中将会使用——PendSV<strong>可悬起</strong>异常和SysTick<strong>滴答定时</strong>器。</p>
+<h2 id="SysTick系统滴答定时器"><a href="#SysTick系统滴答定时器" class="headerlink" title="SysTick系统滴答定时器"></a>SysTick系统滴答定时器</h2><p>SysTick是一个<strong>24位</strong>的系统节拍定时器，具有自动重载和溢出中断功能，所有基于Cortex_M3处理器的微控制器都可以由这个定时器获得一定的时间间隔。</p>
+<p>SysTick在实现本文的实时操作系统中起到了非常关键的作用——节拍 / 时间片，它保证了操作系统运行的基准单位。同时，通过将其优先级设置为最高，就可以实现在一个时间片用完之后，稳定触发该异常，从而实现<strong>时间片的轮转</strong>。</p>
+<p>通过以下函数初始化SysTick计数器，设置两次中断之间的时间。</p>
+<pre><code class="line-numbers language-c">#define TICKS_PER_SEC 1000
+SysTick_Config(SystemCoreClock / TICKS_PER_SEC);
+</code></pre>
+<p><strong>重装载值 = SysTick 时钟频率(Hz) x 想要的定时时间（S）</strong></p>
+<p>例如，<strong>SystemCoreClock</strong>为72MHZ，想要实现1ms进一次中断，就只需要将<strong>TICKS_PER_SEC</strong>设置为1000，也就是 x 0.001即可。</p>
+<h2 id="PendSV可悬起异常"><a href="#PendSV可悬起异常" class="headerlink" title="PendSV可悬起异常"></a>PendSV可悬起异常</h2><p>基于其可悬起的特点，将其配置为最低优先级，OS就可以利用它“缓期执行”一个异常——直到其它重要的任务完成后才执行动作。</p>
+<p>悬起 PendSV 的方法是：手工往 NVIC的 PendSV悬起寄存器中写 1。悬起后，如果优先级不够高，则将缓期等待执行。</p>
+<p>PendSV的典型使用场合是在<strong>上下文切换时（在不同任务之间切换）</strong>。</p>
+<p>例如，一个系统中有两个就绪的任务，上下文切换被触发的场合可以是：<br>1、执行一个系统调用<br>2、<strong>系统滴答定时器（SYSTICK）中断（本文中使用）</strong></p>
+<p>为什么PendSV好用，如下：</p>
+<p>假设有这么一个系统，里面有两个就绪的任务，并且通过SysTick异常启动上下文切换。但若在产生 SysTick 异常时正在响应一个中断，则 SysTick异常会抢占其 ISR。在这种情况下，OS是不能执行上下文切换的，否则将使中断请求被打断延迟，而且在真实系统中延迟时间还往往不可预知，这是不应该被允许的。</p>
+<p>在Cortex-M3中，如果 OS 在某中断活跃时尝试切入线程模式，将触犯用法fault异常。</p>
+<p><img src="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9odWEwODc3,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+<p>PendSV完美解决了这个问题。PendSV异常会自动延迟上下文切换的请求，直到其它的 ISR都完成了处理后才放行。为实现这个机制，需要把 PendSV编程为最低优先级的异常。</p>
+<p>如果 OS检测到某 IRQ正在活动并且被 SysTick抢占，它将悬起一个 PendSV异常，以便缓期执行 上下文切换。</p>
+<p><img src="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9odWEwODc3,size_16,color_FFFFFF,t_70-16494008162875.png" alt="img"></p>
+<p>上图很好的展示了本文实现的操作系统的任务切换的时序实现。</p>
+<h2 id="汇编实现"><a href="#汇编实现" class="headerlink" title="汇编实现"></a>汇编实现</h2><p>使用SysTick异常实现时间片轮转，并触发PendSV中断。</p>
+<p>在PendSV中实现上下文的切换。</p>
+<h3 id="SysTick汇编函数"><a href="#SysTick汇编函数" class="headerlink" title="SysTick汇编函数"></a>SysTick汇编函数</h3><pre><code class="line-numbers language-assembly">NVIC_INT_CTRL    EQU            0xE000ED04    ; 中断控制寄存器
+NVIC_PENDSVSET   EQU            0x10000000    
+; Enable PendSV（触发软中断，通过给NVIC_INT_CTRL第28bit写1）
+NVIC_SYSPRI14    EQU            0xE000ED22    ; 系统优先级寄存器(14)  对应 PendSV
+NVIC_PENDSV_PRI  EQU            0xFF          ; PendSV 中断优先级为最低(0xFF)
+
+CPU_TASK_SCHEDULE                    ;OS context switch（任务切换）
+    PUSH    &#123;R4, R5&#125;                
+    LDR     R4, =NVIC_INT_CTRL       ; R4 = NVIC_INT_CTRL（触发 PendSV 异常）
+    LDR     R5, =NVIC_PENDSVSET      ; R5 = NVIC_PENDSVSET
+    ; *R4 = R5（向 NVIC_INT_CTRL 写入NVIC_PENDSVSET 触发 PendSV 中断）
+    STR     R5, [R4]                 
+    POP     &#123;R4, R5&#125;
+    BX      LR                       ; return;
+    
+    align 4                             ; 4字节对齐，写于文件末
+    end
+</code></pre>
+<p>其中中断控制寄存器片段</p>
+<p><img src="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/543936447c8306c570c2f3dbe7c5f846.png" alt="img"></p>
+<h3 id="PendSV汇编函数"><a href="#PendSV汇编函数" class="headerlink" title="PendSV汇编函数"></a>PendSV汇编函数</h3><pre><code class="line-numbers language-assembly">PendSV_Handler                          ; 保存现场
+    CPSID    I                          ; 关中断，任务切换期间要关中断
+    ; 异常处理或进程切换时，需要保存程序状态寄存器的值，可用该指令读出程序状态寄存器的值，然后保存。
+    MRS     R0, PSP                      
+    CBZ     R0, PendSV_Handler_NoSave   ; PSP指针为0就跳转，只在第一次运行时跳转
+;----------------------------------------------------------------------------------------
+    SUB     R0, R0, #0x20               ; R0 = R0 - 0x20;  
+    STM     R0, &#123;R4-R11&#125;                ; 将R4-R11的值暂存起来             
+;----------------------------------------------------------------------------------    
+    LDR     R1, =TCB_CurP               ; LDR伪指令获取 TCB_CurP-&gt;StackTop 指针
+    ; R1 = *R1; 获取 TCB_CurP-&gt;StackTop 指向的值（这个值是一个地址）
+    LDR     R1, [R1]                    
+    ; *R1 = R0; 将现场信息（R4-R11）存入 TCB_CurP-&gt;StackTop 指向的地址所在的内存
+    STR     R0, [R1]                    
+
+; 由于汇编语言是顺序执行，所以执行完上面那条语句后，在没有跳转等指令的情况下，会接下去执行。
+PendSV_Handler_NoSave                    ; 恢复现场
+    LDR     R0, =TCB_CurP               ; R0 获取 TCB_CurP-&gt;StackTop 指针
+    LDR     R1, =TCB_NextP              ; R1 获取 TCB_NextP-&gt;StackTop 指针
+    LDR     R2, [R1]                      ; R2 获取 TCB_NextP-&gt;StackTop 指向的值
+    STR     R2, [R0]                    ; 将 TCB_CurP-&gt;StackTop 指向这个值
+    ; 将 以这个值为地址的内存里的值（也就是之前保存的现场信息）存入R0，开始恢复
+    LDR     R0, [R2]                    
+    
+    LDM     R0, &#123;R4-R11&#125;                ; 恢复R4-R11的值到 R0 中
+    MSR     PSP, R0                      ; PSP 指向R0（恢复现场）
+
+    ORR     LR, LR, #0x04               ; LR=LR|0x04; EXC_RETURN, 第2位赋1表示返回后使用PSP
+    CPSIE     I                         ; 开中断
+    BX    LR                            ; return;
+</code></pre>
+<p>关于<strong>LR寄存器</strong>，在出入ISR的时候，LR的值将得到重新的诠释，这种特殊的值称为<strong>EXC_RETURN</strong>。</p>
+<p>EXC_RETURN的二进制值除了最低4位外全为1，而其最低4位则有另外的含义，如下：</p>
+<img src="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20220408163753625.png" alt="image-20220408163753625" style="zoom: 67%;">
+
+<p>关于<strong>上下文切换</strong>，一个形象的GIF如下所示：</p>
+<img src="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/pendsv.gif" alt="image-20220408163753625">
+
+
+
+<h3 id="中断控制的汇编函数"><a href="#中断控制的汇编函数" class="headerlink" title="中断控制的汇编函数"></a>中断控制的汇编函数</h3><pre><code class="line-numbers language-assembly">CPU_SR_Save                     ; 关中断（进入临界区）
+    MRS     R0, PRIMASK            ; 读取 PRIMASK 到 R0,R0 为返回值
+                                   ; PRIMASK寄存器只有一位，当这个位置 1 时 就关掉所有可屏蔽的异常
+    CPSID   I                    ; PRIMASK=1,关中断(NMI和硬件FAULT可以响应)
+    BX      LR                    ; 返回
+
+CPU_SR_Restore                    ;开中断（退出临界区）
+    MSR     PRIMASK, R0            ;读取 R0 到 PRIMASK 中,R0 为参数
+    BX      LR                    
+</code></pre>
+<p>c语言定义宏实现调用</p>
+<pre><code class="line-numbers language-c">u32      CPU_SR;                   // 保存PRIMASK的值(中断开关的状态控制)
+#define  ENTER_CRITICAL()  &#123;  CPU_SR = CPU_SR_Save();  &#125;   // 关中断
+#define  EXIT_CRITICAL()   &#123;  CPU_SR_Restore(CPU_SR); &#125;
+</code></pre>
+<h3 id="初始化的汇编函数"><a href="#初始化的汇编函数" class="headerlink" title="初始化的汇编函数"></a>初始化的汇编函数</h3><pre><code class="line-numbers language-assembly">CPU_Start
+    CPSID    I          
+    
+    LDR     R0, =NVIC_SYSPRI14       ; 初始化PendSV，并设置中断优先级为255，最低     
+    LDR     R1, =NVIC_PENDSV_PRI          
+    STRB    R1, [R0]                      
+    
+    LDR R4,  =0x0                    ; 初始化PSP为0   
+    MSR    PSP, R4                           
+    
+    LDR    R4, =NVIC_INT_CTRL        ; 先触发一次PendSV异常
+    LDR    R5, =NVIC_PENDSVSET       
+    STR    R5, [R4]                   
+
+    CPSIE    I  
+</code></pre>
+<h1 id="系统结构"><a href="#系统结构" class="headerlink" title="系统结构"></a>系统结构</h1><h2 id="任务控制块TCB"><a href="#任务控制块TCB" class="headerlink" title="任务控制块TCB"></a>任务控制块TCB</h2><p>包含三个部分，任务栈顶指针、延时时长以及任务状态</p>
+<pre><code class="line-numbers language-c">typedef unsigned int  STACK_TypeDef;
+typedef unsigned int  PRIO_TypeDef;
+typedef unsigned int  TICKS_TypeDef;
+typedef void (*TASK_TypeDef)(void);
+
+// 任务状态
+typedef enum TASK_STATUS
+&#123;
+    TASK_READY = 0,                //就绪
+    TASK_DELAY = 1,                //延时等待
+    TASK_SUSPEND = 2,            //挂起
+&#125; TASK_STATUS;
+
+// TCB控制块
+typedef struct 
+&#123;
+    STACK_TypeDef *StackTop;     //任务栈顶指针
+    TICKS_TypeDef Delay;         //任务延时时钟
+    TASK_STATUS   State;         //任务状态
+&#125; TASK_TCB, *TCB_Ptr;
+            
+#define TASKS_NUM       5        // 设定运行任务的数量,不包含空闲任务 
+
+extern  TASK_TCB      TCB[TASKS_NUM + 1];   // 定义任务控制块TCB数组
+extern  PRIO_TypeDef  PrioCur;                // 当前任务的优先级
+extern  PRIO_TypeDef  PrioNext;             // 下一个运行任务的优先级    
+extern  TCB_Ptr       TCB_CurP;             // 当前任务的TCB指针
+extern  TCB_Ptr       TCB_NextP;            // 下一个运行任务的TCB指针
+</code></pre>
+<h2 id="就绪任务列表"><a href="#就绪任务列表" class="headerlink" title="就绪任务列表"></a>就绪任务列表</h2><pre><code class="line-numbers language-c">extern  u32           TaskReadyTable;       // 就绪任务列表
+</code></pre>
+<p>维护一个任务就绪列表，通过对位进行操作来保存就绪的任务。</p>
+<p>每个任务都有相对应的、不同的优先级，以此区分任务。</p>
+<pre><code class="line-numbers language-c">// prio: 任务优先级
+#define SetTaskReady(prio)    (    TaskReadyTable |= 0x01&lt;&lt;prio    )    
+#define DelTaskReady(Prio)    (    TaskReadyTable &amp;= ~(0x01&lt;&lt;Prio)    )
+</code></pre>
+<p>通过一个简单的for循环获取当前最高优先级的任务（实际就是获取优先级数）</p>
+<pre><code class="line-numbers language-c">u32 i;
+for(i = 0; (i &lt; TASKS_NUM) &amp;&amp; (!(TaskReadyTable &amp; (0x01&lt;&lt;i))); i++);
+</code></pre>
+<p>相应优先级的任务，存于 <strong>TCB[i]</strong> 中。</p>
+<h2 id="任务的创建"><a href="#任务的创建" class="headerlink" title="任务的创建"></a>任务的创建</h2><pre><code class="line-numbers language-c">/*
+ --- 创建任务                                                                    
+ - *p_Task:  任务函数地址
+ - *p_Stack：任务栈顶指针
+ - prio:     任务优先级
+*/
+void STM32_TaskCreate(TASK_TypeDef task, STACK_TypeDef *stack, PRIO_TypeDef prio)
+&#123;
+    STACK_TypeDef  *p_stk;
+    p_stk      = stack;                           //加载栈顶指针
+    p_stk      = (STACK_TypeDef *)((STACK_TypeDef)(p_stk) &amp; 0xFFFFFFF8u);
+    
+    *(--p_stk) = (STACK_TypeDef)0x01000000uL;     // xPSR
+    *(--p_stk) = (STACK_TypeDef)task;             // PC指针
+    // 无意义，只为了--p_stk
+    *(--p_stk) = (STACK_TypeDef)0x14141414uL;     // R14 (LR)
+    *(--p_stk) = (STACK_TypeDef)0x12121212uL;     // R12
+    *(--p_stk) = (STACK_TypeDef)0x03030303uL;     // R3
+    *(--p_stk) = (STACK_TypeDef)0x02020202uL;     // R2
+    *(--p_stk) = (STACK_TypeDef)0x01010101uL;     // R1
+    *(--p_stk) = (STACK_TypeDef)0x00000000u;      // R0
+    *(--p_stk) = (STACK_TypeDef)0x11111111uL;     // R11
+    *(--p_stk) = (STACK_TypeDef)0x10101010uL;     // R10
+    *(--p_stk) = (STACK_TypeDef)0x09090909uL;     // R9
+    *(--p_stk) = (STACK_TypeDef)0x08080808uL;     // R8
+    *(--p_stk) = (STACK_TypeDef)0x07070707uL;     // R7
+    *(--p_stk) = (STACK_TypeDef)0x06060606uL;     // R6
+    *(--p_stk) = (STACK_TypeDef)0x05050505uL;     // R5
+    *(--p_stk) = (STACK_TypeDef)0x04040404uL;     // R4
+    
+    TCB[prio].StackTop = p_stk;
+    TCB[prio].Delay = 0;
+    TCB[prio].State = TASK_READY;
+&#125;
+</code></pre>
+<h2 id="部分函数接口"><a href="#部分函数接口" class="headerlink" title="部分函数接口"></a>部分函数接口</h2><h3 id="任务的创建-1"><a href="#任务的创建-1" class="headerlink" title="任务的创建"></a>任务的创建</h3>
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+            
+            <li class="next">
+            <a href="/%E5%8E%9F%E7%90%86/Tensorflow%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                Tensorflow与深度学习
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+    © 2017 Szh
+
+    <br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    <br>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp; </span>
+<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/prism.js" async></script>
+
+
+
+
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
+</body>
+</html>
