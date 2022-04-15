@@ -2258,14 +2258,6 @@ div.cube-article .cube-article-tags a:visited {
     content: "\f274";
 }
 
-.cube-icon-GitHub:before {
-    content: "\f09b";
-}
-
-.cube-icon-CSDN:before {
-    content: "\f09b";
-}
-
 .fa-calendar:before {
     content: ""
 }
@@ -5751,7 +5743,7 @@ body {
 .cube-footer {
     width: 100%;
     text-align: center;
-    font-size: .9em;
+    font-size: 1.1em;
     color: #999
 }
 
@@ -5781,6 +5773,19 @@ body {
 .cube-footer a:visited {
     text-decoration: none;
     color: #38b7ea
+}
+
+.cube-footer div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.cube-footer div span {
+    padding-left: 5px;
+}
+
+.cube-footer div .space-mark {
+    padding-right: 5px;
 }
 
 @media (max-width:768px) {

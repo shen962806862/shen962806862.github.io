@@ -3,12 +3,12 @@
 <% if (!isPage) { %>
     <div class="cube-article-header">
         <div class="cube-article-date">
-            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <i class="fa fa-calendar-o" aria-hidden="true"></i>
             <!-- moment.js对象 -->
             <%= item.date.format('YYYY-MM-DD') %>
         </div>
         <div class="cube-article-updated">
-            <i class="cube-icon cube-icon-updated" aria-hidden="true"></i>
+            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
             <%= item.updated.format('YYYY-MM-DD') %>
         </div>
         <%- partial('post/tag', { item: item }) %>
@@ -16,12 +16,12 @@
 <% } else { %>
     <div class="cube-article-header">
         <div class="cube-article-date page">
-            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <i class="fa fa-calendar-o" aria-hidden="true"></i>
             <!-- moment.js对象 -->
             <%= item.date.format('YYYY-MM-DD') %>
         </div>
         <div class="cube-article-updated page">
-            <i class="cube-icon cube-icon-updated" aria-hidden="true"></i>
+            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
             <%= item.updated.format('YYYY-MM-DD') %>
         </div>
     </div>
