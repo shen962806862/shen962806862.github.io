@@ -843,7 +843,7 @@
     overflow-x: auto;
     padding: .5em;
     background: #1e1e1e;
-    color: #dcdcdc
+    color: #dcdcdc;
 }
 
 .hljs-keyword,
@@ -865,7 +865,7 @@
 
 .hljs-class,
 .hljs-number {
-    color: #b8d7a3
+    color: #AE81FF
 }
 
 .hljs-meta-string,
@@ -5969,7 +5969,8 @@ header.cube-header-background span.cube-typed-title {
     overflow-x: auto;
     padding: .5em;
     background: #1e1e1e;
-    color: #dcdcdc
+    color: #dcdcdc;
+    font-weight: 500;
 }
 
 .hljs-keyword,
@@ -5991,7 +5992,7 @@ header.cube-header-background span.cube-typed-title {
 
 .hljs-class,
 .hljs-number {
-    color: #b8d7a3
+    color: #AE81FF
 }
 
 .hljs-meta-string,
@@ -6048,7 +6049,7 @@ header.cube-header-background span.cube-typed-title {
 }
 
 .hljs-strong {
-    font-weight: 700
+    font-weight: 600
 }
 
 .hljs-bullet,
