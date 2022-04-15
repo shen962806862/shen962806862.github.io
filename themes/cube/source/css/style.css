@@ -2258,6 +2258,14 @@ div.cube-article .cube-article-tags a:visited {
     content: "\f274";
 }
 
+.cube-icon-GitHub:before {
+    content: "\f09b";
+}
+
+.cube-icon-CSDN:before {
+    content: "\f09b";
+}
+
 .fa-calendar:before {
     content: ""
 }
@@ -6626,12 +6634,12 @@ nav.cube-menu ul.cube-menu-collapse li a:visited {
     .cube-author div.count a.count span {
         display: block;
         padding: 4px;
-        line-height: 40px;
+        line-height: 32px;
         border-radius: 50%;
-        font-size: 16px;
+        font-size: 14px;
         color: #fff;
-        height: 40px;
-        width: 40px;
+        height: 32px;
+        width: 32px;
         margin: 0 auto;
         margin-bottom: 3px
     }
@@ -6646,6 +6654,42 @@ nav.cube-menu ul.cube-menu-collapse li a:visited {
 
     .cube-author div.count a.count.categories span {
         background-color: #72d572
+    }
+
+    .cube-author div.link {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .cube-author div.link span.link-item {
+        margin: 5px 0 0;
+        width: 50%;
+    }
+
+    .cube-author div.link span.link-item a {
+        display: block;
+        text-decoration: none;
+        box-sizing: border-box;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        border-bottom: none;
+        margin-right: 0;
+        margin-bottom: 10px;
+        padding: 0 5px;
+        max-width: 216px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .cube-author div.link span.link-item .fa-sg {
+        text-align: center;
+        margin-right: 2px;
+        font-size: 14px;
+        width: 1.28571429em;
     }
 
     .cube-toc {

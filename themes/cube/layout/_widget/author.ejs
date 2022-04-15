@@ -3,24 +3,26 @@
       let isUrl = /https?:\/\//.test(config.avatar)
       let avatar = isUrl ? config.avatar : `/images/${config.avatar}`
     %>
-    <% if (theme.avatar === true) { %>
+    <% if (theme.avatar) { %>
     <style>
         @media(min-width: 768px) {
             .cube-author img {
-                margin-top: 40px;
+                margin-top: 20px;
                 margin-bottom: 10px;
             }
         }
         @media(max-width: 1120px) and (min-width: 768px) {
             .cube-author img {
-                width: 128px;
-                height: 128px;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
             }
         }
         @media(min-width: 1120px) {
             .cube-author img {
-                width: 160px;
-                height: 160px;
+                width: 96px;
+                height: 96px;
+                border-radius: 50%;
             }
         }
     </style>
@@ -37,7 +39,7 @@
         }
     </style>
     <% } %>
-    <img src="<%= avatar %>" alt="avatar" class="cube-avatar">
+    <img src="<%= avatar %>" alt="avatar">
     <% } %>
     <% if (config.author) { %>
     <span><%= config.author %></span>
@@ -46,8 +48,17 @@
     <a title="<%= config.description %>"><%= config.description %></a>
     <% } %>
     <div class="count">
-        <a class="count articles"><span><%= site.posts.length %></span><%= __('articles') %></a>
-        <a class="count tags"><span><%= site.tags.length %></span><%= __('tags') %></a>
-        <a class="count categories"><span><%= site.categories.length %></span><%= __('categories') %></a>
+        <a class="count articles"><span><%= site.posts.length %></span><%= __('文章') %></a>
+        <a class="count tags"><span><%= site.tags.length %></span><%= __('标签') %></a>
+        <a class="count categories"><span><%= site.categories.length %></span><%= __('分类') %></a>
     </div>
+    <% if (theme.use_my_links && theme.my_links.length > 0) { %>
+        <div class="link">
+        <% theme.my_links.forEach(function (link) { %>
+            <span class="link-item">
+                <a href="<%= link.url %>" target="_blank"><i class="fa fa-sg <%= link.icon %>"></i><%= link.title %></a>
+            </span>
+        <% }) %>
+        </div>
+    <% } %>
 </div>
