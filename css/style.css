@@ -6608,15 +6608,6 @@ nav.cube-menu ul.cube-menu-collapse li a:visited {
         text-decoration: none
     }
 
-    .cube-author img.cube-avactor {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        position: absolute;
-        left: 0;
-        top: 0
-    }
-
     .cube-author div.count {
         width: 80%;
         display: -webkit-box;
