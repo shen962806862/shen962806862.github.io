@@ -311,7 +311,7 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
         </div>
         
@@ -321,7 +321,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/categories/%E6%9D%82%E8%AE%B0/">#杂记</a>
         </div>
         
@@ -339,7 +339,7 @@
         
         
          
-            <div class="cube-box ">
+            <div class="cube-box-bg ">
                 <a href="/tags/PyQt5/">#PyQt5</a>
             </div>
         
@@ -350,34 +350,30 @@
             </div>
         
         
-        
-        
          
             <div class="cube-box ">
-                <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
+                <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
             </div>
         
         
         
         
+        
+        
          
-            <div class="cube-box-bg ">
+            <div class="cube-box ">
                 <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
             </div>
         
         
-        
-        
          
             <div class="cube-box ">
-                <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
+                <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
             </div>
         
         
-         
-            <div class="cube-box ">
-                <a href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
-            </div>
+        
+        
         
         
          
@@ -386,6 +382,10 @@
             </div>
         
         
+         
+            <div class="cube-box-bg ">
+                <a href="/tags/%E7%8E%AF%E5%A2%83/">#环境</a>
+            </div>
         
         
          
@@ -415,16 +415,16 @@
 
     <div class="cube-article-header">
         <div class="cube-article-date">
-            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <i class="fa fa-calendar-o" aria-hidden="true"></i>
             <!-- moment.js对象 -->
             2020-04-30
         </div>
         <div class="cube-article-updated">
-            <i class="cube-icon cube-icon-updated" aria-hidden="true"></i>
+            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
             2022-04-06
         </div>
         <div class="cube-article-tags">
-    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    <i class="fa fa-tags" aria-hidden="true"></i>
     
     <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
     
@@ -545,93 +545,40 @@
     </div>
 </div>
 <footer class="cube-footer">
-    
-    © 2017 Szh
-
-<br>
-Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
-<br>
+    <!-- 网站信息 -->
+<div>
+  <span><i class="fa fa-copyright"></i> 2021-2022</span>
+  <span class="space-mark">|</span>
+  
+    <span><i class="fa fa-user-o"></i> Szh</span>
+  
+  <span class="space-mark">|</span>
+  <span><i class="fa fa-bar-chart"></i> 全站字数:</span>
+  <span class="post-count">26.6k</span>
+</div>
 
 <!-- 网站运行时长统计 -->
-<span id="sitetime"></span>
-<script language="javascript">
-
-    var sitetime = document.getElementById("sitetime")
-	function siteTime(){
-		window.setTimeout("siteTime()", 1000);
-
-    let start = new Date("2019-09-04");
-    let today = new Date();
-    
-    let d1 = today.getDate();
-    let m1 = today.getMonth()+1;
-    let y1 = today.getFullYear();
-    let d2 = start.getDate();
-    let m2 = start.getMonth()+1;
-    let y2 = start.getFullYear();
-
-    var getMonthDays = function (y, m) {
-        var aMonthDays = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        if (m == 2 && ((y % 400 == 0) || (y % 4 == 0 && y % 100 != 0))) {
-            return 29;
-        }
-        return aMonthDays[m];
-    };
-
-    let y, m, d
-    let tempD = 0
-    let tmpM = 0
-    let tmpY = 0
-
-    if (d1 >= d2) {
-      d = d1 - d2
-    } else {
-      tmpM = -1
-      d = getMonthDays(y2, m2) + d1 - d2
-    }
-
-    if (m1 + tmpM >= m2) {
-      m = m1 + tmpM - m2
-    } else {
-      tmpY = -1
-      m = 12 + m1 + tmpM - m2
-    }
-    y = y1 + tmpY - y2
-       
-    let str = "";
-    if (y > 0) {
-      str = y + '年 ' + ("0"+m).substr(-2) + "月 " + ("0"+(d + 1)).substr(-2) + '天 '
-    }else if (m > 0) {
-      str =  m + "月 " + ("0"+(d + 1)).substr(-2) + '天 '
-    }else if (d > 0) {
-      str =  (d + 1) + '天 '
-    }
-
-		sitetime.innerHTML=" 我已在此等候你 "+str+("0"+today.getHours()).substr(-2) + '时 ' + ("0"+today.getMinutes()).substr(-2) + '分 ' + ("0"+today.getSeconds()).substr(-2) + '秒'
-	}
- 
-    if(sitetime){
-        siteTime();
-    }
-</script>
+<div>
+  <span id="sitetime"></span>
+</div>
 
 <!-- 站内访问统计 -->
-<span id="busuanzi_container_site_pv" style='display:none'>本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp; </span>
-<!-- <span id="busuanzi_container_site_uv" style='display:none'>访客数<span id="busuanzi_value_site_uv"></span>人次</span> -->
+<div>
+  <!-- <span id="busuanzi_container_site_pv" style='display:none'>总访问量已经<span id="busuanzi_value_site_pv"></span> 次啦 </span><br> -->
+  <!-- <span id="busuanzi_container_site_uv" style='display:none'>访客数<span id="busuanzi_value_site_uv"></span>人次</span> -->
+  <span id="site_pv_uv"></span>
+</div>
+
+<!-- 框架及主题支持 -->
+<div>
+  <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a></span>
+</div>
+
+
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
 <!-- 代码高亮 -->
-<script src="/js/prism.js" async></script>
+<script async src="/js/prism.js"></script>
+<script async src="/js/myScript.js"></script>
 
 
 
