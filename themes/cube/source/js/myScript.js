@@ -76,33 +76,32 @@ function sitePvUv(){
   let m1 = today.getMonth()+1;
   let y1 = today.getFullYear();
 
-  function getAPIData(data) {
-    site_pv_uv.innerHTML=xhr.responseText;
+  var js = document.createElement("script");
+  js.src ='https://openapi.baidu.com/rest/2.0/tongji/report/getData' +
+          '?access_token=121.0ee23230e835b4db5f4575e92295137c.YQrAi5VpBMYwWfdDjG-AaeD7popPJPwlrPfi2aw.p0tsSA' +
+          '&site_id=17532660' +
+          '&method=overview/getTimeTrendRpt' +
+          '&start_date=20211227' +
+          '&end_date=' + y1 + ("0" + m1).substr(-2) + d1 +
+          '&metrics=pv_count,visitor_count' +
+          '&callback=getAPIData';
+  document.body.appendChild(js);
+  document.body.removeChild(js);
+}
+function getAPIData(data) {
+  var pv = 0;
+  var uv = 0;
+  for (var i = 0; i < data['result']['items'][1].length; i++) {
+    if ( /^[0-9]+$/.test(data['result']['items'][1][i][0]) ) {
+      pv += data['result']['items'][1][i][0];
+    }
+    if ( /^[0-9]+$/.test(data['result']['items'][1][i][1]) ) {
+      uv += data['result']['items'][1][i][1];
+    }
   }
-
-  // var xhr = new XMLHttpRequest();
-  // xhr.withCredentials = true;
-  // xhr.timeout = 3000;
-  // xhr.responseType = "text";
-  // xhr.open('GET', 'https://openapi.baidu.com/rest/2.0/tongji/report/getData' +
-  //                 '?access_token=121.0ee23230e835b4db5f4575e92295137c.YQrAi5VpBMYwWfdDjG-AaeD7popPJPwlrPfi2aw.p0tsSA'+
-  //                 '&site_id=17532660'+
-  //                 '&method=overview/getTimeTrendRpt'+
-  //                 '&start_date=20211227'+
-  //                 '&end_date='+y1+("0"+m1).substr(-2)+d1+
-  //                 '&metrics=pv_count,visitor_count', true);
-  // xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-  // xhr.send(null)
-  // xhr.onreadystatechange = resultt;
-  
-  // function resultt() {
-  //   if (xhr.readyState==4){
-  //     if (xhr.status==200){
-  //       site_pv_uv.innerHTML=xhr.responseText;
-  //     }
-  //   }
-  // }
+  site_pv_uv.innerHTML = '第 ' + uv + ' 位朋友，历经 ' + pv + ' 次回眸才与你相遇';
 }
 if (site_pv_uv){
   sitePvUv();
 }
+
