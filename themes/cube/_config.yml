@@ -55,6 +55,10 @@ menu:
     icon: about
     url: about
 
+# 是否在about页面显示tweakcube
+# tweakcube的六面图片设置在cube.ejs中
+tweakcube: true
+
 # 关于链接部分，如果想单独集成一个模块，可以采用sidebar中的links部分
 # 不显示：links从widgets中剔除即可
 # 若是想使用精简版（即集成在author一栏中），可以采用my_links
@@ -168,7 +172,11 @@ comment_setting:
     hide_notice: true
 
 analytics:
-  baidu: a8ed5b37dd0aaae924c52eb382109c5d
+  baidu: 
+    app_id: a8ed5b37dd0aaae924c52eb382109c5d
+    access_token: 121.0ee23230e835b4db5f4575e92295137c.YQrAi5VpBMYwWfdDjG-AaeD7popPJPwlrPfi2aw.p0tsSA
+    site_id: 17532660
+    start_date: 20211227
   google:
 
 # some setting about reading quantity

@@ -2,8 +2,46 @@
     var _hmt = _hmt || [];
     (function() {
         var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?<%= theme.analytics.baidu %>";
+        hm.src = "https://hm.baidu.com/hm.js?<%= theme.analytics.baidu.app_id %>";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
+</script>
+
+<script>
+    var site_pv_uv = document.getElementById("site_pv_uv")
+    function sitePvUv(){
+    let today = new Date();
+    let d1 = today.getDate();
+    let m1 = today.getMonth()+1;
+    let y1 = today.getFullYear();
+
+    var js = document.createElement("script");
+    js.src ='https://openapi.baidu.com/rest/2.0/tongji/report/getData' +
+            '?access_token=<%= theme.analytics.baidu.access_token %>' +
+            '&site_id=<%= theme.analytics.baidu.site_id %>' +
+            '&method=overview/getTimeTrendRpt' +
+            '&start_date=<%= theme.analytics.baidu.start_date %>' +
+            '&end_date=' + y1 + ("0" + m1).substr(-2) + d1 +
+            '&metrics=pv_count,visitor_count' +
+            '&callback=getAPIData';
+    document.body.appendChild(js);
+    document.body.removeChild(js);
+    }
+    function getAPIData(data) {
+    var pv = 0;
+    var uv = 0;
+    for (var i = 0; i < data['result']['items'][1].length; i++) {
+        if ( /^[0-9]+$/.test(data['result']['items'][1][i][0]) ) {
+        pv += data['result']['items'][1][i][0];
+        }
+        if ( /^[0-9]+$/.test(data['result']['items'][1][i][1]) ) {
+        uv += data['result']['items'][1][i][1];
+        }
+    }
+    site_pv_uv.innerHTML = '第 ' + uv + ' 位朋友，历经 ' + pv + ' 次回眸才与你相遇';
+    }
+    if (site_pv_uv){
+    sitePvUv();
+    }
 </script>

@@ -19,6 +19,11 @@
 <div>
   <span id="site_pv_uv"></span>
 </div>
+<% if (theme.analytics.baidu) { %>
+<%- partial('analytics/baidu') %>
+<% } else if (theme.analytics.google) { %>
+<%- partial('analytics/google') %>
+<% } %>
 
 <!-- 框架及主题支持 -->
 <div>
