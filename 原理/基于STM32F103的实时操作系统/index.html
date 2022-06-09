@@ -334,6 +334,10 @@
         
         
         
+         
+            <div class="cube-box-bg ">
+                <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
+            </div>
         
         
          
@@ -345,25 +349,21 @@
         
         
          
-            <div class="cube-box ">
+            <div class="cube-box-bg ">
                 <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
             </div>
         
         
          
-            <div class="cube-box-bg ">
+            <div class="cube-box ">
                 <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
             </div>
         
         
+        
+        
          
             <div class="cube-box ">
-                <a href="/tags/%E7%94%B5%E5%AD%90/">#电子</a>
-            </div>
-        
-        
-         
-            <div class="cube-box-bg ">
                 <a href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
             </div>
         
@@ -375,7 +375,7 @@
         
         
          
-            <div class="cube-box-bg ">
+            <div class="cube-box ">
                 <a href="/tags/%E7%8E%AF%E5%A2%83/">#环境</a>
             </div>
         
@@ -410,7 +410,7 @@
         <span class="space-mark">|</span>
         <span class="cube-article-updated">
             <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-            2022-05-05
+            2022-06-05
         </span>
         <span class="space-mark">|</span>
         <span class="cube-article-wordcount">
@@ -755,7 +755,7 @@ void TaskCreate(void (*p_Task)(void), STACK_TypeDef *p_Stack, PRIO_TypeDef prio)
     TCB[prio].State &#x3D; TASK_READY;	&#x2F;&#x2F; s	
 	EXIT_CRITICAL();
 	
-	if(PrioCur &#x3D;&#x3D; prio)				&#x2F;&#x2F; 当要挂起的任务为当前任务	重新调度	-------????????	
+	if(PrioCur &#x3D;&#x3D; prio)				&#x2F;&#x2F; 不执行？	
 	&#123;
 		for(i &#x3D; 0; (i &lt; TASKS_NUM) &amp;&amp; (!(TaskReadyTable &amp; (0x01&lt;&lt;i))); i++);
 		
@@ -803,7 +803,7 @@ void task_2()
   	while(1)
 	&#123;
 		task2count++;
-		display(task2count);
+		display(task2count);	&#x2F;&#x2F; 数码管显示函数
 		if (task2count &gt;&#x3D; 9999) &#123;
 			task2count &#x3D; 0;
 		&#125;
@@ -871,7 +871,7 @@ int main()
   
   <span class="space-mark">|</span>
   <span><i class="fa fa-bar-chart"></i> 全站字数:</span>
-  <span class="post-count">27.1k</span>
+  <span class="post-count">27k</span>
 </div>
 
 <!-- 网站运行时长统计 -->
