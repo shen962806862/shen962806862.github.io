@@ -8,7 +8,7 @@ subtitle: ''
 description: ''
 keywords:
 author: Szh 
-language: zh-cn
+language: zh-CN
 timezone: ''
 avatar: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/avatar.jpg
 
@@ -107,7 +107,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: cube
+theme: butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -124,3 +124,9 @@ excerpt:
 
 marked:
   langPrefix: line-numbers language-
+
+search:
+  path: search.xml
+  field: post
+  content: false
+  template: 
