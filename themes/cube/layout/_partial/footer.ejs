@@ -1,0 +1,43 @@
+<!-- 网站信息 -->
+<div>
+  <span><i class="fa fa-copyright"></i> 2021-2022</span>
+  <span class="space-mark">|</span>
+  <% if (config.author) { %>
+    <span><i class="fa fa-user-o"></i> <%= config.author %></span>
+  <% } %>
+  <span class="space-mark">|</span>
+  <span><i class="fa fa-bar-chart"></i> 全站字数:</span>
+  <span class="post-count"><%= totalcount(site) %></span>
+</div>
+
+<!-- 网站运行时长统计 -->
+<div>
+  <span id="sitetime"></span>
+</div>
+
+<!-- 站内访问统计 -->
+<div>
+  <span id="site_pv_uv"></span>
+</div>
+<% if (theme.analytics.baidu) { %>
+<%- partial('analytics/baidu') %>
+<% } else if (theme.analytics.google) { %>
+<%- partial('analytics/google') %>
+<% } %>
+
+<!-- 框架及主题支持 -->
+<div>
+  <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a></span>
+</div>
+
+<!-- 代码高亮 -->
+<script async src="/js/prism.js"></script>
+
+<!-- 自定义js脚本 -->
+<script async src="/js/myScript.js"></script>
+
+<!-- <span id="busuanzi_container_site_pv" style='display:none'>总访问量已经<span id="busuanzi_value_site_pv"></span> 次啦 </span><br> -->
+<!-- <span id="busuanzi_container_site_uv" style='display:none'>访客数<span id="busuanzi_value_site_uv"></span>人次</span> -->
+<!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+
+

@@ -1,0 +1,186 @@
+theme: cube
+
+# background display for mobile, not for pc
+header:
+  # background: http://cube-1252774894.cosgz.myqcloud.com/background.png
+  background: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg
+  # both pc and mobile required title(make it the same as your hexo site _config.yml's title)
+  title: 小涵の米奇妙妙屋
+
+
+# background display for pc
+# you can use url or path relative
+# `background: background.png` refers to the path "source/images/background.png"
+# background: http://cube-1252774894.cosgz.myqcloud.com/background.png
+background: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg
+
+
+# the background image width and height (you can see your image file to get them)
+width: 680
+height: 280
+
+
+# this variable is used to locate your background
+# for example, if you want to locate display your background from top
+# you just need to type it: position: 0
+position: 0
+
+
+# this variable is used to make the background header being fuzzy
+# if your do not need the filter blur on the top, make it empty, it means that: `blur: `
+blur: 5
+
+# yeah, it is just to make your avatar rounded(true) or not(false)
+avatar: true
+
+menu:
+  # index
+  - title: 首页
+    icon: home
+    url: /
+  # archives
+  - title: 归档
+    icon: archive
+    url: archives
+  # categories
+  - title: 分类
+    icon: categories
+    url: categories
+  # tags
+  - title: 标签
+    icon: tags
+    url: tags
+  # about-me
+  - title: 关于我
+    icon: about
+    url: about
+
+# 是否在about页面显示tweakcube
+# tweakcube的六面图片设置在cube.ejs中
+tweakcube: true
+
+# 关于链接部分，如果想单独集成一个模块，可以采用sidebar中的links部分
+# 不显示：links从widgets中剔除即可
+# 若是想使用精简版（即集成在author一栏中），可以采用my_links
+# 不显示：将use_my_links置为false
+use_my_links: true
+my_links:
+  # GitHub
+  - title: GitHub
+    url: https://github.com/shen962806862
+    icon: fa-github
+  # CSDN
+  - title: CSDN
+    url: https://blog.csdn.net/shen962806862
+    icon: fa-laptop
+
+sidebar:
+  links:
+    - title: GitHub
+      url: https://github.com/shen962806862
+      icon: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/github.png
+    - title: CSDN
+      url: https://blog.csdn.net/shen962806862
+      icon: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/csdn.jpg
+  friend_links:
+    - title: 祝大师
+      url: http://www.maxwellzhu.pub/
+      # icon only url
+      icon: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/links.jpg
+    - title: 我的大号
+      url: http://www.hanhan0223.cn/
+      icon: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/icons/links2.jpg
+
+# only path, refer to source/images
+friend_links: friend_links.jpg
+
+widgets:
+- search
+- author
+- recent_posts
+- categories
+- tagcloud
+- toc
+
+# when you want to use the search, firstly make the `search: true`,
+# then you should install hexo-generator-json-content
+# run `npm install hexo-generator-json-content -save` (in your hexo directory)
+search: true
+
+post_toc:
+  showNumber: false
+  maxDepth: 2
+  minDepth: 1
+
+# supported by DIYgod awesome project APlayer, you can find more on https://github.com/MoePlayer/APlayer
+# and you can see the doc on https://aplayer.js.org/docs/#/
+
+# mode can be `random`, `single`, `circulation`(loop), `order`(no loop)
+# if you have the lrc file, make the `showlrc` true, else make it false
+music_setting:
+  auto: false
+  mode: circulation
+  narrow: false
+  mutex: true
+  showlrc: true
+  theme:
+  preload: auto
+  maxHeight: 513px
+
+# if you use path, make sure your hexo _config.yml has set the correcting url
+# url: http://www.yoururl.com/path/to/.mp3 or .lrc or ...
+# you'd better place your music and image, lrc to another site, and use url instead of path
+# if you don't want to use this widget, just make that `music: `
+music:
+  - title: 石头歌 (先行曲)
+    author: 三无Marblue
+    source: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/三无Marblue - 石头歌 (先行曲).mp3
+    lrc: #https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/lrc/三无Marblue - 石头歌 (先行曲).lrc
+    image: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/三无Marblue - 石头歌 (先行曲).jpg
+  - title: 有没有那么一首歌
+    author: 张茜
+    source: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/张茜 - 有没有那么一首歌.mp3
+    lrc: #https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/lrc/张茜 - 有没有那么一首歌.lrc
+    image: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/张茜 - 有没有那么一首歌.jpg
+  - title: NEW BOY
+    author: 朴树
+    source: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/source/朴树 - NEW BOY.mp3
+    lrc: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/lrc/朴树 - NEW BOY.lrc
+    image: https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/music/image/朴树 - NEW BOY.jpg    
+
+# before using the comment
+# make use you know how to set the params
+comment:
+  # your disqus_shortname
+  disqus:
+  changyan:
+    appid:
+    conf:
+  youyan:
+  # gitment: https://github.com/imsun/gitment
+  # make sure you know how to set it
+  gitment:
+    owner:
+    repo:
+    oauth:
+      client_id:
+      client_secret:
+
+# some setting about comment module
+comment_setting:
+  changyan:
+    hide_notice: true
+
+analytics:
+  baidu: 
+    app_id: a8ed5b37dd0aaae924c52eb382109c5d
+    access_token: 121.0ee23230e835b4db5f4575e92295137c.YQrAi5VpBMYwWfdDjG-AaeD7popPJPwlrPfi2aw.p0tsSA
+    site_id: 17532660
+    start_date: 20211227
+  google:
+
+# some setting about reading quantity
+leancloud_visitors:
+  enable: true
+  app_id: PHJss55iUwp0ckP8cbxCsB7w-gzGzoHsz
+  app_key: dOk4B1uMMfBRocXTVhhxKRRD
