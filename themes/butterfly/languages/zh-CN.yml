@@ -64,9 +64,9 @@ aside:
   card_recent_post: 最新文章
   card_webinfo:
     headline: 网站资讯
-    article_name: 文章数目
+    article_name: 已码字
     runtime:
-      name: 已运行时间
+      name: 已艰难求存
       unit: 天
     last_push_date:
       name: 最后更新时间
