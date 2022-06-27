@@ -64,15 +64,15 @@ aside:
   card_recent_post: 最新文章
   card_webinfo:
     headline: 网站资讯
-    article_name: 已码字
+    article_name: 已水文章
     runtime:
-      name: 已艰难求存
+      name: 网站已艰难求存
       unit: 天
     last_push_date:
       name: 最后更新时间
-    site_wordcount: 本站总字数
-    site_uv_name: 本站访客数
-    site_pv_name: 本站总访问量
+    site_wordcount: 网站总字数
+    site_uv_name: 网站访客数
+    site_pv_name: 网站访问量
   more_button: 查看更多
   card_newest_comments:
     headline: 最新评论
