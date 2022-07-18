@@ -1,439 +1,157 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="author" content="Szh">
-    
-    
-    
-    
-    
-    
-    <title>获取bilibili视频文件和封面 | 小涵的米奇妙妙屋</title>
-    <!-- inject:style -->
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
-    <link href="/css/font-awesome.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/css/prism.css" type="text/css">
-    <!-- endinject -->
-    <style>
-        .cube-loading {
-            top: 0;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: url('/images/lg/loading.gif') no-repeat center center;
-            background-color: rgba(0,0,0,.7);
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>获取bilibili视频文件和封面 | 小涵的米奇妙妙屋</title><meta name="keywords" content="脚本,前端,python爬虫"><meta name="author" content="Szh"><meta name="copyright" content="Szh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前两天在阿草微博粉丝群水群的时候，看到有朋友说馋想要一个往期视频的封面，但不知道咋保存~（网上有封面提取的网站） 我一想，应该可以用爬虫去实现嘛，挺有意思的，就尝试着写了一下，链接如下👇 获取b站视频封面 （现在挂在我的云服务器上，但等到过期了就寄了，GitHub Page并不支持php。话说当初学php就是因为在云服务器上建站用的WordPress，想改别人的主题但是看不懂代码才去学的） 三项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="获取bilibili视频文件和封面">
+<meta property="og:url" content="https://www.hanhan0223.cn/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/index.html">
+<meta property="og:site_name" content="小涵的米奇妙妙屋">
+<meta property="og:description" content="前两天在阿草微博粉丝群水群的时候，看到有朋友说馋想要一个往期视频的封面，但不知道咋保存~（网上有封面提取的网站） 我一想，应该可以用爬虫去实现嘛，挺有意思的，就尝试着写了一下，链接如下👇 获取b站视频封面 （现在挂在我的云服务器上，但等到过期了就寄了，GitHub Page并不支持php。话说当初学php就是因为在云服务器上建站用的WordPress，想改别人的主题但是看不懂代码才去学的） 三项">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/3.jpg">
+<meta property="article:published_time" content="2020-04-30T15:27:07.000Z">
+<meta property="article:modified_time" content="2022-04-06T07:20:38.226Z">
+<meta property="article:author" content="Szh">
+<meta property="article:tag" content="脚本">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="python爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/3.jpg"><link rel="shortcut icon" href="/img/Sign.ico"><link rel="canonical" href="https://www.hanhan0223.cn/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '获取bilibili视频文件和封面',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-06 15:20:38'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
         }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-        .cube-loading.out {
-            display: none;
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
         }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-        .cube-loading:before {
-            display: block;
-            content: 'Loading';
-            position: relative;
-            width: 100%;
-            top: 50%;
-            right: -50%;
-            color: #fff;
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
         }
-
-        @media(max-width: 768px) {
-            .cube-loading:before {
-                font-size: 1.2em;
-                transform: translate(-24px,20px);
-                -webkit-transform: translate(-24px,20px);
-                -o-transform: translate(-24px,20px);
-                -ms-transform: translate(-24px,20px);
-            }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
         }
-
-        @media(min-width: 768px) {
-            .cube-loading:before {
-
-            }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
         }
-    </style>
-<meta name="generator" content="Hexo 5.4.0"></head>
-<body>
-<div class="cube-body">
-    <nav id="cube-top-memu" class="cube-menu">
-    <ul class="cube-menu-collapse">
-        
-        <li>
-            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
-            <a href="/">首页</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
-            <a href="/archives">归档</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
-            <a href="/categories">分类</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-tags" aria-hidden="true"></i>
-            <a href="/tags">标签</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
-            <a href="/about">关于我</a>
-        </li>
-        
-    </ul>
-</nav>
-<nav class="cube-side-menu" id="cube-side-menu">
-    <ul class="cube-menu-list">
-        
-        <li>
-            <a class="scroll-to-top">Top</a>
-        </li>
-    </ul>
-</nav>
-    <header class="cube-header" id="cube-header">
-    <img src=" https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg " alt="头部背景图片">
+      }
+      const t = saveToLocal.get('theme')
     
-    <div class="cube-type">
-        <span class="cube-typed-title">小涵の米奇妙妙屋</span>
-        <span class="cube-typed-cursor">|</span>
-    </div>
-    
-</header>
-
-    <style>
-        nav.cube-menu:before {
-            content: '';
-            visibility: hidden;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 44px;
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-            filter: blur(5px);
-            -webkit-filter: blur(5px);
-        
-            z-index: -1;
-            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
-            background-repeat: no-repeat;
-            background-position: center 44px;
-            background-size: cover;
-            background-color: transparent;
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
         }
-
-        header.cube-background.cube-header-background {
-            visibility: hidden;
-            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
-            background-position: center 0;
-        }
-    </style>
-    <header class="cube-background cube-header-background">
-        
-        <div class="cube-type">
-            <span class="cube-typed-title">小涵の米奇妙妙屋</span>
-            <span class="cube-typed-cursor">|</span>
-        </div>
-        
-    </header>
-    <div class="load-header-background"></div>
-    <script>
-        (function (window) {
-
-            window.headerModule = {}
-            window.headerModule.image = {
-                width: '680',
-                height: '280'
-            }
-
-        })(window)
-    </script>
+      }
     
-    <div class="cube-content">
-        <div class="cube-left">
-            
-
-<div class="cube-search cube-sidebar" id="cube-search">
-    <div class="search-container">
-        <input type="text" placeholder="Search" class="cube-search-input" id="cube-search-input">
-        <i class="cube-icon cube-icon-search cube-search-submit" aria-hidden="true"></i>
-    </div>
-    <!-- TODO 通过给window赋一个全局变量，通过脚本赋值 -->
-</div>
-<script>
-    (function (window) {
-        'use strict';
-        window.searchModule = {}
-        window.searchModule.JSONUrl = '/content.json'
-        window.searchModule.rootUrl = '/'
-    })(window)
-</script>
-<div class="cube-search-form">
-    <div class="cube-search-control">
-        <input type="text" placeholder="Search" class="search-input">
-        <a class="close-button">
-            <i class="cube-icon cube-close" aria-hidden="true"></i>
-        </a>
-    </div>
-    <div class="cube-search-result"></div>
-</div>
-
-
-<div class="cube-author cube-sidebar" id="cube-author">
-    
-    
-    <style>
-        @media(min-width: 768px) {
-            .cube-author img {
-                margin-top: 20px;
-                margin-bottom: 10px;
-            }
-        }
-        @media(max-width: 1120px) and (min-width: 768px) {
-            .cube-author img {
-                width: 80px;
-                height: 80px;
-                border-radius: 50%;
-            }
-        }
-        @media(min-width: 1120px) {
-            .cube-author img {
-                width: 96px;
-                height: 96px;
-                border-radius: 50%;
-            }
-        }
-    </style>
-    
-    <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/avatar.jpg" alt="avatar">
-    
-    
-    <span>Szh</span>
-    
-    
-    <div class="count">
-        <a class="count articles"><span>13</span>文章</a>
-        <a class="count tags"><span>14</span>标签</a>
-        <a class="count categories"><span>3</span>分类</a>
-    </div>
-    
-        <div class="link">
-        
-            <span class="link-item">
-                <a href="https://github.com/shen962806862" target="_blank"><i class="fa fa-sg fa-github"></i>GitHub</a>
-            </span>
-        
-            <span class="link-item">
-                <a href="https://blog.csdn.net/shen962806862" target="_blank"><i class="fa fa-sg fa-laptop"></i>CSDN</a>
-            </span>
-        
-        </div>
-    
-</div>
-
-
-
-<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
-    <div class="title">
-        <a>Recent Posts</a>
-    </div>
-    <ul class="list">
-        
-        
-        <li>
-            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
-            
-            <div class="normal">
-                <p class="index first">
-                    <span>1</span>
-                </p>
-                <p class="title">
-                    <a href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Ejs%E8%B7%A8%E6%BA%90%E8%AF%B7%E6%B1%82%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于js跨源请求的解决方案">关于js跨源请求的解决方案</a>
-                </p>
-            </div>
-            
-        </li>
-        
-        
-        
-        <li>
-            <div class="normal">
-                <p class="index">
-                    <span>2</span>
-                </p>
-                <p class="title">
-                    <a href="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="基于STM32F103的实时操作系统">基于STM32F103的实时操作系统</a>
-                </p>
-            </div>
-        </li>
-        
-        
-        
-        <li>
-            <div class="normal">
-                <p class="index">
-                    <span>3</span>
-                </p>
-                <p class="title">
-                    <a href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a>
-                </p>
-            </div>
-        </li>
-        
-        
-    </ul>
-</div>
-
-
-
-<div class="cube-categories cube-sidebar" id="cube-categories">
-    <div class="title">
-        <a href="/categories">Categories</a>
-    </div>
-    <div class="cube-boxs">
-        
-        
-        <div class="cube-box ">
-            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/categories/%E6%9D%82%E8%AE%B0/">#杂记</a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
-    <div class="title">
-        <a href="/tags">Tagcloud</a>
-    </div>
-    <div class="cube-boxs">
-        
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/PyQt5/">#PyQt5</a>
-            </div>
-        
-        
-        
-        
-        
-        
-         
-            <div class="cube-box-bg ">
-                <a href="/tags/%E5%8A%A0%E5%AF%86%E4%B8%8E%E7%BC%96%E7%A0%81/">#加密与编码</a>
-            </div>
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/opencv/">#opencv</a>
-            </div>
-        
-        
-        
-        
-        
-        
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
-            </div>
-        
-        
-        
-        
-         
-            <div class="cube-box-bg ">
-                <a href="/tags/%E7%8E%AF%E5%A2%83/">#环境</a>
-            </div>
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">#嵌入式</a>
-            </div>
-        
-        
-         
-            <div class="cube-box-bg ">
-                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">#操作系统</a>
-            </div>
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/javascript/">#javascript</a>
-            </div>
-        
-    </div>
-</div>
-
-
-
-<div class="cube-toc cube-sidebar" id="cube-toc">
-    <div class="title">
-        <a>Toc</a>
-    </div>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%B0%81%E9%9D%A2"><span class="toc-text">获取封面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="toc-text">1.爬取图片的脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-py%E8%84%9A%E6%9C%AC%E4%B8%8Ephp%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92"><span class="toc-text">2.py脚本与php的数据交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92"><span class="toc-text">3.前后端数据交互</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6"><span class="toc-text">获取视频文件</span></a></li></ol>
-</div>
-
-
-        </div>
-        <div class="cube-right">
-            <div class="cube-article">
-<h1 class="title">获取bilibili视频文件和封面</h1>
-    <div class="cube-article-header">
-        <span class="cube-article-date">
-            <i class="fa fa-calendar-o" aria-hidden="true"></i>
-            2020-04-30
-        </span>
-        <span class="space-mark">|</span>
-        <span class="cube-article-updated">
-            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-            2022-04-06
-        </span>
-        <span class="space-mark">|</span>
-        <span class="cube-article-wordcount">
-            <i class="fa fa-file-word-o" aria-hidden="true"></i>
-            1.3k
-        </span>
-        
-            <span class="space-mark">|</span>
-            <span class="cube-article-tags">
-    <i class="fa fa-tags" aria-hidden="true"></i>
-    
-    <a href="/tags/%E8%84%9A%E6%9C%AC/">#脚本</a>
-    
-    <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
-    
-    <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
-    
-</span>
-        
-    </div>
-    <div class="cube-article-content cube-markdown">
-        
-        <p>前两天在阿草微博粉丝群水群的时候，看到有朋友说<del>馋</del>想要一个往期视频的封面，但不知道咋保存~（网上有封面提取的网站）</p>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/3.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">小涵的米奇妙妙屋</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">获取bilibili视频文件和封面</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-30T15:27:07.000Z" title="发表于 2020-04-30 23:27:07">2020-04-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-06T07:20:38.226Z" title="更新于 2022-04-06 15:20:38">2022-04-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BA%94%E7%94%A8/">应用</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="获取bilibili视频文件和封面"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>前两天在阿草微博粉丝群水群的时候，看到有朋友说<del>馋</del>想要一个往期视频的封面，但不知道咋保存~（网上有封面提取的网站）</p>
 <p>我一想，应该可以用爬虫去实现嘛，挺有意思的，就尝试着写了一下，链接如下👇</p>
 <p><a href="http://www.hanhan0223.cn/TextProject/BilibiliGetting/bilibili.php">获取b站视频封面</a></p>
 <p>（现在挂在我的云服务器上，但等到过期了就寄了，GitHub Page并不支持php。话说当初学php就是因为在云服务器上建站用的WordPress，想改别人的主题但是看不懂代码才去学的）</p>
@@ -469,16 +187,16 @@
 <h2 id="2-py脚本与php的数据交互"><a href="#2-py脚本与php的数据交互" class="headerlink" title="2.py脚本与php的数据交互"></a>2.py脚本与php的数据交互</h2><p><strong>py文件如何向php文件传值？ ajax如何获取php文件的传值？php中如何调用py脚本？</strong></p>
 <p>传值其实很简单，，就是打印函数，python 的<strong>print</strong>和php 的<strong>echo</strong>。</p>
 <p>调用py脚本，用exec函数：</p>
-<pre><code class="line-numbers language-php">$c = exec(&quot;/usr/bin/python GetBilibiliUpCover.py &#123;$func&#125; &#123;$uid&#125; &#123;$bv&#125;&quot;);
-</code></pre>
+<pre class="language-php" data-language="php"><code class="language-php">$c &#x3D; exec(&quot;&#x2F;usr&#x2F;bin&#x2F;python GetBilibiliUpCover.py &#123;$func&#125; &#123;$uid&#125; &#123;$bv&#125;&quot;);</code></pre>
+
 <p>exec用于执行一个外部程序，主体为执行命令，可以附带参数传递，输出数组和状态返回。因为程序要在服务器里运行，所以输入的就是ubuntu的命令行了，ubuntu怎么运行python脚本就怎么来。</p>
 <p>后面的三个是输入参数。在python中通过如下方式获取：</p>
-<pre><code class="line-numbers language-python">sys.argv[1]
-</code></pre>
+<pre class="language-python" data-language="python"><code class="language-python">sys.argv[1]</code></pre>
+
 <p>argv是一个数组，第一位是模块的名称，这里不去管他，从1开始是按序输入的参数，这里输入了三个，就分别用1、2、3来获取就行。</p>
 <h2 id="3-前后端数据交互"><a href="#3-前后端数据交互" class="headerlink" title="3.前后端数据交互"></a>3.前后端数据交互</h2><p>本半吊子表示根本没系统学过前端知识，所以做这一部分的时候异常痛苦，，界面也丑的一言难尽==</p>
 <p>用的ajax，但一开始死都进不去succes步，总进error。。</p>
-<pre><code class="line-numbers language-javascript">$.ajax(&#123;
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript">$.ajax(&#123;
     type : &quot;GET&quot;,
     url : &quot;getting.php&quot;,
     data : &#123;
@@ -488,18 +206,18 @@
     dataType : &quot;text&quot;,
     success : function(msg) &#123;
         $(&quot;#result&quot;).empty();
-        document.getElementById(&quot;dynamic_av&quot;).style.display = &quot;&quot;;
-        var data = &#39;&#39;;
-        if (msg != &#39;&#39;)&#123;
-            data = eval(&quot;(&quot;+msg+&quot;)&quot;);
-        &#125;
-        $(&quot;#result_av&quot;).html(&quot;AV号: &quot; + data.av);
+        document.getElementById(&quot;dynamic_av&quot;).style.display &#x3D; &quot;&quot;;
+        var data &#x3D; &#39;&#39;;
+        if (msg !&#x3D; &#39;&#39;)&#123;
+        	data &#x3D; eval(&quot;(&quot;+msg+&quot;)&quot;);
+    	&#125;
+    	$(&quot;#result_av&quot;).html(&quot;AV号: &quot; + data.av);
     &#125;,
     error: function (msg, textStatus) &#123;
-        console.log(msg);
+    	console.log(msg);
     &#125;
-&#125;);
-</code></pre>
+&#125;);</code></pre>
+
 <p>后来发现一开始数据类型用的json，网上说必须要非常标准的json数据才能接收到，我也不明白为什么我在py文件里封装的json数据就不行。。。</p>
 <p>后来就改成text，文本用eval转化一下提取出来就解决了。</p>
 <h1 id="获取视频文件"><a href="#获取视频文件" class="headerlink" title="获取视频文件"></a>获取视频文件</h1><p>首先进F12，看一下：</p>
@@ -508,133 +226,4 @@
 <p>点击开发者工具的左上角，切换为手机模拟状态，可以看到：</p>
 <p><img src="/%E5%BA%94%E7%94%A8/%E8%8E%B7%E5%8F%96bilibili%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E5%92%8C%E5%B0%81%E9%9D%A2/image-20220110093926135.png" alt="image-20220110093926135"></p>
 <p>手机端的src不再是blob了，而是变成了这样一个url，打开即可下载mp4源文件了~舒服！</p>
-
-        
-    </div>
-</div>
-
-<div class="cube-article-nav">
-    <ul>
-        
-        <li class="prev">
-        <a href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8ERSA%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">
-            <i class="cube-icon cube-prev" aria-hidden="true"></i>
-            关于RSA加密算法
-        </a>
-        </li>
-        
-            
-            <li class="next">
-            <a href="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/">
-                第一次笔记本拆机体验
-                <i class="cube-icon cube-next" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-    </ul>
-</div>
-
-
-<!-- TODO 根据theme.comment的内容进行入口选择 -->
-
-
-        </div>
-    </div>
-</div>
-<footer class="cube-footer">
-    <!-- 网站信息 -->
-<div>
-  <span><i class="fa fa-copyright"></i> 2021-2022</span>
-  <span class="space-mark">|</span>
-  
-    <span><i class="fa fa-user-o"></i> Szh</span>
-  
-  <span class="space-mark">|</span>
-  <span><i class="fa fa-bar-chart"></i> 全站字数:</span>
-  <span class="post-count">27k</span>
-</div>
-
-<!-- 网站运行时长统计 -->
-<div>
-  <span id="sitetime"></span>
-</div>
-
-<!-- 站内访问统计 -->
-<div>
-  <span id="site_pv_uv"></span>
-</div>
-
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-<script>
-    var site_pv_uv = document.getElementById("site_pv_uv")
-    function sitePvUv(){
-    let today = new Date();
-    let d1 = today.getDate();
-    let m1 = today.getMonth()+1;
-    let y1 = today.getFullYear();
-
-    var js = document.createElement("script");
-    js.src ='https://openapi.baidu.com/rest/2.0/tongji/report/getData' +
-            '?access_token=121.0ee23230e835b4db5f4575e92295137c.YQrAi5VpBMYwWfdDjG-AaeD7popPJPwlrPfi2aw.p0tsSA' +
-            '&site_id=17532660' +
-            '&method=overview/getTimeTrendRpt' +
-            '&start_date=20211227' +
-            '&end_date=' + y1 + ("0" + m1).substr(-2) + d1 +
-            '&metrics=pv_count,visitor_count' +
-            '&callback=getAPIData';
-    document.body.appendChild(js);
-    document.body.removeChild(js);
-    }
-    function getAPIData(data) {
-    var pv = 0;
-    var uv = 0;
-    for (var i = 0; i < data['result']['items'][1].length; i++) {
-        if ( /^[0-9]+$/.test(data['result']['items'][1][i][0]) ) {
-        pv += data['result']['items'][1][i][0];
-        }
-        if ( /^[0-9]+$/.test(data['result']['items'][1][i][1]) ) {
-        uv += data['result']['items'][1][i][1];
-        }
-    }
-    site_pv_uv.innerHTML = '第 ' + uv + ' 位朋友，历经 ' + pv + ' 次回眸才与你相遇';
-    }
-    if (site_pv_uv){
-    sitePvUv();
-    }
-</script>
-
-
-
-<!-- 框架及主题支持 -->
-<div>
-  <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a></span>
-</div>
-
-<!-- 代码高亮 -->
-<script async src="/js/prism.js"></script>
-
-<!-- 自定义js脚本 -->
-<script async src="/js/myScript.js"></script>
-
-<!-- <span id="busuanzi_container_site_pv" style='display:none'>总访问量已经<span id="busuanzi_value_site_pv"></span> 次啦 </span><br> -->
-<!-- <span id="busuanzi_container_site_uv" style='display:none'>访客数<span id="busuanzi_value_site_uv"></span>人次</span> -->
-<!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
-
-
-
-</footer>
-<!-- inject:script -->
-<script src="/js/script.js"></script>
-<!-- endinject -->
-<div class="cube-loading out"></div>
-</body>
-</html>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%84%9A%E6%9C%AC/">脚本</a><a class="post-meta__tags" href="/tags/%E5%89%8D%E7%AB%AF/">前端</a><a class="post-meta__tags" href="/tags/python%E7%88%AC%E8%99%AB/">python爬虫</a></div><div class="post_share"><div class="social-share" data-image="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8ERSA%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"><img class="prev-cover" src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">关于RSA加密算法</div></div></a></div><div class="next-post pull-right"><a href="/%E6%9D%82%E8%AE%B0/%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%8B%86%E6%9C%BA%E4%BD%93%E9%AA%8C/"><img class="next-cover" src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第一次笔记本拆机体验</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/%E5%BA%94%E7%94%A8/PyQt5%E7%8B%97%E9%83%BD%E4%B8%8D%E7%94%A8-%E9%98%B4%E9%98%B3%E5%B8%88%E6%8C%82%E6%9C%BA%E8%BD%AF%E4%BB%B6OnHook/" title="PyQt5狗都不用:阴阳师挂机软件OnHook"><img class="cover" src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-11</div><div class="title">PyQt5狗都不用:阴阳师挂机软件OnHook</div></div></a></div><div><a href="/%E5%BA%94%E7%94%A8/web%E7%AB%AF%E5%B0%8F%E4%BD%9C%E5%93%81/" title="web端小作品"><img class="cover" src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-10</div><div class="title">web端小作品</div></div></a></div><div><a href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Ejs%E8%B7%A8%E6%BA%90%E8%AF%B7%E6%B1%82%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于js跨源请求的解决方案"><img class="cover" src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-17</div><div class="title">关于js跨源请求的解决方案</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Szh</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/shen962806862"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临 我的快乐</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%B0%81%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">获取封面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%88%AC%E5%8F%96%E5%9B%BE%E7%89%87%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="toc-number">1.1.</span> <span class="toc-text">1.爬取图片的脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%B0%81%E9%9D%A2%E5%9B%BE"><span class="toc-number">1.1.1.</span> <span class="toc-text">关于封面图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EAV%E5%8F%B7"><span class="toc-number">1.1.2.</span> <span class="toc-text">关于AV号</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-py%E8%84%9A%E6%9C%AC%E4%B8%8Ephp%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92"><span class="toc-number">1.2.</span> <span class="toc-text">2.py脚本与php的数据交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92"><span class="toc-number">1.3.</span> <span class="toc-text">3.前后端数据交互</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">获取视频文件</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Ejs%E8%B7%A8%E6%BA%90%E8%AF%B7%E6%B1%82%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于js跨源请求的解决方案"><img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于js跨源请求的解决方案"/></a><div class="content"><a class="title" href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Ejs%E8%B7%A8%E6%BA%90%E8%AF%B7%E6%B1%82%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于js跨源请求的解决方案">关于js跨源请求的解决方案</a><time datetime="2022-04-17T15:32:36.000Z" title="发表于 2022-04-17 23:32:36">2022-04-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="基于STM32F103的实时操作系统"><img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于STM32F103的实时操作系统"/></a><div class="content"><a class="title" href="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="基于STM32F103的实时操作系统">基于STM32F103的实时操作系统</a><time datetime="2022-04-08T05:41:30.000Z" title="发表于 2022-04-08 13:41:30">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法"><img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="opencv图像算法"/></a><div class="content"><a class="title" href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a><time datetime="2021-12-23T11:36:24.000Z" title="发表于 2021-12-23 19:36:24">2021-12-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Szh</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,437 +1,156 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="author" content="Szh">
-    
-    
-    
-    
-    
-    
-    <title>opencv图像算法 | 小涵的米奇妙妙屋</title>
-    <!-- inject:style -->
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
-    <link href="/css/font-awesome.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/css/prism.css" type="text/css">
-    <!-- endinject -->
-    <style>
-        .cube-loading {
-            top: 0;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: url('/images/lg/loading.gif') no-repeat center center;
-            background-color: rgba(0,0,0,.7);
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>opencv图像算法 | 小涵的米奇妙妙屋</title><meta name="keywords" content="opencv,图像"><meta name="author" content="Szh"><meta name="copyright" content="Szh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="图像低通滤波邻域滤波">
+<meta property="og:type" content="article">
+<meta property="og:title" content="opencv图像算法">
+<meta property="og:url" content="https://www.hanhan0223.cn/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="小涵的米奇妙妙屋">
+<meta property="og:description" content="图像低通滤波邻域滤波">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg">
+<meta property="article:published_time" content="2021-12-23T11:36:24.000Z">
+<meta property="article:modified_time" content="2022-07-18T09:08:36.904Z">
+<meta property="article:author" content="Szh">
+<meta property="article:tag" content="opencv">
+<meta property="article:tag" content="图像">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg"><link rel="shortcut icon" href="/img/Sign.ico"><link rel="canonical" href="https://www.hanhan0223.cn/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'opencv图像算法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-18 17:08:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
         }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-        .cube-loading.out {
-            display: none;
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
         }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-        .cube-loading:before {
-            display: block;
-            content: 'Loading';
-            position: relative;
-            width: 100%;
-            top: 50%;
-            right: -50%;
-            color: #fff;
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
         }
-
-        @media(max-width: 768px) {
-            .cube-loading:before {
-                font-size: 1.2em;
-                transform: translate(-24px,20px);
-                -webkit-transform: translate(-24px,20px);
-                -o-transform: translate(-24px,20px);
-                -ms-transform: translate(-24px,20px);
-            }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
         }
-
-        @media(min-width: 768px) {
-            .cube-loading:before {
-
-            }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
         }
-    </style>
-<meta name="generator" content="Hexo 5.4.0"></head>
-<body>
-<div class="cube-body">
-    <nav id="cube-top-memu" class="cube-menu">
-    <ul class="cube-menu-collapse">
-        
-        <li>
-            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
-            <a href="/">首页</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
-            <a href="/archives">归档</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
-            <a href="/categories">分类</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-tags" aria-hidden="true"></i>
-            <a href="/tags">标签</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
-            <a href="/about">关于我</a>
-        </li>
-        
-    </ul>
-</nav>
-<nav class="cube-side-menu" id="cube-side-menu">
-    <ul class="cube-menu-list">
-        
-        <li>
-            <a class="scroll-to-top">Top</a>
-        </li>
-    </ul>
-</nav>
-    <header class="cube-header" id="cube-header">
-    <img src=" https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg " alt="头部背景图片">
+      }
+      const t = saveToLocal.get('theme')
     
-    <div class="cube-type">
-        <span class="cube-typed-title">小涵の米奇妙妙屋</span>
-        <span class="cube-typed-cursor">|</span>
-    </div>
-    
-</header>
-
-    <style>
-        nav.cube-menu:before {
-            content: '';
-            visibility: hidden;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 44px;
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-            filter: blur(5px);
-            -webkit-filter: blur(5px);
-        
-            z-index: -1;
-            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
-            background-repeat: no-repeat;
-            background-position: center 44px;
-            background-size: cover;
-            background-color: transparent;
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
         }
-
-        header.cube-background.cube-header-background {
-            visibility: hidden;
-            background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/background.jpg');
-            background-position: center 0;
-        }
-    </style>
-    <header class="cube-background cube-header-background">
-        
-        <div class="cube-type">
-            <span class="cube-typed-title">小涵の米奇妙妙屋</span>
-            <span class="cube-typed-cursor">|</span>
-        </div>
-        
-    </header>
-    <div class="load-header-background"></div>
-    <script>
-        (function (window) {
-
-            window.headerModule = {}
-            window.headerModule.image = {
-                width: '680',
-                height: '280'
-            }
-
-        })(window)
-    </script>
+      }
     
-    <div class="cube-content">
-        <div class="cube-left">
-            
-
-<div class="cube-search cube-sidebar" id="cube-search">
-    <div class="search-container">
-        <input type="text" placeholder="Search" class="cube-search-input" id="cube-search-input">
-        <i class="cube-icon cube-icon-search cube-search-submit" aria-hidden="true"></i>
-    </div>
-    <!-- TODO 通过给window赋一个全局变量，通过脚本赋值 -->
-</div>
-<script>
-    (function (window) {
-        'use strict';
-        window.searchModule = {}
-        window.searchModule.JSONUrl = '/content.json'
-        window.searchModule.rootUrl = '/'
-    })(window)
-</script>
-<div class="cube-search-form">
-    <div class="cube-search-control">
-        <input type="text" placeholder="Search" class="search-input">
-        <a class="close-button">
-            <i class="cube-icon cube-close" aria-hidden="true"></i>
-        </a>
-    </div>
-    <div class="cube-search-result"></div>
-</div>
-
-
-<div class="cube-author cube-sidebar" id="cube-author">
-    
-    
-    <style>
-        @media(min-width: 768px) {
-            .cube-author img {
-                margin-top: 20px;
-                margin-bottom: 10px;
-            }
-        }
-        @media(max-width: 1120px) and (min-width: 768px) {
-            .cube-author img {
-                width: 80px;
-                height: 80px;
-                border-radius: 50%;
-            }
-        }
-        @media(min-width: 1120px) {
-            .cube-author img {
-                width: 96px;
-                height: 96px;
-                border-radius: 50%;
-            }
-        }
-    </style>
-    
-    <img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/avatar.jpg" alt="avatar">
-    
-    
-    <span>Szh</span>
-    
-    
-    <div class="count">
-        <a class="count articles"><span>13</span>文章</a>
-        <a class="count tags"><span>14</span>标签</a>
-        <a class="count categories"><span>3</span>分类</a>
-    </div>
-    
-        <div class="link">
-        
-            <span class="link-item">
-                <a href="https://github.com/shen962806862" target="_blank"><i class="fa fa-sg fa-github"></i>GitHub</a>
-            </span>
-        
-            <span class="link-item">
-                <a href="https://blog.csdn.net/shen962806862" target="_blank"><i class="fa fa-sg fa-laptop"></i>CSDN</a>
-            </span>
-        
-        </div>
-    
-</div>
-
-
-
-<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
-    <div class="title">
-        <a>Recent Posts</a>
-    </div>
-    <ul class="list">
-        
-        
-        <li>
-            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
-            
-            <div class="normal">
-                <p class="index first">
-                    <span>1</span>
-                </p>
-                <p class="title">
-                    <a href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Ejs%E8%B7%A8%E6%BA%90%E8%AF%B7%E6%B1%82%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于js跨源请求的解决方案">关于js跨源请求的解决方案</a>
-                </p>
-            </div>
-            
-        </li>
-        
-        
-        
-        <li>
-            <div class="normal">
-                <p class="index">
-                    <span>2</span>
-                </p>
-                <p class="title">
-                    <a href="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="基于STM32F103的实时操作系统">基于STM32F103的实时操作系统</a>
-                </p>
-            </div>
-        </li>
-        
-        
-        
-        <li>
-            <div class="normal">
-                <p class="index">
-                    <span>3</span>
-                </p>
-                <p class="title">
-                    <a href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a>
-                </p>
-            </div>
-        </li>
-        
-        
-    </ul>
-</div>
-
-
-
-<div class="cube-categories cube-sidebar" id="cube-categories">
-    <div class="title">
-        <a href="/categories">Categories</a>
-    </div>
-    <div class="cube-boxs">
-        
-        
-        <div class="cube-box ">
-            <a href="/categories/%E5%BA%94%E7%94%A8/">#应用</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/categories/%E5%8E%9F%E7%90%86/">#原理</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/categories/%E6%9D%82%E8%AE%B0/">#杂记</a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
-    <div class="title">
-        <a href="/tags">Tagcloud</a>
-    </div>
-    <div class="cube-boxs">
-        
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/PyQt5/">#PyQt5</a>
-            </div>
-        
-        
-        
-        
-        
-        
-        
-        
-         
-            <div class="cube-box-bg ">
-                <a href="/tags/opencv/">#opencv</a>
-            </div>
-        
-        
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
-            </div>
-        
-        
-        
-        
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/python%E7%88%AC%E8%99%AB/">#python爬虫</a>
-            </div>
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/%E7%8E%AF%E5%A2%83/">#环境</a>
-            </div>
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">#嵌入式</a>
-            </div>
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">#操作系统</a>
-            </div>
-        
-        
-         
-            <div class="cube-box ">
-                <a href="/tags/javascript/">#javascript</a>
-            </div>
-        
-    </div>
-</div>
-
-
-
-<div class="cube-toc cube-sidebar" id="cube-toc">
-    <div class="title">
-        <a>Toc</a>
-    </div>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F"><span class="toc-text">图像</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2"><span class="toc-text">低通滤波</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%EF%BC%88%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B%EF%BC%89"><span class="toc-text">高通滤波（边缘检测）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%8D%E5%A4%AB%E5%8F%98%E6%8D%A2"><span class="toc-text">霍夫变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%A0%E5%8C%96"><span class="toc-text">池化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2"><span class="toc-text">颜色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%80%BC%E5%8C%96"><span class="toc-text">二值化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E5%8F%98%E6%8D%A2"><span class="toc-text">几何变换</span></a></li></ol></li></ol>
-</div>
-
-
-        </div>
-        <div class="cube-right">
-            <div class="cube-article">
-<h1 class="title">opencv图像算法</h1>
-    <div class="cube-article-header">
-        <span class="cube-article-date">
-            <i class="fa fa-calendar-o" aria-hidden="true"></i>
-            2021-12-23
-        </span>
-        <span class="space-mark">|</span>
-        <span class="cube-article-updated">
-            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-            2022-04-06
-        </span>
-        <span class="space-mark">|</span>
-        <span class="cube-article-wordcount">
-            <i class="fa fa-file-word-o" aria-hidden="true"></i>
-            12.2k
-        </span>
-        
-            <span class="space-mark">|</span>
-            <span class="cube-article-tags">
-    <i class="fa fa-tags" aria-hidden="true"></i>
-    
-    <a href="/tags/opencv/">#opencv</a>
-    
-    <a href="/tags/%E5%9B%BE%E5%83%8F/">#图像</a>
-    
-</span>
-        
-    </div>
-    <div class="cube-article-content cube-markdown">
-        
-        <h1 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h1><h2 id="低通滤波"><a href="#低通滤波" class="headerlink" title="低通滤波"></a>低通滤波</h2><h3 id="邻域滤波"><a href="#邻域滤波" class="headerlink" title="邻域滤波"></a>邻域滤波</h3><p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-14d8e1ccf33a81b447d0faf8566bb7ef_r-16402595643921.jpg" alt="preview"></p>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">小涵的米奇妙妙屋</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">opencv图像算法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-23T11:36:24.000Z" title="发表于 2021-12-23 19:36:24">2021-12-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-18T09:08:36.904Z" title="更新于 2022-07-18 17:08:36">2022-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%8E%9F%E7%90%86/">原理</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">13.5k</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="opencv图像算法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h1><h2 id="低通滤波"><a href="#低通滤波" class="headerlink" title="低通滤波"></a>低通滤波</h2><h3 id="邻域滤波"><a href="#邻域滤波" class="headerlink" title="邻域滤波"></a>邻域滤波</h3><p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-14d8e1ccf33a81b447d0faf8566bb7ef_r-16402595643921.jpg" alt="preview"></p>
 <p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211209161017369-16402595643922.png" alt="邻域计算公式"></p>
 <span id="more"></span>
 
@@ -538,13 +257,13 @@
 <p>对于窗口模板的大小为 (2k+1)×(2k+1)，模板中各个元素值的计算公式如下：</p>
 <p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/20190502112714183-164025956439315.png" alt="img"></p>
 <p>转化为代码：</p>
-<pre><code class="line-numbers language-cpp">for(int i = 0; i &lt; m; ++i)
-    for(int j = 0; j &lt; n; ++j)
-        double g = exp(((i - m/2)*(i - m/2) + (j - n/2)*(j - n/2)) * -1.0 / (2 * sigma * sigma));
-</code></pre>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">for(int i &#x3D; 0; i &lt; m; ++i)
+    for(int j &#x3D; 0; j &lt; n; ++j)
+        double g &#x3D; exp(((i - m&#x2F;2)*(i - m&#x2F;2) + (j - n&#x2F;2)*(j - n&#x2F;2)) * -1.0 &#x2F; (2 * sigma * sigma));</code></pre>
+
 <p>再对求出来的每个g进行归一化（因为求的是加权平均，要保证窗口模板各元素和为1）</p>
-<pre><code class="line-numbers language-cpp">kernel = g / sum;
-</code></pre>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">kernel &#x3D; g &#x2F; sum;</code></pre>
+
 <p>关于高斯分布的<strong>标准差σ的选值</strong>，代表着数据的离散程度。如果σ较小，那么生成的模板的中心系数较大，而周围的系数较小，这样对图像的平滑效果就不是很明显；反之，σ较大，则生成的模板的各个系数相差就不是很大，比较类似均值模板，对图像的平滑效果比较明显。</p>
 <p>高斯分布的概率分布密度图如下：</p>
 <p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/439761-20170216214529738-2113566517-164025956439316.png" alt="img"></p>
@@ -588,57 +307,57 @@
 
 <p><strong>2.行、列卷积核的生成</strong></p>
 <p>阅读源码：</p>
-<pre><code class="line-numbers language-cpp">for( int k = 0; k &lt; 2; k++ )    // 分别生成行、列
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">for( int k &#x3D; 0; k &lt; 2; k++ )	&#x2F;&#x2F; 分别生成行、列
 &#123;
-    Mat* kernel = k == 0 ? &amp;kx : &amp;ky;
-    int order = k == 0 ? dx : dy;
-    int ksize = k == 0 ? ksizeX : ksizeY;    // ksize都是相同的
+    Mat* kernel &#x3D; k &#x3D;&#x3D; 0 ? &amp;kx : &amp;ky;
+    int order &#x3D; k &#x3D;&#x3D; 0 ? dx : dy;
+    int ksize &#x3D; k &#x3D;&#x3D; 0 ? ksizeX : ksizeY;	&#x2F;&#x2F; ksize都是相同的
 
     CV_Assert( ksize &gt; order );
 
-    if( ksize == 1 )
-        kerI[0] = 1;
-    else if( ksize == 3 )    // 卷积核大小设为3时使用固定值
+    if( ksize &#x3D;&#x3D; 1 )
+        kerI[0] &#x3D; 1;
+    else if( ksize &#x3D;&#x3D; 3 )	&#x2F;&#x2F; 卷积核大小设为3时使用固定值
     &#123;
-        if( order == 0 )
-            kerI[0] = 1, kerI[1] = 2, kerI[2] = 1;
-        else if( order == 1 )
-            kerI[0] = -1, kerI[1] = 0, kerI[2] = 1;
+        if( order &#x3D;&#x3D; 0 )
+            kerI[0] &#x3D; 1, kerI[1] &#x3D; 2, kerI[2] &#x3D; 1;
+        else if( order &#x3D;&#x3D; 1 )
+            kerI[0] &#x3D; -1, kerI[1] &#x3D; 0, kerI[2] &#x3D; 1;
         else
-            kerI[0] = 1, kerI[1] = -2, kerI[2] = 1;
+            kerI[0] &#x3D; 1, kerI[1] &#x3D; -2, kerI[2] &#x3D; 1;
     &#125;
-    else    // 大于3时进行计算，巧妙
+    else	&#x2F;&#x2F; 大于3时进行计算，巧妙
     &#123;
         int oldval, newval;
-        kerI[0] = 1;
-        for( i = 0; i &lt; ksize; i++ )
-            kerI[i+1] = 0;
+        kerI[0] &#x3D; 1;
+        for( i &#x3D; 0; i &lt; ksize; i++ )
+            kerI[i+1] &#x3D; 0;
 
-        for( i = 0; i &lt; ksize - order - 1; i++ )
+        for( i &#x3D; 0; i &lt; ksize - order - 1; i++ )
         &#123;
-            oldval = kerI[0];
-            for( j = 1; j &lt;= ksize; j++ )
+            oldval &#x3D; kerI[0];
+            for( j &#x3D; 1; j &lt;&#x3D; ksize; j++ )
             &#123;
-                newval = kerI[j]+kerI[j-1];
-                kerI[j-1] = oldval;
-                oldval = newval;
+                newval &#x3D; kerI[j]+kerI[j-1];
+                kerI[j-1] &#x3D; oldval;
+                oldval &#x3D; newval;
             &#125;
         &#125;
 
-        for( i = 0; i &lt; order; i++ )
+        for( i &#x3D; 0; i &lt; order; i++ )
         &#123;
-            oldval = -kerI[0];
-            for( j = 1; j &lt;= ksize; j++ )
+            oldval &#x3D; -kerI[0];
+            for( j &#x3D; 1; j &lt;&#x3D; ksize; j++ )
             &#123;
-                newval = kerI[j-1] - kerI[j];
-                kerI[j-1] = oldval;
-                oldval = newval;
+                newval &#x3D; kerI[j-1] - kerI[j];
+                kerI[j-1] &#x3D; oldval;
+                oldval &#x3D; newval;
             &#125;
         &#125;
-        // 以上计算，假设ksize=5，order=1，可得一维核：[-1，-2，0，2，1]
+        &#x2F;&#x2F; 以上计算，假设ksize&#x3D;5，order&#x3D;1，可得一维核：[-1，-2，0，2，1]
     &#125;
-&#125;
-</code></pre>
+&#125;</code></pre>
+
 <p>设ksize=3，dx=1，dy=0，带入运算可得：</p>
 <img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20220328112628256.png" alt="image-20220328112628256" style="zoom:67%;">
 
@@ -700,6 +419,15 @@
 <p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211211151831396-164025956439332.png" alt="image-20211211151831396"></p>
 <p>对每个像素点都用 这8个模板进行进行卷积（注意，每个卷积值都应取绝对值），求出该点的最大卷积值。</p>
 <h4 id="Nevitia算子"><a href="#Nevitia算子" class="headerlink" title="Nevitia算子"></a>Nevitia算子</h4><p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211211163622445-164025956439333.png" alt="image-20211211163622445"></p>
+<h2 id="形态学"><a href="#形态学" class="headerlink" title="形态学"></a>形态学</h2><h3 id="膨胀"><a href="#膨胀" class="headerlink" title="膨胀"></a>膨胀</h3><p>膨胀的操作本质上来说和滤波是一样的，采用滑动窗口（为像素点指定邻域）的模式去遍历整张图，来调整像素值。</p>
+<p>调整方式为：选取像素点及其指定邻域中的<strong>极大值</strong>，作为该像素点的新值。</p>
+<p>膨胀同sobel一样存在方向性，可以通过改变邻域的形状，来控制膨胀的方向。</p>
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20220718153424903.png" alt="image-20220718153424903" style="zoom: 67%;">
+
+<h3 id="腐蚀"><a href="#腐蚀" class="headerlink" title="腐蚀"></a>腐蚀</h3><p>腐蚀与膨胀的原理相同。</p>
+<p>调整方式为：选取像素点及其指定邻域中的<strong>极小值</strong>，作为该像素点的新值。</p>
+<p>膨胀和腐蚀是针对图像中的高亮部分的变化来说的。</p>
+<p>膨胀和腐蚀常用于二值图的操作。</p>
 <h2 id="霍夫变换"><a href="#霍夫变换" class="headerlink" title="霍夫变换"></a>霍夫变换</h2><h3 id="直线检测"><a href="#直线检测" class="headerlink" title="直线检测"></a>直线检测</h3><h4 id="标准霍夫变换"><a href="#标准霍夫变换" class="headerlink" title="标准霍夫变换"></a>标准霍夫变换</h4><p>首先该检测算法的输入图像只能是边缘二值图像。</p>
 <p><strong>1.一条直线在图像二维空间可由两个变量表示：</strong></p>
 <p>· 在笛卡尔坐标系：<strong>y = kx + b</strong>，可由k、b表示。</p>
@@ -717,6 +445,11 @@
 <p>2.当极坐标系里面有交点达到最小投票数，将该点对应x-y坐标系的直线L找出来；</p>
 <p>3.搜索边缘图像上前景点，在直线L上的点（且点与点之间距离小于maxLineGap的）连成线段，然后这些点全部删除，并且记录该线段的参数（起始点和终止点），当然线段长度要满足最小长度；</p>
 <p>4.重复1. 2. 3.。</p>
+<p><strong>opencv函数</strong></p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">HoughLinesP(InputArray image, OutputArray lines, double	rho, double theta, int threshold,
+double minLineLength &#x3D; 0, double maxLineGap &#x3D; 0)</code></pre>
+
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpX2hhaXl1,size_16,color_FFFFFF,t_70.png" alt="img"></p>
 <h2 id="池化"><a href="#池化" class="headerlink" title="池化"></a>池化</h2><p><strong>池化的作用：</strong>减少特征图大小，也就是可以减少计算量和所需显存。</p>
 <h3 id="平均池化（mean-pooling）"><a href="#平均池化（mean-pooling）" class="headerlink" title="平均池化（mean-pooling）"></a>平均池化（mean-pooling）</h3><p>即对邻域内特征点只求平均</p>
 <p>优缺点：<strong>能很好的保留背景，但容易使得图片变模糊</strong></p>
@@ -765,8 +498,10 @@
 <img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/v2-58d0f7160ef3cc1db393f612bf56c56c_1440w-164025956439335.jpg" alt="img" style="zoom:67%;">
 
 <p><strong>代码实现</strong></p>
-<pre><code class="line-numbers language-cpp">unsigned char newPixel = static_cast&lt;unsigned char&gt;(pow(pixel / 255.0, gamma) * 255);
-</code></pre>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">unsigned char newPixel &#x3D; static_cast&lt;unsigned char&gt;(pow(pixel &#x2F; 255.0, gamma) * 255);</code></pre>
+
+
+
 <h3 id="图像的归一化"><a href="#图像的归一化" class="headerlink" title="图像的归一化"></a>图像的归一化</h3><p>所谓归一化，就是把需要处理的数据限制在你需要的一定范围内。</p>
 <p>首先归一化是为了后面<strong>数据处理的方便</strong>，其次是保证<strong>程序运行时收敛加快</strong>。归一化的具体作用是<strong>归纳统一样本的统计分布性</strong>。归一化在0-1之间是统计的概率分布，归一化在某个区间上是统计的坐标分布。</p>
 <p>而图像的归一化用的最多的就是<strong>归一化到（min，max）范围内：</strong></p>
@@ -816,6 +551,88 @@
 <img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211217143838854-164025956439340.png" alt="image-20211217143838854" style="zoom:67%;">
 
 <p>根据源码中获得的数组对每个像素进行转换即可。</p>
+<h3 id="RGB模型"><a href="#RGB模型" class="headerlink" title="RGB模型"></a>RGB模型</h3><p>图像处理中，最常用的颜色空间是RGB模型，常用于颜色显示和图像处理，三维坐标的模型形式。</p>
+<img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDM3MTgw,size_16,color_FFFFFF,t_70.png" alt="img" style="zoom:67%;">
+
+<p>原点到白色顶点的中轴线是灰度线，r、g、b三分量相等，强度可以由三分量的向量表示。</p>
+<p>用RGB来理解色彩、深浅、明暗变化如下：</p>
+<p><strong>色彩变化：</strong> 三个坐标轴RGB最大分量顶点与黄紫青YMC色顶点的连线</p>
+<p><strong>深浅变化：</strong>RGB顶点和CMY顶点到原点和白色顶点的中轴线的距离</p>
+<p><strong>明暗变化：</strong>中轴线的点的位置，到原点，就偏暗，到白色顶点就偏亮</p>
+<h3 id="HSV色域"><a href="#HSV色域" class="headerlink" title="HSV色域"></a>HSV色域</h3><p>这是针对用户观感的一种颜色模型，侧重于色彩表示，什么颜色、深浅如何、明暗如何。</p>
+<p><strong>色调H</strong></p>
+<p>用角度度量，取值范围为0°～360°，从红色开始按逆时针方向计算，红色为0°，绿色为120°,蓝色为240°。它们的补色是：黄色为60°，青色为180°,品红为300°；</p>
+<p><strong>饱和度S</strong></p>
+<p>饱和度S表示颜色接近光谱色的程度。一种颜色，可以看成是某种光谱色与白色混合的结果。其中光谱色所占的比例愈大，颜色接近光谱色的程度就愈高，颜色的饱和度也就愈高。饱和度高，颜色则深而艳。光谱色的白光成分为0，饱和度达到最高。通常取值范围为0%～100%，值越大，颜色越饱和。</p>
+<p><strong>明度V</strong></p>
+<p>明度表示颜色明亮的程度，对于光源色，明度值与发光体的光亮度有关；对于物体色，此值和物体的透射比或反射比有关。通常取值范围为0%（黑）到100%（白）。</p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/20190713042821916.png" alt="img"><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/20190713042838269-16581337844089.png" alt="img">      </p>
+<p>H是色彩</p>
+<p>S是深浅， S = 0时，只有灰度</p>
+<p>V是明暗，表示色彩的明亮程度</p>
+<p>把RGB三维坐标的中轴线立起来，并扁化，就能形成HSV的锥形模型了。</p>
+<p><strong>RGB到HSV转化模型</strong></p>
+<p>首先要将图像的R、G、B三个通道的分量归一化到0 ~ 1之间。</p>
+<p>我们设max为该像素点的RGB中的最大值，min为最小值，有如下公式：</p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/4f18d260bc465763fed4a95044fc253d.png" alt="4f18d260bc465763fed4a95044fc253d.png"></p>
+<pre class="language-C++" data-language="C++"><code class="language-C++">float max &#x3D; 0,min &#x3D; 0;
+
+max &#x3D; retmax(R,G,B);	&#x2F;&#x2F; 计算三者的最大值
+min &#x3D; retmin(R,G,B);
+
+v &#x3D; max;
+
+if(max &#x3D;&#x3D; 0)
+    s &#x3D; 0;
+else
+    s &#x3D; 1 - (min &#x2F; max);
+
+if(max &#x3D;&#x3D; min)
+    h &#x3D; 0;
+else if(max &#x3D;&#x3D; R &amp;&amp; G &gt;&#x3D; B)
+    h &#x3D; 60 * ((G - B) &#x2F; (max - min));
+else if(max &#x3D;&#x3D; R &amp;&amp; G &lt; B)
+    h &#x3D; 60 * ((G - B) &#x2F; (max - min)) + 360;
+else if(max &#x3D;&#x3D; G)
+    h &#x3D; 60 * ((B - R) &#x2F; (max - min)) + 120;
+else if(max &#x3D;&#x3D; B)
+    h &#x3D; 60 * ((R - G) &#x2F; (max - min)) + 240;</code></pre>
+
+<p><strong>HSV到RGB转化模型</strong></p>
+<p><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/18284ab401f777c452c89f641f2db4b4.png" alt="18284ab401f777c452c89f641f2db4b4.png"></p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">float C &#x3D; 0,X &#x3D; 0,Y &#x3D; 0,Z &#x3D; 0;
+int i &#x3D; 0;
+float H &#x3D; h &#x2F; 1.0;
+float S &#x3D; s &#x2F; 100.0;
+float V &#x3D; v &#x2F; 100.0;
+
+if(S &#x3D;&#x3D; 0)
+    R &#x3D; G &#x3D; B &#x3D; V;
+else
+&#123;
+    H &#x3D; H &#x2F; 60;
+    i &#x3D; (int)H;
+    C &#x3D; H - i;
+
+    X &#x3D; V * (1 - S);
+    Y &#x3D; V * (1 - S * C);
+    Z &#x3D; V * (1 - S * (1 - C));
+    switch(i)&#123;
+        case 0 : R &#x3D; V; G &#x3D; Z; B &#x3D; X; break;
+        case 1 : R &#x3D; Y; G &#x3D; V; B &#x3D; X; break;
+        case 2 : R &#x3D; X; G &#x3D; V; B &#x3D; Z; break;
+        case 3 : R &#x3D; X; G &#x3D; Y; B &#x3D; V; break;
+        case 4 : R &#x3D; Z; G &#x3D; X; B &#x3D; V; break;
+        case 5 : R &#x3D; V; G &#x3D; X; B &#x3D; Y; break;
+    &#125;
+&#125;</code></pre>
+
+
+
+<h3 id="差影法"><a href="#差影法" class="headerlink" title="差影法"></a>差影法</h3><p>原理上来说就是两幅图像作差对应的像素点之间作差。</p>
+<p>常用于判断两幅角度相同的相似图像之间的差别。</p>
+<p>可以通过对差值乘以一个倍数，实现放大差别的效果。</p>
+<p>是否对差值使用绝对值计算，对作差的结果有一定影响。</p>
 <h2 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h2><h3 id="普通二值化"><a href="#普通二值化" class="headerlink" title="普通二值化"></a>普通二值化</h3><p>遍历判断图像每个像素点的值，如果大于设定的阈值，则修改为255，如果小于，则修改为0。</p>
 <h3 id="大津法二值化"><a href="#大津法二值化" class="headerlink" title="大津法二值化"></a>大津法二值化</h3><p>图像分割中阈值选取的最佳算法，计算简单，<strong>不受图像亮度和对比度的影响</strong>。它是按图像的灰度特性，将图像分成背景和前景两部分。因方差是灰度分布均匀性的一种度量，背景和前景之间的类间方差越大，说明构成图像的两部分的差别越大，当部分前景错分为背景或部分背景错分为前景都会导致两部分差别变小。因此,使类间方差最大的分割意味着<strong>错分概率最小</strong>。</p>
 <p><strong>优点</strong>：计算简单快速，不受图像亮度和对比度的影响。适用于大部分需要求图像全局阈值的场合。</p>
@@ -839,41 +656,43 @@
 <p>最终目的是为了获得当类间方差最大时的<strong>k1和k2</strong></p>
 <p>最后只需要判断每个像素点的值在这三类中的哪类，分别修改值为0，128，255即可。</p>
 <p>因此代码实现为：</p>
-<pre><code class="line-numbers language-cpp">for (k1 = 1; k1 &lt; 256; k1++)&#123;
-    for (k2 = 1; k2 &lt; 256; k2++)&#123;
-        for (int i = 0; i &lt; k1; i++)&#123;
-            p1 += Pi;
-            m1 += i * Pi;
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">for (k1 &#x3D; 1; k1 &lt; 256; k1++)&#123;
+    for (k2 &#x3D; 1; k2 &lt; 256; k2++)&#123;
+        for (int i &#x3D; 0; i &lt; k1; i++)&#123;
+            p1 +&#x3D; Pi;
+            m1 +&#x3D; i * Pi;
         &#125;
-        for (int i = k1; i &lt; k2; i++)&#123;
-            p2 += Pi;
-            m2 += i * Pi;
+        for (int i &#x3D; k1; i &lt; k2; i++)&#123;
+            p2 +&#x3D; Pi;
+            m2 +&#x3D; i * Pi;
         &#125;
-        for (int i = k2; i &lt; 256; i++)&#123;
-            p3 += Pi;
-            m3 += i * Pi;
+        for (int i &#x3D; k2; i &lt; 256; i++)&#123;
+            p3 +&#x3D; Pi;
+            m3 +&#x3D; i * Pi;
         &#125;
-        mg = m1 + m2 + m3;
-        m1 /= p1;
-        m2 /= p2;
-        m3 /= p3;
-        // 类间方差
-        double sigma = p1 * pow(m1 - mg, 2) + p2 * pow(m2 - mg, 2) + p3 * pow(m3 - mg, 2);
+        mg &#x3D; m1 + m2 + m3;
+        m1 &#x2F;&#x3D; p1;
+        m2 &#x2F;&#x3D; p2;
+        m3 &#x2F;&#x3D; p3;
+        &#x2F;&#x2F; 类间方差
+        double sigma &#x3D; p1 * pow(m1 - mg, 2) + p2 * pow(m2 - mg, 2) + p3 * pow(m3 - mg, 2);
         if (max &lt; sigma)&#123;
-            max = sigma;
-            thres1 = k1;
-            thres2 = k2;
+            max &#x3D; sigma;
+            thres1 &#x3D; k1;
+            thres2 &#x3D; k2;
         &#125;
     &#125;
-&#125;
-</code></pre>
+&#125;</code></pre>
+
+
+
 <h2 id="几何变换"><a href="#几何变换" class="headerlink" title="几何变换"></a>几何变换</h2><h3 id="图像的缩放"><a href="#图像的缩放" class="headerlink" title="图像的缩放"></a>图像的缩放</h3><h4 id="最近邻插值"><a href="#最近邻插值" class="headerlink" title="最近邻插值"></a>最近邻插值</h4><img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215203920356-164025956439343.png" alt="image-20211215203920356" style="zoom:50%;">
 
 <p>由于<strong>缩放比例</strong>（即srcWidth / dstWidth）基本上是浮点数值，而最后得到的<strong>图像坐标</strong>（srcX）是整数。因此需要对等式右边的值进行四舍五入的操作：</p>
-<pre><code class="line-numbers language-cpp">int srcX = static_cast&lt;int&gt;(dstX * (srcWidth / dstWidth) + 0.5f);
-// 其中static_cast用于强制转换为int类型
-// +0.5f是为了实现四舍五入而不是舍去小数点后的值
-</code></pre>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">int srcX &#x3D; static_cast&lt;int&gt;(dstX * (srcWidth &#x2F; dstWidth) + 0.5f);
+&#x2F;&#x2F; 其中static_cast用于强制转换为int类型
+&#x2F;&#x2F; +0.5f是为了实现四舍五入而不是舍去小数点后的值</code></pre>
+
 <p>这种方法在放大图像时容易导致图像的严重失真，根源在于当坐标是浮点数时直接四舍五入取最近的整数。</p>
 <h4 id="双线性插值"><a href="#双线性插值" class="headerlink" title="双线性插值"></a>双线性插值</h4><p><strong>线性插值的解释</strong></p>
 <p>已知数据 (x0, y0) 与 (x1, y1)，要计算 [x0, x1] 区间内某一位置 x 在直线上的y值。</p>
@@ -894,9 +713,9 @@
 <p>由于图像双线性插值只会用相邻的4个点，因此上述公式的分母都是1。opencv中的源码如下，用了一些优化手段：</p>
 <p><strong>用整数计算代替float</strong>（下面代码中的 * 2048就是变11位小数为整数，最后有两个连乘，因此&gt;&gt;22位）</p>
 <p><strong>源图像和目标图像几何中心的对齐</strong></p>
-<pre><code class="line-numbers language-cpp">SrcX=(dstX + 0.5) * (srcWidth/dstWidth) -0.5
-SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
-</code></pre>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">SrcX&#x3D;(dstX + 0.5) * (srcWidth&#x2F;dstWidth) -0.5
+SrcY&#x3D;(dstY + 0.5) * (srcHeight&#x2F;dstHeight) - 0.5</code></pre>
+
 <p>源图像和目标图像的原点（0，0）均选择左上角，然后根据插值公式计算目标图像每点像素，假设你需要将一幅5x5的图像缩小成3x3，那么源图像和目标图像各个像素之间的对应关系如下。如果没有这个中心对齐，根据基本公式去算，就会得到左边这样的结果；而用了对齐，就会得到右边的结果：</p>
 <img src="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/image-20211215212542008-164025956439450.png" alt="image-20211215212542008" style="zoom: 50%;">
 
@@ -929,133 +748,4 @@ SrcY=(dstY + 0.5) * (srcHeight/dstHeight) - 0.5
 <p>因为方向向量长度为1且起点为原点，所以易得：<strong>x^2 + a * x^2 = 1</strong>，解得：</p>
 <p>**x = 1 / sqrt( a^2 + 1 ) **</p>
 <p>**y = a / sqrt( a^2 + 1 ) ** 即为方向向量。</p>
-
-        
-    </div>
-</div>
-
-<div class="cube-article-nav">
-    <ul>
-        
-        <li class="prev">
-        <a href="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-            <i class="cube-icon cube-prev" aria-hidden="true"></i>
-            基于STM32F103的实时操作系统
-        </a>
-        </li>
-        
-            
-            <li class="next">
-            <a href="/%E6%9D%82%E8%AE%B0/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/">
-                opencv移库笔记
-                <i class="cube-icon cube-next" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-    </ul>
-</div>
-
-
-<!-- TODO 根据theme.comment的内容进行入口选择 -->
-
-
-        </div>
-    </div>
-</div>
-<footer class="cube-footer">
-    <!-- 网站信息 -->
-<div>
-  <span><i class="fa fa-copyright"></i> 2021-2022</span>
-  <span class="space-mark">|</span>
-  
-    <span><i class="fa fa-user-o"></i> Szh</span>
-  
-  <span class="space-mark">|</span>
-  <span><i class="fa fa-bar-chart"></i> 全站字数:</span>
-  <span class="post-count">27k</span>
-</div>
-
-<!-- 网站运行时长统计 -->
-<div>
-  <span id="sitetime"></span>
-</div>
-
-<!-- 站内访问统计 -->
-<div>
-  <span id="site_pv_uv"></span>
-</div>
-
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?a8ed5b37dd0aaae924c52eb382109c5d";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-<script>
-    var site_pv_uv = document.getElementById("site_pv_uv")
-    function sitePvUv(){
-    let today = new Date();
-    let d1 = today.getDate();
-    let m1 = today.getMonth()+1;
-    let y1 = today.getFullYear();
-
-    var js = document.createElement("script");
-    js.src ='https://openapi.baidu.com/rest/2.0/tongji/report/getData' +
-            '?access_token=121.0ee23230e835b4db5f4575e92295137c.YQrAi5VpBMYwWfdDjG-AaeD7popPJPwlrPfi2aw.p0tsSA' +
-            '&site_id=17532660' +
-            '&method=overview/getTimeTrendRpt' +
-            '&start_date=20211227' +
-            '&end_date=' + y1 + ("0" + m1).substr(-2) + d1 +
-            '&metrics=pv_count,visitor_count' +
-            '&callback=getAPIData';
-    document.body.appendChild(js);
-    document.body.removeChild(js);
-    }
-    function getAPIData(data) {
-    var pv = 0;
-    var uv = 0;
-    for (var i = 0; i < data['result']['items'][1].length; i++) {
-        if ( /^[0-9]+$/.test(data['result']['items'][1][i][0]) ) {
-        pv += data['result']['items'][1][i][0];
-        }
-        if ( /^[0-9]+$/.test(data['result']['items'][1][i][1]) ) {
-        uv += data['result']['items'][1][i][1];
-        }
-    }
-    site_pv_uv.innerHTML = '第 ' + uv + ' 位朋友，历经 ' + pv + ' 次回眸才与你相遇';
-    }
-    if (site_pv_uv){
-    sitePvUv();
-    }
-</script>
-
-
-
-<!-- 框架及主题支持 -->
-<div>
-  <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a></span>
-</div>
-
-<!-- 代码高亮 -->
-<script async src="/js/prism.js"></script>
-
-<!-- 自定义js脚本 -->
-<script async src="/js/myScript.js"></script>
-
-<!-- <span id="busuanzi_container_site_pv" style='display:none'>总访问量已经<span id="busuanzi_value_site_pv"></span> 次啦 </span><br> -->
-<!-- <span id="busuanzi_container_site_uv" style='display:none'>访客数<span id="busuanzi_value_site_uv"></span>人次</span> -->
-<!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
-
-
-
-</footer>
-<!-- inject:script -->
-<script src="/js/script.js"></script>
-<!-- endinject -->
-<div class="cube-loading out"></div>
-</body>
-</html>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/opencv/">opencv</a><a class="post-meta__tags" href="/tags/%E5%9B%BE%E5%83%8F/">图像</a></div><div class="post_share"><div class="social-share" data-image="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><img class="prev-cover" src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">基于STM32F103的实时操作系统</div></div></a></div><div class="next-post pull-right"><a href="/%E6%9D%82%E8%AE%B0/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/"><img class="next-cover" src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/3.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">opencv移库笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/%E6%9D%82%E8%AE%B0/opencv%E7%A7%BB%E5%BA%93%E7%AC%94%E8%AE%B0/" title="opencv移库笔记"><img class="cover" src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-23</div><div class="title">opencv移库笔记</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Szh</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/shen962806862"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临 我的快乐</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F"><span class="toc-number">1.</span> <span class="toc-text">图像</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.</span> <span class="toc-text">低通滤波</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%BB%E5%9F%9F%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.1.</span> <span class="toc-text">邻域滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.2.</span> <span class="toc-text">中值滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E9%80%82%E5%BA%94%E4%B8%AD%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.3.</span> <span class="toc-text">自适应中值滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.4.</span> <span class="toc-text">均值滤波</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">算术均值滤波</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">几何均值滤波</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%90%E6%B3%A2%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">谐波均值滤波</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%86%E8%B0%90%E6%B3%A2%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">逆谐波均值滤波</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%AD%A3%E5%90%8E%E7%9A%84alpha%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">修正后的alpha均值滤波</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.5.</span> <span class="toc-text">最值滤波</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%80%BC%E5%92%8C%E6%9C%80%E5%B0%8F%E5%80%BC%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">最大值和最小值滤波</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E7%82%B9%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">中点滤波</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E8%BE%B9%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.6.</span> <span class="toc-text">双边滤波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.7.</span> <span class="toc-text">高斯滤波</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%EF%BC%88%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">高通滤波（边缘检测）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Roberts%E7%AE%97%E5%AD%90"><span class="toc-number">1.2.1.</span> <span class="toc-text">Roberts算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sobel%E7%AE%97%E5%AD%90%EF%BC%88%E4%B8%80%E9%98%B6%E5%AF%BC%E6%95%B0%E6%B3%95%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">Sobel算子（一阶导数法）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prewitt%E7%AE%97%E5%AD%90"><span class="toc-number">1.2.3.</span> <span class="toc-text">Prewitt算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Laplacian%E7%AE%97%E5%AD%90%EF%BC%88%E4%BA%8C%E9%98%B6%E5%BE%AE%E5%88%86%E6%B3%95%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">Laplacian算子（二阶微分法）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Canny%E7%AE%97%E5%AD%90"><span class="toc-number">1.2.5.</span> <span class="toc-text">Canny算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%90%91%E7%AE%97%E5%AD%90"><span class="toc-number">1.2.6.</span> <span class="toc-text">方向算子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Kirsch%E7%AE%97%E5%AD%90"><span class="toc-number">1.2.6.1.</span> <span class="toc-text">Kirsch算子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Nevitia%E7%AE%97%E5%AD%90"><span class="toc-number">1.2.6.2.</span> <span class="toc-text">Nevitia算子</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%A2%E6%80%81%E5%AD%A6"><span class="toc-number">1.3.</span> <span class="toc-text">形态学</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%86%A8%E8%83%80"><span class="toc-number">1.3.1.</span> <span class="toc-text">膨胀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%85%90%E8%9A%80"><span class="toc-number">1.3.2.</span> <span class="toc-text">腐蚀</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%8D%E5%A4%AB%E5%8F%98%E6%8D%A2"><span class="toc-number">1.4.</span> <span class="toc-text">霍夫变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E7%BA%BF%E6%A3%80%E6%B5%8B"><span class="toc-number">1.4.1.</span> <span class="toc-text">直线检测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E9%9C%8D%E5%A4%AB%E5%8F%98%E6%8D%A2"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">标准霍夫变换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%AF%E8%AE%A1%E6%A6%82%E7%8E%87%E9%9C%8D%E5%A4%AB%E5%8F%98%E6%8D%A2%EF%BC%88%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">累计概率霍夫变换（常用）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%A0%E5%8C%96"><span class="toc-number">1.5.</span> <span class="toc-text">池化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E6%B1%A0%E5%8C%96%EF%BC%88mean-pooling%EF%BC%89"><span class="toc-number">1.5.1.</span> <span class="toc-text">平均池化（mean-pooling）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E6%B1%A0%E5%8C%96%EF%BC%88max-pooling%EF%BC%89"><span class="toc-number">1.5.2.</span> <span class="toc-text">最大池化（max-pooling）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%B1%A0%E5%8C%96%EF%BC%88stochastic-pooling%EF%BC%89"><span class="toc-number">1.5.3.</span> <span class="toc-text">随机池化（stochastic-pooling）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2"><span class="toc-number">1.6.</span> <span class="toc-text">颜色</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%AE%E5%BA%A6%E4%B8%8E%E5%AF%B9%E6%AF%94%E5%BA%A6"><span class="toc-number">1.6.1.</span> <span class="toc-text">亮度与对比度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%BA%BF%E6%80%A7%E5%8F%98%E5%8C%96"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">基础线性变化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">改进</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E9%81%93%E6%B7%B7%E5%90%88"><span class="toc-number">1.6.2.</span> <span class="toc-text">通道混合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gamma%E5%8F%98%E6%8D%A2%EF%BC%88%E6%A0%A1%E6%AD%A3%EF%BC%89"><span class="toc-number">1.6.3.</span> <span class="toc-text">gamma变换（校正）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E5%BD%92%E4%B8%80%E5%8C%96"><span class="toc-number">1.6.4.</span> <span class="toc-text">图像的归一化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9D%87%E8%A1%A1%E5%8C%96"><span class="toc-number">1.6.5.</span> <span class="toc-text">图像的均衡化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RGB%E8%BD%AC%E7%81%B0%E5%BA%A6"><span class="toc-number">1.6.6.</span> <span class="toc-text">RGB转灰度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B0%E5%BA%A6%E8%BD%AC%E4%BC%AA%E5%BD%A9%E8%89%B2"><span class="toc-number">1.6.7.</span> <span class="toc-text">灰度转伪彩色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RGB%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.6.8.</span> <span class="toc-text">RGB模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HSV%E8%89%B2%E5%9F%9F"><span class="toc-number">1.6.9.</span> <span class="toc-text">HSV色域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E5%BD%B1%E6%B3%95"><span class="toc-number">1.6.10.</span> <span class="toc-text">差影法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%80%BC%E5%8C%96"><span class="toc-number">1.7.</span> <span class="toc-text">二值化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E4%BA%8C%E5%80%BC%E5%8C%96"><span class="toc-number">1.7.1.</span> <span class="toc-text">普通二值化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E6%B4%A5%E6%B3%95%E4%BA%8C%E5%80%BC%E5%8C%96"><span class="toc-number">1.7.2.</span> <span class="toc-text">大津法二值化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E9%98%88%E5%80%BC%E4%B8%89%E5%80%BC%E5%8C%96"><span class="toc-number">1.7.3.</span> <span class="toc-text">双阈值三值化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E5%8F%98%E6%8D%A2"><span class="toc-number">1.8.</span> <span class="toc-text">几何变换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E7%BC%A9%E6%94%BE"><span class="toc-number">1.8.1.</span> <span class="toc-text">图像的缩放</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E8%BF%91%E9%82%BB%E6%8F%92%E5%80%BC"><span class="toc-number">1.8.1.1.</span> <span class="toc-text">最近邻插值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC"><span class="toc-number">1.8.1.2.</span> <span class="toc-text">双线性插值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E7%AB%8B%E6%96%B9%E6%8F%92%E5%80%BC"><span class="toc-number">1.8.1.3.</span> <span class="toc-text">双立方插值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%82%BB%E5%9F%9F%E5%83%8F%E7%B4%A0%E5%86%8D%E5%8F%96%E6%A0%B7%E6%8F%92%E5%80%BC"><span class="toc-number">1.8.1.4.</span> <span class="toc-text">邻域像素再取样插值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lanczos%E6%8F%92%E5%80%BC"><span class="toc-number">1.8.1.5.</span> <span class="toc-text">lanczos插值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E6%97%8B%E8%BD%AC"><span class="toc-number">1.8.2.</span> <span class="toc-text">图像的旋转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E7%BA%BF%E6%8B%9F%E5%90%88"><span class="toc-number">1.8.3.</span> <span class="toc-text">直线拟合</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Ejs%E8%B7%A8%E6%BA%90%E8%AF%B7%E6%B1%82%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于js跨源请求的解决方案"><img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于js跨源请求的解决方案"/></a><div class="content"><a class="title" href="/%E5%8E%9F%E7%90%86/%E5%85%B3%E4%BA%8Ejs%E8%B7%A8%E6%BA%90%E8%AF%B7%E6%B1%82%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="关于js跨源请求的解决方案">关于js跨源请求的解决方案</a><time datetime="2022-04-17T15:32:36.000Z" title="发表于 2022-04-17 23:32:36">2022-04-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="基于STM32F103的实时操作系统"><img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="基于STM32F103的实时操作系统"/></a><div class="content"><a class="title" href="/%E5%8E%9F%E7%90%86/%E5%9F%BA%E4%BA%8ESTM32F103%E7%9A%84%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="基于STM32F103的实时操作系统">基于STM32F103的实时操作系统</a><time datetime="2022-04-08T05:41:30.000Z" title="发表于 2022-04-08 13:41:30">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法"><img src="https://myweb-1259751480.cos.ap-shanghai.myqcloud.com/images/cover/2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="opencv图像算法"/></a><div class="content"><a class="title" href="/%E5%8E%9F%E7%90%86/opencv%E5%9B%BE%E5%83%8F%E7%AE%97%E6%B3%95/" title="opencv图像算法">opencv图像算法</a><time datetime="2021-12-23T11:36:24.000Z" title="发表于 2021-12-23 19:36:24">2021-12-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Szh</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
