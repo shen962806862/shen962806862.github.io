@@ -504,6 +504,30 @@ Laplace算子的差分形式：
 
 
 
+## 形态学
+
+### 膨胀
+
+膨胀的操作本质上来说和滤波是一样的，采用滑动窗口（为像素点指定邻域）的模式去遍历整张图，来调整像素值。
+
+调整方式为：选取像素点及其指定邻域中的**极大值**，作为该像素点的新值。
+
+膨胀同sobel一样存在方向性，可以通过改变邻域的形状，来控制膨胀的方向。
+
+<img src="opencv图像算法/image-20220718153424903.png" alt="image-20220718153424903" style="zoom: 67%;" />
+
+### 腐蚀
+
+腐蚀与膨胀的原理相同。
+
+调整方式为：选取像素点及其指定邻域中的**极小值**，作为该像素点的新值。
+
+膨胀和腐蚀是针对图像中的高亮部分的变化来说的。
+
+膨胀和腐蚀常用于二值图的操作。
+
+
+
 ## 霍夫变换
 
 ### 直线检测
@@ -545,6 +569,15 @@ Laplace算子的差分形式：
 3.搜索边缘图像上前景点，在直线L上的点（且点与点之间距离小于maxLineGap的）连成线段，然后这些点全部删除，并且记录该线段的参数（起始点和终止点），当然线段长度要满足最小长度；
 
 4.重复1. 2. 3.。
+
+**opencv函数**
+
+```c++
+HoughLinesP(InputArray image, OutputArray lines, double	rho, double theta, int threshold,
+double minLineLength = 0, double maxLineGap = 0)
+```
+
+![img](opencv图像算法/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpX2hhaXl1,size_16,color_FFFFFF,t_70.png)
 
 
 
@@ -797,6 +830,130 @@ Gray = (R * 313524 + G * 615514 + B * 119538) >> 20
 <img src="opencv图像算法/image-20211217143838854-164025956439340.png" alt="image-20211217143838854" style="zoom:67%;" />
 
 根据源码中获得的数组对每个像素进行转换即可。
+
+
+
+### RGB模型
+
+图像处理中，最常用的颜色空间是RGB模型，常用于颜色显示和图像处理，三维坐标的模型形式。
+
+<img src="opencv图像算法/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDM3MTgw,size_16,color_FFFFFF,t_70.png" alt="img" style="zoom:67%;" />
+
+原点到白色顶点的中轴线是灰度线，r、g、b三分量相等，强度可以由三分量的向量表示。
+
+用RGB来理解色彩、深浅、明暗变化如下：
+
+**色彩变化：** 三个坐标轴RGB最大分量顶点与黄紫青YMC色顶点的连线
+
+**深浅变化：**RGB顶点和CMY顶点到原点和白色顶点的中轴线的距离
+
+**明暗变化：**中轴线的点的位置，到原点，就偏暗，到白色顶点就偏亮
+
+
+
+### HSV色域
+
+这是针对用户观感的一种颜色模型，侧重于色彩表示，什么颜色、深浅如何、明暗如何。
+
+**色调H**
+
+用角度度量，取值范围为0°～360°，从红色开始按逆时针方向计算，红色为0°，绿色为120°,蓝色为240°。它们的补色是：黄色为60°，青色为180°,品红为300°；
+
+**饱和度S**
+
+饱和度S表示颜色接近光谱色的程度。一种颜色，可以看成是某种光谱色与白色混合的结果。其中光谱色所占的比例愈大，颜色接近光谱色的程度就愈高，颜色的饱和度也就愈高。饱和度高，颜色则深而艳。光谱色的白光成分为0，饱和度达到最高。通常取值范围为0%～100%，值越大，颜色越饱和。
+
+**明度V**
+
+明度表示颜色明亮的程度，对于光源色，明度值与发光体的光亮度有关；对于物体色，此值和物体的透射比或反射比有关。通常取值范围为0%（黑）到100%（白）。
+
+![img](opencv图像算法/20190713042821916.png)![img](opencv图像算法/20190713042838269-16581337844089.png)      
+
+H是色彩
+
+S是深浅， S = 0时，只有灰度
+
+V是明暗，表示色彩的明亮程度
+
+把RGB三维坐标的中轴线立起来，并扁化，就能形成HSV的锥形模型了。
+
+**RGB到HSV转化模型**
+
+首先要将图像的R、G、B三个通道的分量归一化到0 ~ 1之间。
+
+我们设max为该像素点的RGB中的最大值，min为最小值，有如下公式：
+
+![4f18d260bc465763fed4a95044fc253d.png](opencv图像算法/4f18d260bc465763fed4a95044fc253d.png)
+
+```C++
+float max = 0,min = 0;
+
+max = retmax(R,G,B);	// 计算三者的最大值
+min = retmin(R,G,B);
+
+v = max;
+
+if(max == 0)
+    s = 0;
+else
+    s = 1 - (min / max);
+
+if(max == min)
+    h = 0;
+else if(max == R && G >= B)
+    h = 60 * ((G - B) / (max - min));
+else if(max == R && G < B)
+    h = 60 * ((G - B) / (max - min)) + 360;
+else if(max == G)
+    h = 60 * ((B - R) / (max - min)) + 120;
+else if(max == B)
+    h = 60 * ((R - G) / (max - min)) + 240;
+```
+
+**HSV到RGB转化模型**
+
+![18284ab401f777c452c89f641f2db4b4.png](opencv图像算法/18284ab401f777c452c89f641f2db4b4.png)
+
+```c++
+float C = 0,X = 0,Y = 0,Z = 0;
+int i = 0;
+float H = h / 1.0;
+float S = s / 100.0;
+float V = v / 100.0;
+
+if(S == 0)
+    R = G = B = V;
+else
+{
+    H = H / 60;
+    i = (int)H;
+    C = H - i;
+
+    X = V * (1 - S);
+    Y = V * (1 - S * C);
+    Z = V * (1 - S * (1 - C));
+    switch(i){
+        case 0 : R = V; G = Z; B = X; break;
+        case 1 : R = Y; G = V; B = X; break;
+        case 2 : R = X; G = V; B = Z; break;
+        case 3 : R = X; G = Y; B = V; break;
+        case 4 : R = Z; G = X; B = V; break;
+        case 5 : R = V; G = X; B = Y; break;
+    }
+}
+```
+
+
+
+### 差影法
+
+原理上来说就是两幅图像作差对应的像素点之间作差。
+
+常用于判断两幅角度相同的相似图像之间的差别。
+
+可以通过对差值乘以一个倍数，实现放大差别的效果。
+
+是否对差值使用绝对值计算，对作差的结果有一定影响。
 
 
 
